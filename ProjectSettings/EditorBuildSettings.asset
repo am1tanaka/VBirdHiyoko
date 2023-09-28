@@ -4,5 +4,50 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/AM1/VBirdHiyoko/Scenes/System.unity
+    guid: 3e92e1a5dcd9763418ecf8b57fecc5ed
+  - enabled: 1
+    path: Assets/AM1/VBirdHiyoko/Scenes/Title.unity
+    guid: 98686d0af63e2024792eb1f774de3451
+  - enabled: 1
+    path: Assets/AM1/VBirdHiyoko/Scenes/Game.unity
+    guid: c7cc5aba7e48ef74283883b3ad587c75
+  - enabled: 1
+    path: Assets/AM1/VBirdHiyoko/Scenes/Ending.unity
+    guid: d091f9bfe15b36745878f4280ffa80c4
+  - enabled: 1
+    path: Assets/AM1/VBirdHiyoko/Scenes/Credits.unity
+    guid: 357ffcc5913577148b3131390c8043a9
+  - enabled: 1
+    path: Assets/AM1/VBirdHiyoko/Scenes/Stage.unity
+    guid: df57ebf066fb9364c9dd64a7cbc6df30
+  - enabled: 1
+    path: Assets/AM1/VBirdHiyoko/Scenes/Stages/StageTitle.unity
+    guid: 4ec174bf4f31ff54a8557fe86d4a32c8
+  - enabled: 1
+    path: Assets/AM1/VBirdHiyoko/Scenes/Stages/Stage01.unity
+    guid: f00b495838f70164595aeb8a89e0cf72
+  - enabled: 1
+    path: Assets/AM1/VBirdHiyoko/Scenes/Stages/Stage02.unity
+    guid: f53603eb9642d88458edddf5510c5a39
+  - enabled: 1
+    path: Assets/AM1/VBirdHiyoko/Scenes/Stages/Stage03.unity
+    guid: 70c5a69d0ee217346a01ab9789a6a2d0
+  - enabled: 1
+    path: Assets/AM1/VBirdHiyoko/Scenes/Stages/Stage04.unity
+    guid: 2266f860f196e914e81bb0068be18fa5
+  - enabled: 1
+    path: Assets/AM1/VBirdHiyoko/Scenes/Stages/Stage05.unity
+    guid: e246e9e0671cd154c895426379eb9f28
+  - enabled: 1
+    path: Assets/AM1/VBirdHiyoko/Scenes/Stages/Stage06.unity
+    guid: 6f0175f60cd7b9640b49b249a5fb423e
+  - enabled: 1
+    path: Assets/AM1/VBirdHiyoko/Scenes/Stages/Stage07.unity
+    guid: e88de4814ee8bf6419e0c1a5cbffccce
+  - enabled: 1
+    path: Assets/AM1/VBirdHiyoko/Scenes/Stages/Stage08.unity
+    guid: 971f0634f43a5a546bda35c8d50e7236
   m_configObjects: {}
