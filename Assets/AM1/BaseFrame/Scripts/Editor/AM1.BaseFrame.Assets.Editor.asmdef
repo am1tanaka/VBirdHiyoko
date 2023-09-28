@@ -1,0 +1,20 @@
+{
+    "name": "AM1.BaseFrame.Assets.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:9aa49cfb2c2502f4da296bd300aba59f",
+        "GUID:5e2ef578e173547fc9208113419297a5",
+        "GUID:d32a7e50039420748b5cce61be0a0fa8"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

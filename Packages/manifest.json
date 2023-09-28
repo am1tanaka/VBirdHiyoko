@@ -1,5 +1,8 @@
 {
   "dependencies": {
+    "jp.am1.baseframe": "https://github.com/am1tanaka/AM1BaseFrame21LTS.git?path=/Assets/AM1BaseFrame",
+    "jp.am1.utils": "https://github.com/am1tanaka/AM1BaseFrame21LTS.git?path=/Assets/AM1Utils",
+    "jp.am1.statesystem": "https://github.com/am1tanaka/AM1BaseFrame21LTS.git?path=/Assets/AM1State",
     "com.unity.collab-proxy": "2.0.7",
     "com.unity.feature.development": "1.0.1",
     "com.unity.textmeshpro": "3.0.6",

@@ -1,0 +1,17 @@
+{
+    "name": "AM1.BaseFrame.Assets",
+    "rootNamespace": "",
+    "references": [
+        "GUID:9aa49cfb2c2502f4da296bd300aba59f",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -135,6 +135,27 @@
       },
       "url": "https://packages.unity.com"
     },
+    "jp.am1.baseframe": {
+      "version": "https://github.com/am1tanaka/AM1BaseFrame21LTS.git?path=/Assets/AM1BaseFrame",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "9c3bf8290e39e465cf3fab58a96aa82e407edf16"
+    },
+    "jp.am1.statesystem": {
+      "version": "https://github.com/am1tanaka/AM1BaseFrame21LTS.git?path=/Assets/AM1State",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "9c3bf8290e39e465cf3fab58a96aa82e407edf16"
+    },
+    "jp.am1.utils": {
+      "version": "https://github.com/am1tanaka/AM1BaseFrame21LTS.git?path=/Assets/AM1Utils",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "9c3bf8290e39e465cf3fab58a96aa82e407edf16"
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,

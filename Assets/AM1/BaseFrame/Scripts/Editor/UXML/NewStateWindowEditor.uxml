@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:TextField picking-mode="Ignore" label="状態名" name="StateNameText" tooltip="状態名を半角英数で入力します。" />
+    <ui:Toggle label="シーンを作成" name="MakeSceneToggle" tooltip="同時にシーンを作成する時、チェック" value="true" />
+    <ui:TextField picking-mode="Ignore" label="シーン名" name="SceneName" />
+    <uie:EnumField label="画面切り替えの種類" name="ScreenTransitionTypeEnum" />
+    <uie:FloatField label="画面遷移の秒数" value="0.5" name="ScreenTransitionSeconds" tooltip="画面遷移の秒数" />
+    <ui:Button text="Create" display-tooltip-when-elided="true" name="CreateButton" tooltip="設定の状態を新規作成します。" />
+</ui:UXML>

@@ -1,7 +1,10 @@
+# Created by https://www.toptal.com/developers/gitignore/api/unity
+# Edit at https://www.toptal.com/developers/gitignore?templates=unity
+
+### Unity ###
 # This .gitignore file should be placed at the root of your Unity project directory
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
-#
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
@@ -25,6 +28,7 @@
 
 # Visual Studio cache directory
 .vs/
+.vscode/
 
 # Gradle cache directory
 .gradle/
@@ -70,3 +74,12 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# End of https://www.toptal.com/developers/gitignore/api/unity
+
+/Assets/TextMesh Pro*
+*.cd
+
+!/Assets/AM1BaseFrame/Samples~*
+!/Assets/AM1BaseFrame/Package Resources/*.unitypackage
+/Assets/AM1/BaseFrame/LocalSettings*
