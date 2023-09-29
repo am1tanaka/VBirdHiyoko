@@ -3,14 +3,20 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Block
+  - Goal
+  - Start
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
+  - Block
+  - StageBase
+  - Trigger
   - 
   - 
   - 
@@ -33,10 +39,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - PPS
   m_SortingLayers:
   - name: Default
     uniqueID: 0

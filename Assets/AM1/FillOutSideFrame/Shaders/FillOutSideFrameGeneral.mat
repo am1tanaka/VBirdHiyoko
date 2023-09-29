@@ -33,5 +33,5 @@ Material:
     - _BottomColor: {r: 0, g: 0, b: 0, a: 1}
     - _Color: {r: 1, g: 0, b: 0, a: 1}
     - _TopColor: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 1}
-    - _ViewRect: {r: 0.000009536743, g: 42.968754, b: 905, a: 552.03125}
+    - _ViewRect: {r: 56.944435, g: -0.000004172325, b: 848.05554, a: 445}
   m_BuildTextureStacks: []
