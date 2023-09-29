@@ -16,11 +16,10 @@ public class EndingSceneStateChanger : SceneStateChangerBase<EndingSceneStateCha
     public override void Init()
     {
         // 画面を覆う
-        ScreenTransitionRegistry.StartCover((int)ScreenTransitionType.FilledRadial, 0.5f);
+        ScreenTransitionRegistry.StartCover((int)ScreenTransitionType.Fade, 1f);
 
         // シーンの非同期読み込み開始
         SceneStateChanger.LoadSceneAsync("Ending", true);
-
     }
 
     /// <summary>
@@ -28,7 +27,7 @@ public class EndingSceneStateChanger : SceneStateChangerBase<EndingSceneStateCha
     /// </summary>
     public override void OnHideScreen()
     {
-        
+        SceneStateChanger.UnloadSceneAsync("Stage");
     }
 
     /// <summary>
@@ -48,6 +47,6 @@ public class EndingSceneStateChanger : SceneStateChangerBase<EndingSceneStateCha
     public override void Terminate() {
         // シーンの解放
         SceneStateChanger.UnloadSceneAsync("Ending");
-
+        SceneStateChanger.UnloadSceneAsync("Credits");
     }
 }

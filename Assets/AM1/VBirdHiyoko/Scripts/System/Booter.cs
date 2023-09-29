@@ -5,48 +5,51 @@ using UnityEngine.SceneManagement;
 using AM1.BaseFrame;
 using AM1.BaseFrame.Assets;
 
-/// <summary>
-/// 状態システム起動クラス
-/// </summary>
-public class Booter : MonoBehaviour
+namespace AM1.VBirdHiyoko
 {
-    private void Start()
+    /// <summary>
+    /// 状態システム起動クラス
+    /// </summary>
+    public class Booter : MonoBehaviour
     {
-        StartCoroutine(BootSequence());
-    }
+        private void Start()
+        {
+            StartCoroutine(BootSequence());
+        }
 
-    IEnumerator BootSequence()
-    {
+        IEnumerator BootSequence()
+        {
 #if UNITY_EDITOR
-        // システムシーン以外を削除
-        Scene[] scenes = new Scene[SceneManager.sceneCount];
-        for (int i = 0; i < SceneManager.sceneCount; i++)
-        {
-            scenes[i] = SceneManager.GetSceneAt(i);
-        }
-        for (int i=0;i<scenes.Length;i++)
-        {
-            var sc = scenes[i];
-            if (sc.name != gameObject.scene.name)
+            // システムシーン以外を削除
+            Scene[] scenes = new Scene[SceneManager.sceneCount];
+            for (int i = 0; i < SceneManager.sceneCount; i++)
             {
-                yield return SceneManager.UnloadSceneAsync(sc);
+                scenes[i] = SceneManager.GetSceneAt(i);
             }
-        }
+            for (int i = 0; i < scenes.Length; i++)
+            {
+                var sc = scenes[i];
+                if (sc.name != gameObject.scene.name)
+                {
+                    yield return SceneManager.UnloadSceneAsync(sc);
+                }
+            }
 #endif
 
-        BootSceneStateChanger.Instance.Request();
-        yield return new WaitWhile(() => SceneStateChanger.IsRequestOrChanging);
+            BootSceneStateChanger.Instance.Request();
+            yield return new WaitWhile(() => SceneStateChanger.IsRequestOrChanging);
 
-        var gos = gameObject.GetComponents<MonoBehaviour>();
-        if (gos.Length > 1)
-        {
-            // 2つ以上コンポーネントがアタッチされていたらこのスクリプトだけ削除
-            Destroy(this);
-        }
-        else
-        {
-            // 1つの時はこれだけなのでオブジェクトごと削除
-            Destroy(gameObject);
+            var gos = gameObject.GetComponents<MonoBehaviour>();
+            if (gos.Length > 1)
+            {
+                // 2つ以上コンポーネントがアタッチされていたらこのスクリプトだけ削除
+                Destroy(this);
+            }
+            else
+            {
+                // 1つの時はこれだけなのでオブジェクトごと削除
+                Destroy(gameObject);
+            }
         }
     }
 }

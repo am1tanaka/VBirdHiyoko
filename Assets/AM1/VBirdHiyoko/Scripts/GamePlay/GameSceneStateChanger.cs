@@ -11,16 +11,26 @@ using AM1.BaseFrame.Assets;
 public class GameSceneStateChanger : SceneStateChangerBase<GameSceneStateChanger>, ISceneStateChanger
 {
     /// <summary>
+    /// タイトルからスタートの時、true
+    /// </summary>
+    bool isStartTitle;
+
+    /// <summary>
     /// 画面を覆う演出の開始や、この状態に必要なシーンの非同期読み込みの開始など。
     /// </summary>
     public override void Init()
     {
         // 画面を覆う
-        ScreenTransitionRegistry.StartCover((int)ScreenTransitionType.FilledRadial, 0.5f);
+        ScreenTransitionRegistry.StartCover((int)ScreenTransitionType.Fade, Color.black, 0.5f);
+        BGMSourceAndClips.Instance.Stop(0.5f);
 
         // シーンの非同期読み込み開始
-        SceneStateChanger.LoadSceneAsync("Game", true);
-
+        isStartTitle = (SceneStateChanger.CurrentState == TitleSceneStateChanger.Instance);
+        if (isStartTitle)
+        {
+            SceneStateChanger.LoadSceneAsync("Game", true);
+            SceneStateChanger.LoadSceneAsync("Stage01", true);
+        }
     }
 
     /// <summary>
@@ -28,7 +38,12 @@ public class GameSceneStateChanger : SceneStateChangerBase<GameSceneStateChanger
     /// </summary>
     public override void OnHideScreen()
     {
-        
+        SceneStateChanger.LoadSceneAsync("Stage", false);
+        if (!isStartTitle)
+        {
+            SceneStateChanger.LoadSceneAsync("Game", false);
+            SceneStateChanger.LoadSceneAsync("Stage01", false);
+        }
     }
 
     /// <summary>
@@ -39,7 +54,6 @@ public class GameSceneStateChanger : SceneStateChangerBase<GameSceneStateChanger
         // 画面の覆いを解除
         ScreenTransitionRegistry.StartUncover(0.5f);
         yield return ScreenTransitionRegistry.WaitAll();
-
     }
 
     /// <summary>
@@ -48,6 +62,6 @@ public class GameSceneStateChanger : SceneStateChangerBase<GameSceneStateChanger
     public override void Terminate() {
         // シーンの解放
         SceneStateChanger.UnloadSceneAsync("Game");
-
+        SceneStateChanger.UnloadSceneAsync("Stage01");
     }
 }
