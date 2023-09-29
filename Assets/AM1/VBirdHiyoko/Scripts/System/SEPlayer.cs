@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using AM1.BaseFrame;
 
-namespace AM1.BaseFrame.Assets
+namespace AM1.VBirdHiyoko
 {
     /// <summary>
     /// 効果音のインデックスをenumで定義して、
@@ -12,11 +10,13 @@ namespace AM1.BaseFrame.Assets
     {
         public enum SE
         {
-            Click,
             Start,
-            Jump,
-            Miss,
-            Clear
+            Click,
+            Cancel,
+            Message,
+            Clear,
+            MoveCursor,
+            CloseMessage,
         }
 
         /// <summary>

@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using AM1.BaseFrame;
 using AM1.BaseFrame.Assets;
+using AM1.VBirdHiyoko;
+using System.Collections;
 
 /// <summary>
 /// Title状態への切り替え
@@ -80,6 +79,8 @@ public class TitleSceneStateChanger : SceneStateChangerBase<TitleSceneStateChang
         ScreenTransitionRegistry.StartUncover(0.5f);
         yield return ScreenTransitionRegistry.WaitAll();
 
+        // TitleBGM
+        BGMPlayer.Play(BGMPlayer.BGM.Title);
     }
 
     /// <summary>
