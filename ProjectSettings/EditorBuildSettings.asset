@@ -27,6 +27,9 @@ EditorBuildSettings:
     path: Assets/AM1/VBirdHiyoko/Scenes/Stages/StageTitle.unity
     guid: 4ec174bf4f31ff54a8557fe86d4a32c8
   - enabled: 1
+    path: Assets/AM1/VBirdHiyoko/Tests/TestStage01.unity
+    guid: fe38b5b7cf1a9f048b4c0213ee6c150a
+  - enabled: 1
     path: Assets/AM1/VBirdHiyoko/Scenes/Stages/Stage01.unity
     guid: f00b495838f70164595aeb8a89e0cf72
   - enabled: 1
