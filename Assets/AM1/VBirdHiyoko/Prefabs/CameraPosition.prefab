@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6825567036470182087}
   - component: {fileID: 6825567036470182086}
-  - component: {fileID: 6825567036470182084}
+  - component: {fileID: 4923071826116140730}
   m_Layer: 0
   m_Name: CameraPosition
   m_TagString: Untagged
@@ -84,7 +84,7 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!114 &6825567036470182084
+--- !u!114 &4923071826116140730
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,7 +137,7 @@ MonoBehaviour:
       motionGridSize: 64
       colorBlindnessType: 0
       colorBlindnessStrength: 1
-  m_Resources: {fileID: 0}
+  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
   m_ShowToolkit: 0
   m_ShowCustomSorter: 0
   breakBeforeColorGrading: 0
