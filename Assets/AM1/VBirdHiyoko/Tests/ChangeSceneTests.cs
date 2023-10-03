@@ -5,6 +5,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
+using AM1.VBirdHiyoko;
 
 public class ChangeSceneTests
 {
@@ -43,8 +44,8 @@ public class ChangeSceneTests
         // エンディング
         EndingSceneStateChanger.Instance.Request();
         time = Time.realtimeSinceStartup;
-        yield return WaitSceneLoaded(waitSeconds);
-        Assert.That(Time.realtimeSinceStartup - time, Is.LessThanOrEqualTo(waitSeconds), "Ending起動");
+        yield return WaitSceneLoaded(7);
+        Assert.That(Time.realtimeSinceStartup - time, Is.LessThanOrEqualTo(7), "Ending起動");
         Assert.That(CheckSceneLoaded(endingScenes), Is.True, "Ending状態のシーン確認");
 
         // エンディングからタイトルヘ戻る
