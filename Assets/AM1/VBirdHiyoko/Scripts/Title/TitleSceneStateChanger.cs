@@ -2,6 +2,7 @@ using AM1.BaseFrame;
 using AM1.BaseFrame.Assets;
 using AM1.VBirdHiyoko;
 using System.Collections;
+using AM1.CommandSystem;
 
 /// <summary>
 /// Title状態への切り替え
@@ -75,12 +76,20 @@ public class TitleSceneStateChanger : SceneStateChangerBase<TitleSceneStateChang
     /// フェードインなどの状態を始めるための処理を実装します。
     /// </summary>
     public override IEnumerator OnAwakeDone() {
+        // 初期化
+        StageBehaviour.Instance.Init();
+        StageScenarioBehaviour.Init();
+
         // 画面の覆いを解除
         ScreenTransitionRegistry.StartUncover(0.5f);
         yield return ScreenTransitionRegistry.WaitAll();
 
         // TitleBGM
         BGMPlayer.Play(BGMPlayer.BGM.Title);
+        TitleBehaviour.Instance.ChangeState(TitleBehaviour.State.Play);
+
+        // 入力受付開始
+        CommandQueue.ChangeInputMask(CommandInputType.Everything);
     }
 
     /// <summary>
