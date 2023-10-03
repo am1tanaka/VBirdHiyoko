@@ -12,7 +12,7 @@ namespace AM1.VBirdHiyoko
     {
         public static void Init()
         {
-            Debug.Log($"未実装");
+            VBirdHiyokoManager.Init();
         }
     }
 }

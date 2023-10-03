@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,27 +22,28 @@ namespace AM1.VBirdHiyoko
         /// <returns>登録できたとき、true。すでに登録済みの時 false</returns>
         public bool Register<T>(T instance)
         {
-            if (instances.ContainsKey(instance.GetType()))
+            if (instances.ContainsKey(typeof(T)))
             {
                 return false;
             }
-            instances[instance.GetType()] = instance;
+
+            instances[typeof(T)] = instance;
             return true;
         }
 
         /// <summary>
-        /// 型を指定して、登録されているインスタンスを取り出す。
+        /// 指定した型で登録されているインスタンスを返す。
         /// </summary>
         /// <typeparam name="T">取り出したいクラス</typeparam>
-        /// <returns>指定のクラスで登録されていたインスタンスを返す。未登録の時は、該当クラスを生成して、生成したインスタンスを返す。</returns>
-        public T Get<T>() where T : class, new()
+        /// <returns>指定のクラスで登録されていたインスタンスを返す。未登録の時は、null</returns>
+        public T Get<T>()
         {
             if (!instances.ContainsKey(typeof(T)))
             {
-                instances[typeof(T)] = new T();
+                return default(T);
             }
 
-            return instances[typeof(T)] as T;
+            return (T)instances[typeof(T)];
         }
     }
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace AM1.VBirdHiyoko
@@ -12,7 +10,7 @@ namespace AM1.VBirdHiyoko
         /// <summary>
         /// 現在のステージ数。0=Title, 1=Stage01
         /// </summary>
-        public int CurrentStage { get; private set; } = 0;
+        public int Current { get; private set; } = 0;
 
         /// <summary>
         /// 最大ステージ
@@ -23,23 +21,23 @@ namespace AM1.VBirdHiyoko
         /// ステージ数を設定する
         /// </summary>
         /// <param name="stage">設定したいステージ数。0=StageTitle, 1=Stage01</param>
-        public void SetStage(int stage)
+        public void Set(int stage)
         {
-            CurrentStage = Mathf.Clamp(stage, 0, MaxStage);
+            Current = Mathf.Clamp(stage, 0, MaxStage);
         }
 
         /// <summary>
-        /// 次のステージに更新。最終ステージだった場合、CurrentStageはそのままでfalseを返す
+        /// 次のステージに更新。最終ステージだった場合、Currentはそのままでfalseを返す
         /// </summary>
         /// <returns>次のステージがあったらtrue。最終ステージだったらfalse</returns>
-        public bool NextStage()
+        public bool Next()
         {
-            if (CurrentStage >= MaxStage)
+            if (Current >= MaxStage)
             {
                 return false;
             }
 
-            CurrentStage++;
+            Current++;
             return true;
         }
     }

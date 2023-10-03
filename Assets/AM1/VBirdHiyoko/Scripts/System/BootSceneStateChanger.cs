@@ -16,12 +16,20 @@ namespace AM1.VBirdHiyoko
             // staticを初期化
             StaticInitializer.Init();
 
+            // 履歴のストレージを登録
+            HistoryRecorder.historyLoader = VBirdHiyokoManager.GetInstance<IHistoryLoader>();
+            HistoryRecorder.historySaver = VBirdHiyokoManager.GetInstance<IHistorySaver>();
+
             // 画面を覆う
             ScreenTransitionRegistry.StartCover((int)ScreenTransitionType.FilledRadial);
         }
 
         public override void OnHideScreen()
         {
+            // クリア済みステージの読み込みと初期設定
+            VBirdHiyokoManager.GetInstance<IGameDataStorage>().InitAndLoad();
+            VBirdHiyokoManager.CurrentStage.Set(VBirdHiyokoManager.ClearedStage.Current - 1);
+
             // ボリューム初期化
             new VolumeSetting((int)VolumeType.BGM, new BGMVolumeSaverWithPlayerPrefs());
             BGMSourceAndClips.Instance.SetVolumeSetting(VolumeSetting.volumeSettings[(int)VolumeType.BGM]);
