@@ -13,6 +13,9 @@ namespace AM1.VBirdHiyoko
     {
         public override void Init()
         {
+            // staticを初期化
+            StaticInitializer.Init();
+
             // 画面を覆う
             ScreenTransitionRegistry.StartCover((int)ScreenTransitionType.FilledRadial);
         }
