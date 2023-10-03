@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace AM1.CommandSystem
 {
@@ -22,5 +23,26 @@ namespace AM1.CommandSystem
         {
             Debug.Log("未実装");
         }
+
+        /// <summary>
+        /// 変更時のイベントを登録
+        /// </summary>
+        /// <param name="type">登録先の種類</param>
+        /// <param name="action">登録する処理</param>
+        public static void AddChangeListener(CommandInputType type, UnityAction<bool> action)
+        {
+            Debug.Log("未実装");
+        }
+
+        /// <summary>
+        /// 変更時の処理の登録を解除
+        /// </summary>
+        /// <param name="type">解除する種類</param>
+        /// <param name="action">解除するアクション</param>
+        public static void RemoveChangeListener(CommandInputType type, UnityAction<bool> action)
+        {
+            Debug.Log("未実装");
+        }
+
     }
 }

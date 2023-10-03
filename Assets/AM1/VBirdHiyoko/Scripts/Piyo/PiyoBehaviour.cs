@@ -10,12 +10,30 @@ namespace AM1.VBirdHiyoko
     {
         public static PiyoBehaviour Instance { get; private set; }
 
+        InstanceDictionary instanceDictionary = new InstanceDictionary();
+
+        /// <summary>
+        /// 歩数を管理するインスタンス
+        /// </summary>
+        public StepCounter StepCounterInstance { get; private set; } = new();
+
         void Awake()
         {
             if (SceneStateChanger.IsReady)
             {
                 Instance = this;
             }
+        }
+
+        /// <summary>
+        /// 指定の方のインスタンスを返す。
+        /// 未登録のインスタンスは生成して登録してから返す。
+        /// </summary>
+        /// <typeparam name="T">取り出したい型</typeparam>
+        /// <returns>インスタンス</returns>
+        public T GetInstance<T>() where T : new()
+        {
+            return instanceDictionary.GetOrNew<T>();
         }
 
         /// <summary>

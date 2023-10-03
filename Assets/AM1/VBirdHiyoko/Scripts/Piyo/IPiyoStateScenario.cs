@@ -1,9 +1,9 @@
 namespace AM1.VBirdHiyoko
 {
     /// <summary>
-    /// PlayerStateScenarioに設定するシナリオデータ用のインターフェース
+    /// PiyoStateScenarioに設定するシナリオデータ用のインターフェース
     /// </summary>
-    public interface IPlayerStateScenario
+    public interface IPiyoStateScenario
     {
         /// <summary>
         /// シナリオのテキストを返す。

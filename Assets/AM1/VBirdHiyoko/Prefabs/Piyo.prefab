@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 528507065814671367}
+  - component: {fileID: 2100123302865478038}
   - component: {fileID: 2465761032397629978}
   m_Layer: 3
   m_Name: Piyo
@@ -33,6 +34,18 @@ Transform:
   - {fileID: 528507066226340903}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2100123302865478038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 528507065814671366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed01e03e614477e40b7ce4c3be4d64ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!54 &2465761032397629978
 Rigidbody:
   m_ObjectHideFlags: 0

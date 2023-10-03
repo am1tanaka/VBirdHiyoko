@@ -45,5 +45,21 @@ namespace AM1.VBirdHiyoko
 
             return (T)instances[typeof(T)];
         }
+
+        /// <summary>
+        /// 指定の型のインスタンスを取り出す。
+        /// 指定の型が未登録なら生成して、登録したものを返す。
+        /// </summary>
+        /// <typeparam name="T">型指定</typeparam>
+        /// <returns>取り出すか生成したインスタンス</returns>
+        public T GetOrNew<T>() where T : new()
+        {
+            if (!instances.ContainsKey(typeof(T)))
+            {
+                Register<T>(new T());
+            }
+
+            return (T)instances[typeof(T)];
+        }
     }
 }

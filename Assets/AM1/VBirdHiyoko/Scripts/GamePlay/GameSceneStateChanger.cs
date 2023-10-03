@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using AM1.BaseFrame;
 using AM1.BaseFrame.Assets;
+using AM1.CommandSystem;
+using AM1.VBirdHiyoko;
+using AM1.MessageSystem;
 
 /// <summary>
 /// Game状態への切り替え
@@ -10,6 +13,16 @@ using AM1.BaseFrame.Assets;
 /// </summary>
 public class GameSceneStateChanger : SceneStateChangerBase<GameSceneStateChanger>, ISceneStateChanger
 {
+    /// <summary>
+    /// 読み込んだステージの名前
+    /// </summary>
+    public string LoadedStageName { get; private set; }
+
+    /// <summary>
+    /// TODO 現在のステージ番号から該当するステージ名を返す
+    /// </summary>
+    static string StageName = "Stage01";
+
     /// <summary>
     /// タイトルからスタートの時、true
     /// </summary>
@@ -20,6 +33,15 @@ public class GameSceneStateChanger : SceneStateChangerBase<GameSceneStateChanger
     /// </summary>
     public override void Init()
     {
+        // 操作を無効にする
+        CommandQueue.ChangeInputMask(CommandInputType.None);
+
+        // プレイヤーを待機状態へ
+        PiyoBehaviour.Instance.Enqueue(PiyoBehaviour.Instance.GetInstance<PiyoStateStandby>());
+
+        // ウィンドウを閉じる
+        MessageWindow.Instance.CloseAll();
+
         // 画面を覆う
         ScreenTransitionRegistry.StartCover((int)ScreenTransitionType.Fade, Color.black, 0.5f);
         BGMSourceAndClips.Instance.Stop(0.5f);
@@ -29,7 +51,8 @@ public class GameSceneStateChanger : SceneStateChangerBase<GameSceneStateChanger
         if (isStartTitle)
         {
             SceneStateChanger.LoadSceneAsync("Game", true);
-            SceneStateChanger.LoadSceneAsync("Stage01", true);
+            SceneStateChanger.LoadSceneAsync(StageName, true);
+            LoadedStageName = StageName;
         }
     }
 
@@ -42,7 +65,8 @@ public class GameSceneStateChanger : SceneStateChangerBase<GameSceneStateChanger
         if (!isStartTitle)
         {
             SceneStateChanger.LoadSceneAsync("Game", false);
-            SceneStateChanger.LoadSceneAsync("Stage01", false);
+            SceneStateChanger.LoadSceneAsync(StageName, false);
+            LoadedStageName = StageName;
         }
     }
 
@@ -51,17 +75,63 @@ public class GameSceneStateChanger : SceneStateChangerBase<GameSceneStateChanger
     /// フェードインなどの状態を始めるための処理を実装します。
     /// </summary>
     public override IEnumerator OnAwakeDone() {
+        // 初期化
+        StageBehaviour.Instance.Init();
+        CommandQueue.AddChangeListener(CommandInputType.UI, OnChangeCommandUI);
+        CommandQueue.AddChangeListener(CommandInputType.Game, OnChangeCommandGame);
+        StageScenarioBehaviour.Init();
+        GamePlayStateQueue.Instance.Init();
+
+        HistoryRecorder.Init();
+        HistoryPlayer.Init();
+        HistoryObjectRegistrant.RegisterObjects();
+        ushort innerStep;
+        if (HistoryRecorder.Load(VBirdHiyokoManager.CurrentStage.Current, out innerStep))
+        {
+            PiyoBehaviour.Instance.StepCounterInstance.SetInnerStep(innerStep);
+        }
+
         // 画面の覆いを解除
         ScreenTransitionRegistry.StartUncover(0.5f);
         yield return ScreenTransitionRegistry.WaitAll();
+
+        // BGM
+        BGMPlayer.Play(BGMPlayer.BGM.Game);
+        // ゲームを開始
+        GamePlayStateQueue.Instance.Enqueue(GamePlayStateQueue.Instance.GetInstance<GameStatePlay>());
     }
 
     /// <summary>
     /// 次の状態への切り替えにおいて、画面が隠れた時に呼び出すシーンの終了処理。不要になったシーンの解放などを実装します。
     /// </summary>
     public override void Terminate() {
+        // 登録解除
+        CommandQueue.RemoveChangeListener(CommandInputType.UI, OnChangeCommandUI);
+        CommandQueue.RemoveChangeListener(CommandInputType.Game, OnChangeCommandGame);
+
         // シーンの解放
         SceneStateChanger.UnloadSceneAsync("Game");
-        SceneStateChanger.UnloadSceneAsync("Stage01");
+        SceneStateChanger.UnloadSceneAsync("Clear");
+        SceneStateChanger.UnloadSceneAsync(LoadedStageName);
+        LoadedStageName = "";
     }
+
+    /// <summary>
+    /// UIコマンドの有効、無効の切り替え時に呼び出される処理。
+    /// </summary>
+    /// <param name="flag">操作を有効にする時、true</param>
+    void OnChangeCommandUI(bool flag)
+    {
+        Debug.Log($"OnChangeCommandUI({flag})");
+    }
+
+    /// <summary>
+    /// ゲーム操作の有効無効設定
+    /// </summary>
+    /// <param name="flag">操作を有効にする時、true</param>
+    void OnChangeCommandGame(bool flag)
+    {
+        Debug.Log($"OnChangeCommandGame({flag})");
+    }
+
 }
