@@ -40,6 +40,14 @@ namespace AM1.CommandSystem
         }
 
         /// <summary>
+        /// 更新をシステムから呼び出す
+        /// </summary>
+        public static void Update()
+        {
+            Debug.Log("未実装");
+        }
+
+        /// <summary>
         /// 指定の入力を有効にする。
         /// </summary>
         /// <param name="flag">有効にする時、true</param>
@@ -66,6 +74,17 @@ namespace AM1.CommandSystem
         public static void RemoveChangeListener(CommandInputType type, UnityAction<bool> action)
         {
             Debug.Log("未実装");
+        }
+
+        /// <summary>
+        /// 指定のデータの登録を要求する。
+        /// </summary>
+        /// <param name="data">登録したいデータのインスタンス</param>
+        /// <returns>登録できたら true</returns>
+        public static bool EntryCommand(ICommandQueueData data)
+        {
+            Debug.Log("未実装");
+            return false;
         }
 
     }
