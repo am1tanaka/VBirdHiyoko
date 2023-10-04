@@ -56,4 +56,170 @@ public class AM1TestUtil
         Assert.That(pos.magnitude, Is.LessThan(0.02f), $"{mes} target={target.x}, {target.y}, {target.z} player={PiyoBehaviour.Instance.RigidbodyPosition.x}, {PiyoBehaviour.Instance.RigidbodyPosition.y}, {PiyoBehaviour.Instance.RigidbodyPosition.z}");
     }
 
+    /// <summary>
+    /// 保存データをTestにして削除
+    /// </summary>
+    internal static void SetGameDataTestAndClear()
+    {
+        VBirdHiyokoPlayerPrefs.prefix = "Test";
+        VBirdHiyokoManager.ResetStatics();
+        VBirdHiyokoManager.Init();
+        VBirdHiyokoManager.GetInstance<IGameDataStorage>().DeleteAll();
+    }
+
+    static Collider[] results = new Collider[1];
+    public static BlockRouteData Click(Vector3 target)
+    {
+        Debug.Log($"Click({target})");
+        int count = Physics.OverlapSphereNonAlloc(target, 0.1f, results, LayerMask.GetMask("Block"));
+        Assert.That(count, Is.GreaterThan(0), $"ブロックあり {target}");
+        var block = results[0].GetComponent<BlockRouteData>();
+        Assert.That(block, Is.Not.Null, $"BlockRouteDataあり {target}");
+        PiyoBehaviour.Instance.GetInstance<PiyoStateWaitInput>().OnAction(block);
+        return block;
+    }
+
+    /// <summary>
+    /// 歩き終わるのを指定秒数のタイムアウト付きで待つ。
+    /// </summary>
+    public static IEnumerator WaitWalkDone(string mes = "", float limit = 5f)
+    {
+        // 歩き始めるのを待つ
+        float t = 0;
+        while ((t < limit) && !PiyoBehaviour.Instance.StateIs<PiyoStateWalk>())
+        {
+            yield return null;
+            t += Time.deltaTime;
+        }
+        Assert.That(t, Is.LessThan(limit), $"歩き待ち 制限時間オーバー:{mes}");
+
+        // 入力待ちまで待つ
+        t = 0;
+        while ((t < limit) && !PiyoBehaviour.Instance.GetInstance<PiyoStateWaitInput>().IsWaitInput)
+        {
+            yield return null;
+            t += Time.deltaTime;
+        }
+        Assert.That(t, Is.LessThan(limit), $"入力待機 制限時間オーバー:{mes}");
+    }
+
+    /// <summary>
+    /// 押し終わるのを指定秒数のタイムアウト付きで待つ。
+    /// </summary>
+    public static IEnumerator WaitWalkOrPushDone(string mes = "", float limit = 5f)
+    {
+        // 押し始めるのを待つ
+        float t = 0;
+        while ((t < limit)
+            && !PiyoBehaviour.Instance.StateIs<PiyoStatePush>()
+            && !PiyoBehaviour.Instance.StateIs<PiyoStateWalk>())
+        {
+            yield return null;
+            t += Time.deltaTime;
+        }
+        Assert.That(t, Is.LessThan(limit), $"歩くか押し待ち 制限時間オーバー:{mes}");
+
+        // 入力待ちまで待つ
+        t = 0;
+        while ((t < limit) && !PiyoBehaviour.Instance.GetInstance<PiyoStateWaitInput>().IsWaitInput)
+        {
+            yield return null;
+            t += Time.deltaTime;
+        }
+        Assert.That(t, Is.LessThan(limit), $"入力待機 制限時間オーバー:{mes}");
+    }
+
+    /// <summary>
+    /// 指定の座標につくまで待つ。
+    /// </summary>
+    /// <param name="pos">確認する座標</param>
+    public static IEnumerator WaitPlayerPosition(Vector3 pos, float time = 5f)
+    {
+        float t = 0;
+
+        for (; t < time; t += Time.fixedDeltaTime)
+        {
+            if (IsPlayerPosition(pos))
+            {
+                yield break;
+            }
+
+            yield return new WaitForFixedUpdate();
+        }
+
+        Assert.That(t, Is.LessThan(time), $"座標につくまで待つ 制限時間オーバー {pos}");
+    }
+
+    /// <summary>
+    /// プレイヤーの座標が指定の座標と一致するかどうかを返す。
+    /// </summary>
+    /// <param name="pos">確認する座標</param>
+    /// <param name="withIn">許容誤差</param>
+    /// <returns>一致していると見做せる時、true</returns>
+    public static bool IsPlayerPosition(Vector3 pos, float withIn = 0.01f)
+    {
+        var p = PiyoBehaviour.Instance.RigidbodyPosition - pos;
+        p.y = 0;
+        return p.magnitude < withIn;
+    }
+
+    /// <summary>
+    /// メッセージが表示状態になるのを待つ。
+    /// </summary>
+    /// <param name="timeout">タイムアウトの秒数</param>
+    public static IEnumerator WaitShowMessage(string mes = "", float timeout = 3)
+    {
+        float time = 0;
+        yield return null;
+        while ((time < timeout) && (MessageWindow.Instance.CurrentState != MessageWindow.State.Show))
+        {
+            yield return null;
+            time += Time.deltaTime;
+        }
+
+        if (time >= timeout)
+        {
+            Assert.Fail("Timeout" + (mes.Length > 0 ? $":{mes}" : ""));
+        }
+    }
+
+    /// <summary>
+    /// メッセージが変わるまで待つ
+    /// </summary>
+    /// <param name="timeout">タイムアウトの秒数</param>
+    public static IEnumerator WaitChangeMessage(string mes = "", float timeout = 3)
+    {
+        float time = 0;
+        string last = MessageWindow.Instance.MessageText;
+        while ((time < timeout) && (MessageWindow.Instance.MessageText == last))
+        {
+            yield return null;
+            time += Time.deltaTime;
+        }
+
+        if (time >= timeout)
+        {
+            Assert.Fail("Timeout" + (mes.Length > 0 ? $":{mes}" : ""));
+        }
+    }
+
+    /// <summary>
+    /// メッセージが閉じるのを待つ。
+    /// </summary>
+    /// <param name="timeout">タイムアウトの秒数</param>
+    internal static IEnumerator WaitCloseMessage(string mes = "", float timeout = 3)
+    {
+        float time = 0;
+        yield return null;
+        while ((time < timeout) && (MessageWindow.Instance.CurrentState != MessageWindow.State.Hide))
+        {
+            yield return null;
+            time += Time.deltaTime;
+        }
+
+        if (time >= timeout)
+        {
+            Assert.Fail("Timeout" + (mes.Length > 0 ? $":{mes}" : ""));
+        }
+    }
 }

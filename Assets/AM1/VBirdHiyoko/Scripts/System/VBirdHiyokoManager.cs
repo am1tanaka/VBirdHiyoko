@@ -41,7 +41,7 @@ namespace AM1.VBirdHiyoko
         {
             CurrentStage.Set(0);
             ClearedStage.Set(0);
-            instanceDictionary.Unregister<IGameDataStorage>();
+            instanceDictionary?.Unregister<IGameDataStorage>();
         }
 
         /// <summary>

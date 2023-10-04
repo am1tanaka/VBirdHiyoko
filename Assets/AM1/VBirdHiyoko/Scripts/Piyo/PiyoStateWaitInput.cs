@@ -18,5 +18,14 @@ namespace AM1.VBirdHiyoko
             PiyoBehaviour.Instance.StateIs<PiyoStateWaitInput>()
             && CommandQueue.CurrentInputMask.HasFlag(CommandInputType.Game)
             && !CommandQueue.IsSetNextCommand;
+
+        /// <summary>
+        /// 指定のブロックのクリックを受け取る。
+        /// </summary>
+        /// <param name="blockRouteData">クリックしたオブジェクト</param>
+        public void OnAction(BlockRouteData blockRouteData)
+        {
+            Debug.Log("未実装");
+        }
     }
 }

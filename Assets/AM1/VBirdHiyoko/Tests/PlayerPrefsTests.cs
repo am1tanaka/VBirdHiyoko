@@ -11,10 +11,8 @@ public class PlayerPrefsTests
     public void PlayerPrefsTestsSimplePasses()
     {
         VBirdHiyokoManager.ResetStatics();
-        VBirdHiyokoPlayerPrefs.prefix = "test";
-        VBirdHiyokoManager.Init();
+        AM1TestUtil.SetGameDataTestAndClear();
         var storageClass = VBirdHiyokoManager.GetInstance<VBirdHiyokoPlayerPrefs>();
-        storageClass.DeleteAll();
 
         Assert.That(VBirdHiyokoManager.ClearedStage.Current, Is.EqualTo(0), "初期値0");
 
