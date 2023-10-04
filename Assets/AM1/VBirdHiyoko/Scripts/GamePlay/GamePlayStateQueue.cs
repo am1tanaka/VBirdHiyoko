@@ -40,9 +40,9 @@ namespace AM1.VBirdHiyoko
         /// </summary>
         /// <typeparam name="T">返す型。</typeparam>
         /// <returns>インスタンス</returns>
-        public T GetInstance<T>() where T : new()
+        public void Enqueue<T>() where T : AM1StateQueueBase, new()
         {
-            return instanceDictionary.GetOrNew<T>();
+            Enqueue(instanceDictionary.GetOrNew<T>());
         }
     }
 }

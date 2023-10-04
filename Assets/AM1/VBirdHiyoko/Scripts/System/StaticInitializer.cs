@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using AM1.BaseFrame;
+using AM1.CommandSystem;
 
 namespace AM1.VBirdHiyoko
 {
@@ -13,6 +12,11 @@ namespace AM1.VBirdHiyoko
         public static void Init()
         {
             VBirdHiyokoManager.Init();
+            CommandQueue.Init();
+            HistoryPlayer.Init();
+            HistoryRecorder.Init();
+            HistoryObjectList.Init();
+            SceneStateChanger.ResetStatics();
         }
     }
 }

@@ -43,6 +43,11 @@ namespace AM1.VBirdHiyoko
         {
             return instanceDictionary.Get<T>();
         }
-        
+
+        [System.Diagnostics.Conditional("DEBUG_LOG")]
+        public static void Log(object message)
+        {
+            Debug.Log(message);
+        }
     }
 }

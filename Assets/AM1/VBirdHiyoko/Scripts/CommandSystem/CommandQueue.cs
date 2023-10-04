@@ -16,6 +16,30 @@ namespace AM1.CommandSystem
     public static class CommandQueue
     {
         /// <summary>
+        /// 登録可能な入力の種類。
+        /// 登録済みのコマンドには影響しない。
+        /// </summary>
+        public static CommandInputType CurrentInputMask { get; private set; }
+
+        /// <summary>
+        /// 次に実行予定のコマンド
+        /// </summary>
+        static ICommandQueueData nextCommand;
+
+        /// <summary>
+        /// 次のコマンドが設定済みのとき、true
+        /// </summary>
+        public static bool IsSetNextCommand => nextCommand != null;
+
+        /// <summary>
+        /// 起動時などのシステムの開始時に呼び出す。テストなどで利用。
+        /// </summary>
+        public static void Init()
+        {
+            Debug.Log("未実装");
+        }
+
+        /// <summary>
         /// 指定の入力を有効にする。
         /// </summary>
         /// <param name="flag">有効にする時、true</param>

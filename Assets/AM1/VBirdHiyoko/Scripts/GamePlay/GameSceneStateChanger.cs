@@ -37,7 +37,7 @@ public class GameSceneStateChanger : SceneStateChangerBase<GameSceneStateChanger
         CommandQueue.ChangeInputMask(CommandInputType.None);
 
         // プレイヤーを待機状態へ
-        PiyoBehaviour.Instance.Enqueue(PiyoBehaviour.Instance.GetInstance<PiyoStateStandby>());
+        PiyoBehaviour.Instance.EnqueueState<PiyoStateStandby>();
 
         // ウィンドウを閉じる
         MessageWindow.Instance.CloseAll();
@@ -98,7 +98,7 @@ public class GameSceneStateChanger : SceneStateChangerBase<GameSceneStateChanger
         // BGM
         BGMPlayer.Play(BGMPlayer.BGM.Game);
         // ゲームを開始
-        GamePlayStateQueue.Instance.Enqueue(GamePlayStateQueue.Instance.GetInstance<GameStatePlay>());
+        GamePlayStateQueue.Instance.Enqueue<GameStatePlay>();
     }
 
     /// <summary>
@@ -122,7 +122,7 @@ public class GameSceneStateChanger : SceneStateChangerBase<GameSceneStateChanger
     /// <param name="flag">操作を有効にする時、true</param>
     void OnChangeCommandUI(bool flag)
     {
-        Debug.Log($"OnChangeCommandUI({flag})");
+        Button3DAnimator.SetEnabledAll(flag);
     }
 
     /// <summary>
@@ -131,7 +131,13 @@ public class GameSceneStateChanger : SceneStateChangerBase<GameSceneStateChanger
     /// <param name="flag">操作を有効にする時、true</param>
     void OnChangeCommandGame(bool flag)
     {
-        Debug.Log($"OnChangeCommandGame({flag})");
+        if (flag)
+        {
+            PiyoBehaviour.Instance.ShowPushArrows();
+        }
+        else
+        {
+            PiyoBehaviour.Instance.HidePushArrows();
+        }
     }
-
 }
