@@ -32,6 +32,18 @@ namespace AM1.VBirdHiyoko
         }
 
         /// <summary>
+        /// 指定の型の登録を削除する。
+        /// </summary>
+        /// <typeparam name="T">削除したい型</typeparam>
+        public void Unregister<T>()
+        {
+            if (instances.ContainsKey(typeof(T)))
+            {
+                instances.Remove(typeof(T));
+            }
+        }
+
+        /// <summary>
         /// 指定した型で登録されているインスタンスを返す。
         /// </summary>
         /// <typeparam name="T">取り出したいクラス</typeparam>

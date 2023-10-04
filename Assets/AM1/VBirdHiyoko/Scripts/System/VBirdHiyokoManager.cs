@@ -35,6 +35,16 @@ namespace AM1.VBirdHiyoko
         }
 
         /// <summary>
+        /// テストなどのリスタート用にstaticのデータを再生成する。
+        /// </summary>
+        public static void ResetStatics()
+        {
+            CurrentStage.Set(0);
+            ClearedStage.Set(0);
+            instanceDictionary.Unregister<IGameDataStorage>();
+        }
+
+        /// <summary>
         /// 指定の型のインスタンスを返す。
         /// </summary>
         /// <typeparam name="T">取り出したいクラス</typeparam>
@@ -42,6 +52,30 @@ namespace AM1.VBirdHiyoko
         public static T GetInstance<T>()
         {
             return instanceDictionary.Get<T>();
+        }
+
+        /// <summary>
+        /// 指定の型のインスタンスを解放する。
+        /// </summary>
+        /// <typeparam name="T">解放する型</typeparam>
+        public static void RemoveInstance<T>()
+        {
+            instanceDictionary.Unregister<T>();
+        }
+
+        /// <summary>
+        /// ステージクリア時にステージ番号の更新とクリア済みデータを更新する。
+        /// </summary>
+        /// <returns>次のステージへ進む時、true。エンディングなら false</returns>
+        public static bool NextStage()
+        {
+            if (ClearedStage.Current < CurrentStage.Current)
+            {
+                ClearedStage.Set(CurrentStage.Current);
+                instanceDictionary.Get<IGameDataStorage>().SaveClearedStage(ClearedStage.Current);
+            }
+
+            return CurrentStage.Next();
         }
 
         [System.Diagnostics.Conditional("DEBUG_LOG")]
