@@ -21,20 +21,45 @@ namespace AM1.MessageSystem
         }
 
         /// <summary>
+        /// 閉じられない秒数
+        /// </summary>
+        public static float IgnoreCloseSeconds => 0.5f;
+
+        /// <summary>
         /// 現在の状態
         /// </summary>
         public State CurrentState { get; private set; }
+
+        /// <summary>
+        /// 次の状態
+        /// </summary>
+        public State NextState { get; private set; } = State.None;
 
         /// <summary>
         /// 表示中のメッセージ
         /// </summary>
         public string MessageText => messageText != null ? messageText.text : "";
 
+        /// <summary>
+        /// メッセージ表示中フラグ
+        /// </summary>
+        public bool IsShowing => (CurrentState != State.Hide) || (NextState != State.None);
+
         TextMeshProUGUI messageText;
 
         private void Awake()
         {
             Instance = this;
+        }
+
+        /// <summary>
+        /// メッセージの表示を登録する。
+        /// </summary>
+        /// <param name="data">登録するメッセージのデータ</param>
+        /// <returns>登録</returns>
+        public bool Show(MessageData data)
+        {
+            return false;
         }
 
         /// <summary>

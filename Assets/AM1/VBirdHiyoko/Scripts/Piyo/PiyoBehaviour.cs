@@ -45,7 +45,7 @@ namespace AM1.VBirdHiyoko
         /// 状態の予約がないことと指定の状態かを確認する。
         /// </summary>
         /// <returns>予約がなく状態が指定のものなら、true</returns>
-        public bool StateIs<T>() where T : AM1StateQueueBase
+        public bool IsState<T>() where T : AM1StateQueueBase
         {
             return (stateQueue.Count == 0) && (CurrentState == instanceDictionary.Get<T>());
         }

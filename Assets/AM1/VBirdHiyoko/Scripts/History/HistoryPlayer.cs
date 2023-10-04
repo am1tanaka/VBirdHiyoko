@@ -9,6 +9,15 @@ namespace AM1.VBirdHiyoko
     /// </summary>
     public static class HistoryPlayer
     {
+        public static IHistoryPlayer.Mode CurrentState = IHistoryPlayer.Mode.None;
+
+        /// <summary>
+        /// 指定の状態に一致するかを確認する。
+        /// </summary>
+        /// <param name="state">確認する状態</param>
+        /// <returns>一致する時、true</returns>
+        public static bool IsCurrentState(IHistoryPlayer.Mode state) => state == CurrentState;
+
         /// <summary>
         /// 初期化
         /// </summary>

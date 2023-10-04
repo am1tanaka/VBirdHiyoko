@@ -15,6 +15,19 @@ public class AM1TestUtil
             () => SceneStateChanger.IsStateStarted(TitleSceneStateChanger.Instance));
     }
 
+    public static IEnumerator StartStage(int stage = 1)
+    {
+        yield return StartTitle();
+
+        // ゲームスタート
+        VBirdHiyokoManager.CurrentStage.Set(stage);
+        TitleBehaviour.Instance.ChangeState(TitleBehaviour.State.GameStart);
+        yield return new WaitUntil(
+            () => SceneStateChanger.IsStateStarted(GameSceneStateChanger.Instance));
+        yield return new WaitWhile(() => SceneStateChanger.IsChanging);
+        yield return WaitCanAction();
+    }
+
     public static IEnumerator StartStage(string stageName)
     {
         TestSceneStateChanger.StageName = stageName;
@@ -80,13 +93,43 @@ public class AM1TestUtil
     }
 
     /// <summary>
+    /// 指定座標をクリックして、チェック座標に移動したことを確認する。
+    /// </summary>
+    /// <param name="target">目的地座標</param>
+    /// <param name="check">チェック座標</param>
+    public static IEnumerator ClickAndAssert(Vector3 target, Vector3 check, string mes = "")
+    {
+        yield return new WaitUntil(() => PiyoBehaviour.Instance.GetInstance<PiyoStateWaitInput>().IsWaitInput);
+        Click(target);
+        yield return WaitWalkOrPushDone();
+        AssertPosition(check, mes);
+    }
+
+    /// <summary>
+    /// 指定の座標にあるオブジェクトをOverlapSphereで獲得して返す。
+    /// </summary>
+    /// <param name="pos">確認する座標</param>
+    /// <returns></returns>
+    public static Collider GetObject(Vector3 pos, int layer)
+    {
+        int count = Physics.OverlapSphereNonAlloc(
+            pos, 0.1f, results, layer);
+
+        if (count == 0)
+        {
+            return null;
+        }
+        return results[0];
+    }
+
+    /// <summary>
     /// 歩き終わるのを指定秒数のタイムアウト付きで待つ。
     /// </summary>
     public static IEnumerator WaitWalkDone(string mes = "", float limit = 5f)
     {
         // 歩き始めるのを待つ
         float t = 0;
-        while ((t < limit) && !PiyoBehaviour.Instance.StateIs<PiyoStateWalk>())
+        while ((t < limit) && !PiyoBehaviour.Instance.IsState<PiyoStateWalk>())
         {
             yield return null;
             t += Time.deltaTime;
@@ -111,8 +154,8 @@ public class AM1TestUtil
         // 押し始めるのを待つ
         float t = 0;
         while ((t < limit)
-            && !PiyoBehaviour.Instance.StateIs<PiyoStatePush>()
-            && !PiyoBehaviour.Instance.StateIs<PiyoStateWalk>())
+            && !PiyoBehaviour.Instance.IsState<PiyoStatePush>()
+            && !PiyoBehaviour.Instance.IsState<PiyoStateWalk>())
         {
             yield return null;
             t += Time.deltaTime;

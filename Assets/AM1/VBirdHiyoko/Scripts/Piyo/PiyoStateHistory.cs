@@ -1,23 +1,20 @@
+using AM1.State;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using AM1.State;
-using AM1.CommandSystem;
 
 namespace AM1.VBirdHiyoko
 {
-    /// <summary>
-    /// 操作待ち状態
-    /// </summary>
-    public class PiyoStateWaitInput : AM1StateQueueBase
+    public class PiyoStateHistory : AM1StateQueueBase
     {
         /// <summary>
-        /// 入力待ちになったら true
+        /// クリックを受け取る
         /// </summary>
-        public bool IsWaitInput =>
-            PiyoBehaviour.Instance.IsState<PiyoStateWaitInput>()
-            && CommandQueue.CurrentInputMask.HasFlag(CommandInputType.Game)
-            && !CommandQueue.IsSetNextCommand;
+        /// <param name="hit">クリックしたオブジェクトの当たり判定</param>
+        public void OnAction(RaycastHit hit)
+        {
+            OnAction(hit.collider.GetComponent<BlockRouteData>());
+        }
 
         /// <summary>
         /// 指定のブロックのクリックを受け取る。

@@ -9,6 +9,8 @@ namespace AM1.VBirdHiyoko
     /// </summary>
     public static class HistoryObjectRegistrant
     {
+        public static Bounds MapBounds { get; private set; } = new ();
+
         /// <summary>
         /// シーンに配置されたHistoryBehaviourを検索して、X,Y,Zの小さい順に並び替えて、その順でHistoryRecorderへ登録する。
         /// </summary>
