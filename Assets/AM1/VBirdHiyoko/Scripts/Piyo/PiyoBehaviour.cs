@@ -37,9 +37,24 @@ namespace AM1.VBirdHiyoko
         /// </summary>
         public Vector3 RigidbodyPosition => rb.position;
 
+        /// <summary>
+        /// 登録されたシナリオイベントがある時、trueを返す。
+        /// </summary>
+        public bool IsAddedScenario => addedScenarioQueue.Count > 0;
+
+        /// <summary>
+        /// シナリオ実行後の状態を設定する。
+        /// </summary>
+        public AM1StateQueueBase afterScenarioState;
+
         InstanceDictionary instanceDictionary = new InstanceDictionary();
         Transform pivotTransform;
         Rigidbody rb;
+
+        /// <summary>
+        /// 歩行中に受け取ったマップ上のシナリオイベントのキュー
+        /// </summary>
+        Queue<AM1StateQueueBase> addedScenarioQueue = new Queue<AM1StateQueueBase>();
 
         /// <summary>
         /// 状態の予約がないことと指定の状態かを確認する。
@@ -56,7 +71,8 @@ namespace AM1.VBirdHiyoko
             {
                 Instance = this;
                 rb = GetComponent<Rigidbody>();
-                Mover = new PiyoMover(rb, pivotTransform);
+                pivotTransform = transform.Find("Pivot");
+                Mover = new PiyoMover(this, rb, pivotTransform);
             }
         }
 
@@ -86,7 +102,16 @@ namespace AM1.VBirdHiyoko
         /// <param name="pos">設定する座標</param>
         public void SetPosition(Vector3 pos)
         {
-            Debug.Log($"未実装");
+            rb.position = pos;
+            transform.position = pos;
+        }
+
+        /// <summary>
+        /// ルートを現在の状態で更新する。
+        /// </summary>
+        public void UpdateRoute()
+        {
+            Debug.Log("未実装");
         }
 
         /// <summary>
@@ -96,6 +121,29 @@ namespace AM1.VBirdHiyoko
         public void AddScenario(AM1StateQueueBase scenario)
         {
             Debug.Log("未実装");
+        }
+
+        /// <summary>
+        /// 追加されたシナリオイベントを実行する。
+        /// </summary>
+        public void InvokeAddedScenarioState()
+        {
+            // シナリオイベントを実行する。
+            if (addedScenarioQueue.TryDequeue(out var scenarioState))
+            {
+                Enqueue(scenarioState);
+            }
+            else
+            {
+                if (afterScenarioState != null)
+                {
+                    Enqueue(afterScenarioState);
+                }
+                else
+                {
+                    Enqueue(GetInstance<PiyoStateWaitInput>());
+                }
+            }
         }
 
         /// <summary>
@@ -113,6 +161,16 @@ namespace AM1.VBirdHiyoko
         public void HidePushArrows()
         {
             Debug.Log("未実装");
+        }
+
+        /// <summary>
+        /// 詰み状態を発動させるか確認する。
+        /// </summary>
+        /// <returns>詰み状態へ変更する時 true。すでに詰み状態だったり継続可能ならfalse</returns>
+        public bool ChangeTsumi()
+        {
+            Debug.Log("未実装");
+            return false;
         }
     }
 }

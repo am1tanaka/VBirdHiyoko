@@ -9,6 +9,6 @@ namespace AM1.CommandSystem
         None = 0,
         UI = 1 << 0,
         Game = 1 << 1,
-        Everything = -1
+        Everything = 0b11
     }
 }

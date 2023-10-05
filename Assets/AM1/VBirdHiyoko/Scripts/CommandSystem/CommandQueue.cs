@@ -16,6 +16,16 @@ namespace AM1.CommandSystem
     public static class CommandQueue
     {
         /// <summary>
+        /// 入力の可否を切り替えた時に呼び出したい処理を登録
+        /// </summary>
+        static readonly UnityEvent<bool>[] onChange;
+
+        /// <summary>
+        /// 有効にする予定のマスクの状態
+        /// </summary>
+        static CommandInputType nextInputMask;
+
+        /// <summary>
         /// 登録可能な入力の種類。
         /// 登録済みのコマンドには影響しない。
         /// </summary>
@@ -32,11 +42,44 @@ namespace AM1.CommandSystem
         public static bool IsSetNextCommand => nextCommand != null;
 
         /// <summary>
+        /// CommandInputTypeをインデックスに変換
+        /// </summary>
+        /// <param name="type">変換したいコマンドの種類フラグ</param>
+        /// <returns>インデックス。onChangeのインデックスに利用</returns>
+        static int CommandTypeTypeToIndex(CommandInputType type)
+        {
+            for (int i = 0; i < onChange.Length; i++)
+            {
+                if (type.HasFlag((CommandInputType)(1 << i)))
+                {
+                    return i;
+                }
+            }
+
+            return 0;
+        }
+
+        /// <summary>
+        /// クラス初期化
+        /// </summary>
+        static CommandQueue()
+        {
+            int count = System.Enum.GetValues(typeof(CommandInputType)).Length - 1;
+            onChange = new UnityEvent<bool>[count];
+            for (int i = 0; i < count; i++)
+            {
+                onChange[i] = new UnityEvent<bool>();
+            }
+            nextCommand = null;
+        }
+
+        /// <summary>
         /// 起動時などのシステムの開始時に呼び出す。テストなどで利用。
         /// </summary>
         public static void Init()
         {
-            Debug.Log("未実装");
+            CurrentInputMask = CommandInputType.None;
+            RemoveAllChangeListener();
         }
 
         /// <summary>
@@ -44,7 +87,35 @@ namespace AM1.CommandSystem
         /// </summary>
         public static void Update()
         {
-            Debug.Log("未実装");
+            UpdateMask();
+            InvokeCommand();
+        }
+
+        /// <summary>
+        /// マスクの更新処理
+        /// </summary>
+        static void UpdateMask()
+        {
+            // 差分
+            var diff = CurrentInputMask ^ nextInputMask;
+
+            for (int i = 0; i < onChange.Length; i++)
+            {
+                if (diff.HasFlag((CommandInputType)(1 << i)))
+                {
+                    onChange[i].Invoke((nextInputMask.HasFlag((CommandInputType)(1 << i))));
+                }
+            }
+            CurrentInputMask = nextInputMask;
+        }
+
+        static void InvokeCommand()
+        {
+            if (nextCommand == null) return;
+
+            // 実行
+            nextCommand.Invoke();
+            nextCommand = null;
         }
 
         /// <summary>
@@ -53,7 +124,14 @@ namespace AM1.CommandSystem
         /// <param name="flag">有効にする時、true</param>
         public static void ChangeInputMask(CommandInputType type)
         {
-            Debug.Log("未実装");
+            nextInputMask = type;
+
+            if ((nextCommand == null)
+                || !type.HasFlag(nextCommand.Type))
+                return;
+
+            // 操作が無効化されていたら登録データを削除
+            nextCommand = null;
         }
 
         /// <summary>
@@ -63,7 +141,7 @@ namespace AM1.CommandSystem
         /// <param name="action">登録する処理</param>
         public static void AddChangeListener(CommandInputType type, UnityAction<bool> action)
         {
-            Debug.Log("未実装");
+            onChange[CommandTypeTypeToIndex(type)].AddListener(action);
         }
 
         /// <summary>
@@ -73,7 +151,18 @@ namespace AM1.CommandSystem
         /// <param name="action">解除するアクション</param>
         public static void RemoveChangeListener(CommandInputType type, UnityAction<bool> action)
         {
-            Debug.Log("未実装");
+            onChange[CommandTypeTypeToIndex(type)].RemoveListener(action);
+        }
+
+        /// <summary>
+        /// 登録されている全ての変更時の処理を解除。
+        /// </summary>
+        public static void RemoveAllChangeListener()
+        {
+            for (int i = 0; i < onChange.Length; i++)
+            {
+                onChange[i].RemoveAllListeners();
+            }
         }
 
         /// <summary>
@@ -83,9 +172,36 @@ namespace AM1.CommandSystem
         /// <returns>登録できたら true</returns>
         public static bool EntryCommand(ICommandQueueData data)
         {
-            Debug.Log("未実装");
-            return false;
+            Log($"EntryCommand CurrentInputMask={CurrentInputMask} data.Type={data.Type} nextCommand={nextCommand}");
+            if (nextCommand != null)
+            {
+                Log($"  nextPri={nextCommand.Priority} data.pri={data.Priority}");
+            }
+
+
+            // マスクされていたら登録不可
+            if (!CurrentInputMask.HasFlag(data.Type))
+            {
+                Log($"  HasFlagチェックがfalse");
+                return false;
+            }
+
+            // 登録済みのコマンドより優先度が低ければ登録不可
+            if ((nextCommand != null) && (nextCommand.Priority >= data.Priority))
+            {
+                Log($"  優先順位でキャンセル");
+                return false;
+            }
+
+            Log($"登録 nextCommand={data}");
+            nextCommand = data;
+            return true;
         }
 
+        [System.Diagnostics.Conditional("DEBUG_LOG")]
+        static void Log(object mes)
+        {
+            Debug.Log(mes);
+        }
     }
 }
