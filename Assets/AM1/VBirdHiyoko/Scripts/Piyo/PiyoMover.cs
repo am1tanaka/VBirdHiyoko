@@ -191,25 +191,18 @@ namespace AM1.VBirdHiyoko
         /// <param name="dir">歩く方向。Yは無効</param>
         public IEnumerator WalkTo(Vector3 dir)
         {
-            Debug.Log($"Walkto");
             yield return TurnTo(Direction.DetectType(dir));
-
-            Debug.Log($"Walkto b");
 
             SetState(State.Walk);
 
-            Debug.Log($"Walkto c");
-
             // 目的座標算出
             Vector3 target = GetTargetPosition(dir);
-            Debug.Log($"target={target}");
             // 目的座標まで移動
             bool isWalking = true;
             float step = Time.fixedDeltaTime * WalkSpeed;
             while (isWalking)
             {
                 Vector3 to = target - rb.position;
-                Debug.Log($"  to={to}");
                 to.y = 0;
                 float distance = step;
                 if (to.magnitude <= distance)
@@ -222,7 +215,6 @@ namespace AM1.VBirdHiyoko
                 SideMove(distance * to.normalized);
                 yield return wait;
             }
-            Debug.Log("done");
         }
 
         /// <summary>
@@ -484,7 +476,7 @@ namespace AM1.VBirdHiyoko
             // TODO きりのよい場所へ移動
 
             // 停止
-            Debug.Log("未実装");
+            SetState(State.Stand);
         }
 
         /// <summary>
