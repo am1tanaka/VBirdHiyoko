@@ -13,7 +13,7 @@ public class RouteTests
     [UnityTest]
     public IEnumerator RockTests()
     {
-        yield return AM1TestUtil.StartStage("Stage00");
+        yield return AM1TestUtil.StartStage("TestStage01");
 
         // 1, -5へ歩く
         yield return AM1TestUtil.ClickAndAssert(new Vector3(0, 0.5f, -4), new Vector3(0, 0, -4), "1, -5へ");
@@ -29,7 +29,7 @@ public class RouteTests
     [UnityTest]
     public IEnumerator RouteTestsWithEnumeratorPasses()
     {
-        yield return AM1TestUtil.StartStage("Stage00");
+        yield return AM1TestUtil.StartStage("TestStage01");
 
         // 1, -5へ歩く
         Vector3 target = new(1, 0.5f, -5);
@@ -41,7 +41,7 @@ public class RouteTests
         Assert.That(block.CanWalk, Is.True, $"Block歩ける {block.StepCount}");
 
         yield return new WaitUntil(
-            () => PlayerBehaviour.Instance.CurrentState == PlayerBehaviour.Instance.Instances.Get<PlayerStateWalk>());
+            () => PiyoBehaviour.Instance.CurrentState == PiyoBehaviour.Instance.GetInstance<PiyoStateWalk>());
 
         var wayDirs = WalkCourse.walkForwards.ToArray();
 
@@ -53,7 +53,7 @@ public class RouteTests
         Assert.That(wayDirs[4], Is.EqualTo(Direction.Type.Right), "6歩目は右");
 
         float time = 0;
-        while ((time < 6) && (PlayerBehaviour.Instance.CurrentState == PlayerBehaviour.Instance.Instances.Get<PlayerStateWalk>()))
+        while ((time < 6) && (PiyoBehaviour.Instance.CurrentState == PiyoBehaviour.Instance.GetInstance<PiyoStateWalk>()))
         {
             yield return null;
             time += Time.deltaTime;

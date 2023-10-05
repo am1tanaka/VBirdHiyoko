@@ -17,7 +17,7 @@ public class HistoryPlayTests
     public IEnumerator HistoryPlayFundamental()
     {
         Time.timeScale = 4;
-        yield return AM1TestUtil.StartStage("Stage00");
+        yield return AM1TestUtil.StartStage("TestStage01");
         yield return AM1TestUtil.WaitCanAction();
 
         Vector3[] stands =
@@ -216,7 +216,7 @@ public class HistoryPlayTests
     public IEnumerator MarkerTests()
     {
         Time.timeScale = 2;
-        yield return AM1TestUtil.StartStage("Stage00");
+        yield return AM1TestUtil.StartStage("TestStage01");
         yield return AM1TestUtil.WaitCanAction();
 
         Vector3[] stands =
@@ -312,7 +312,7 @@ public class HistoryPlayTests
     public IEnumerator SandBlockTests()
     {
         Time.timeScale = 1;
-        yield return AM1TestUtil.StartStage("Stage00");
+        yield return AM1TestUtil.StartStage("TestStage01");
         yield return AM1TestUtil.WaitCanAction();
 
         Vector3[] stands =

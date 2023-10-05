@@ -52,5 +52,13 @@ namespace AM1.VBirdHiyoko
             nextState = state;
             return true;
         }
+
+        /// <summary>
+        /// クレジットリンクをクリックした時の処理
+        /// </summary>
+        public void OnClickCredits()
+        {
+            Debug.Log("未実装");
+        }
     }
 }

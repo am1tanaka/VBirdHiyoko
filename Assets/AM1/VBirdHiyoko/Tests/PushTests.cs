@@ -11,7 +11,7 @@ public class PushTests
     [UnityTest]
     public IEnumerator RapidPushTests()
     {
-        yield return AM1TestUtil.StartStage("Stage00");
+        yield return AM1TestUtil.StartStage("TestStage01");
 
         Vector3 target = new Vector3(1, 1.5f, -3);
         yield return AM1TestUtil.Click(target);
@@ -41,7 +41,7 @@ public class PushTests
     {
         Time.timeScale = 2;
 
-        yield return AM1TestUtil.StartStage("StagePush");
+        yield return AM1TestUtil.StartStage("TestStage02");
 
         // 氷1つ
         Vector3 target = new Vector3(0, 0, -2);
@@ -175,7 +175,7 @@ public class PushTests
     [UnityTest]
     public IEnumerator PushTestsWithEnumeratorPasses()
     {
-        yield return AM1TestUtil.StartStage("Stage00");
+        yield return AM1TestUtil.StartStage("TestStage01");
 
         // 移動
         Vector3 target = new Vector3(0, 0, -3);

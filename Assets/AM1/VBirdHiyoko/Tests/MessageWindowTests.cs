@@ -9,7 +9,7 @@ public class MessageWindowTests
     [UnityTest]
     public IEnumerator MessageWindowFundamentalTests()
     {
-        yield return AM1TestUtil.StartStage("Stage00");
+        yield return AM1TestUtil.StartStage("TestStage01");
 
         // メッセージウィンドウを取得
         Assert.That(MessageWindow.Instance, Is.Not.Null);

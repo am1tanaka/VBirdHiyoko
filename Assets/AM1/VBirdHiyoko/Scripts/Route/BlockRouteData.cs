@@ -44,5 +44,11 @@ namespace AM1.VBirdHiyoko
             Debug.Log("未実装");
             return false;
         }
+
+        /// <summary>
+        /// 歩けるとき、trueを返す
+        /// </summary>
+        public bool CanWalk => Checked && StepCount > 0;
+
     }
 }

@@ -1,6 +1,7 @@
+using AM1.MessageSystem;
 using UnityEngine;
 
-namespace AM1.ScenarioSystem
+namespace AM1.VBirdHiyoko
 {
     [CreateAssetMenu(menuName = "AM1/ScenarioSystem/AutoTalkerData")]
     /// <summary>
@@ -18,14 +19,14 @@ namespace AM1.ScenarioSystem
         public float waitTalkSeconds = 4;
 
         [Tooltip("メッセージデータのリスト")]
-        public TalkData[] talkData = default;
+        public MessageData[] messageData = default;
 
-        public void Set(bool isRand, float firstTalkSec, float waitTalkSec, TalkData[] data)
+        public void Set(bool isRand, float firstTalkSec, float waitTalkSec, MessageData[] data)
         {
             isRandom = isRand;
             firstTalkSeconds = firstTalkSec;
             waitTalkSeconds = waitTalkSec;
-            talkData = data;
+            messageData = data;
         }
     }
 }

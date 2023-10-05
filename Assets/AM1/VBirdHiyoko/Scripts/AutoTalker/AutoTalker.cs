@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AM1.ScenarioSystem
+namespace AM1.VBirdHiyoko
 {
     /// <summary>
     /// 自動発話コンポーネント。
@@ -25,13 +25,26 @@ namespace AM1.ScenarioSystem
         public State CurrentState { get; private set; } = State.None;
 
         /// <summary>
-        /// 自動発話用のクラスのインスタンスを設定
+        /// 自動発話用のデータ
         /// </summary>
-        /// <param name="player">再生用クラスのインスタンス</param>
-        public void SetAutoTalkPlayer(AutoTalkScenario player)
+        AutoTalkerData autoTalkerData;
+
+        /// <summary>
+        /// 指定の自動発話用のデータをセット
+        /// </summary>
+        /// <param name="data">設定する発話データ</param>
+        public void SetTalkData(AutoTalkerData data)
         {
-            autoTalkPlayer = player;
+            Debug.Log("未実装");
         }
 
+        /// <summary>
+        /// 自動発話をするかどうかを設定する。
+        /// </summary>
+        /// <param name="flag">自動発話を行う時、true</param>
+        public void SetTimerActive(bool flag)
+        {
+            Debug.Log("未実装");
+        }
     }
 }

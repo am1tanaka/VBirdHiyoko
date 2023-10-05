@@ -13,7 +13,7 @@ public class IceBlockOverTests
     {
         Time.timeScale = 5;
 
-        yield return AM1TestUtil.StartStage("Stage00");
+        yield return AM1TestUtil.StartStage("TestStage01");
 
         // 最初のメッセージを確認
         //yield return AM1TestUtil.WaitShowMessage("最初のメッセージ");

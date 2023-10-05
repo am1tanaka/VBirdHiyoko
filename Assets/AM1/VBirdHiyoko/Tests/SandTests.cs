@@ -10,7 +10,7 @@ public class SandTests
     [UnityTest]
     public IEnumerator SandTestsWithEnumeratorPasses()
     {
-        yield return AM1TestUtil.StartStage("Stage00");
+        yield return AM1TestUtil.StartStage("TestStage01");
 
         // 手前まで移動
         Vector3 target = new Vector3(0, 0, -3);
