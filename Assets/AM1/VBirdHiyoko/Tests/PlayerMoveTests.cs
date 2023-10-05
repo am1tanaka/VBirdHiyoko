@@ -39,7 +39,6 @@ public class PlayerMoveTests
         yield return PiyoBehaviour.Instance.Mover.WalkTo(Vector3.back);
         yield return PiyoBehaviour.Instance.Mover.WalkTo(Vector3.back);
         yield return new WaitForFixedUpdate();
-        Debug.Log("5");
         var pos1 = startPos + 5 * Vector3.back;
         AM1TestUtil.AssertPosition(pos1);
 

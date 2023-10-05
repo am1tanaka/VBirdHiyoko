@@ -371,6 +371,12 @@ PrefabInstance:
       addedObject: {fileID: 7910030950883787635}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8351ae755609c6b419b1583a2d233449, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 6749065584537099862}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8351ae755609c6b419b1583a2d233449, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 1739388228333267556}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8351ae755609c6b419b1583a2d233449, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3994632637477635469}
   m_SourcePrefab: {fileID: 100100000, guid: 8351ae755609c6b419b1583a2d233449, type: 3}
@@ -389,6 +395,36 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8351ae755609c6b419b1583a2d233449, type: 3}
   m_PrefabInstance: {fileID: 6248273393777961311}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6749065584537099862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6518743144327402510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2114b16d1328d5d4d8ca43dd268ecc67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footStamps:
+  - {fileID: 8300000, guid: a65f8cfa1bd8bc04db4269bcf0caa786, type: 3}
+  - {fileID: 8300000, guid: 5eb0788fac80a574b8b36c2766058b1f, type: 3}
+  - {fileID: 8300000, guid: b974071a0c214b645913ea1148cf80f0, type: 3}
+  - {fileID: 8300000, guid: c3b10332fa701194fb45b32fdc24c449, type: 3}
+  jump: {fileID: 8300000, guid: 84564cb18a31ba74e9de933ed9c184c9, type: 3}
+--- !u!114 &1739388228333267556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6518743144327402510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a74c5012a497b404d846c117a1d2e187, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!82 &3994632637477635469
 AudioSource:
   m_ObjectHideFlags: 0
