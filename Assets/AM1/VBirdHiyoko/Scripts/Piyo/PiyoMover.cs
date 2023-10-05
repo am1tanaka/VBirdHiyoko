@@ -74,6 +74,11 @@ namespace AM1.VBirdHiyoko
         /// </summary>
         Transform pivotTransform;
 
+        /// <summary>
+        /// 押しているブロックのインスタンス
+        /// </summary>
+        IMovableBlock moveBlock;
+
         Rigidbody rb;
         Animator animator;
         Vector3 velocity;
@@ -428,8 +433,44 @@ namespace AM1.VBirdHiyoko
         /// <param name="block">押す対象のブロック</param>
         public IEnumerator PushTo(Vector3 dir, IMovableBlock block)
         {
-            Debug.Log("未実装");
-            yield return null;
+            if (!block.StartPush(dir))
+            {
+                // 押せなかったので取り消し
+                yield break;
+            }
+
+            // 押す処理
+            moveBlock = block;
+            SetState(State.Push);
+
+            // 目的座標算出
+            Vector3 target = rb.position + dir;
+            target.x = Mathf.Round(target.x);
+            target.z = Mathf.Round(target.z);
+
+            // 目的座標まで移動
+            bool isWalking = true;
+            float step = Time.fixedDeltaTime * WalkSpeed;
+            while (isWalking)
+            {
+                Vector3 to = target - rb.position;
+                to.y = 0;
+                float distance = step;
+                if (to.magnitude <= distance)
+                {
+                    // 次の移動で到着
+                    isWalking = false;
+                    distance = to.magnitude;
+                }
+
+                moveBlock.Push(distance * to.normalized);
+                Vector3 next = rb.position + distance * to.normalized;
+                ChangeGroundCheck(next);
+                rb.MovePosition(next);
+                yield return wait;
+            }
+
+            moveBlock.PushDone();
         }
 
         /// <summary>
