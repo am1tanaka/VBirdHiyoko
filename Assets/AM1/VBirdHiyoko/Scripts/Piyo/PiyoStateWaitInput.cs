@@ -1,3 +1,5 @@
+#define DEBUG_LOG
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -83,7 +85,13 @@ namespace AM1.VBirdHiyoko
         /// <param name="blockRouteData">クリックしたオブジェクト</param>
         public void OnAction(BlockRouteData blockRouteData)
         {
-            Debug.Log("未実装");
+            if (blockRouteData == null) return;
+
+            VBirdHiyokoManager.Log($"OnAction({blockRouteData.name}) {blockRouteData.CenterTop}");
+
+            var playerActionCommand = PiyoBehaviour.Instance.GetInstance<PiyoActionCommand>();
+            playerActionCommand.clickedBlockRouteData = blockRouteData;
+            CommandQueue.EntryCommand(playerActionCommand);
         }
     }
 }

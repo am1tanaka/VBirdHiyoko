@@ -164,6 +164,25 @@ namespace AM1.VBirdHiyoko
         }
 
         /// <summary>
+        /// フラグを指定の座標へ表示する。
+        /// </summary>
+        /// <param name="pos">旗を立てる座標</param>
+        public void ShowTargetFlag(Vector3 pos)
+        {
+            //stageInstances.targetFlag?.Show(pos);
+            Debug.Log("未実装");
+        }
+
+        /// <summary>
+        /// 目的地の旗を降ろす。
+        /// </summary>
+        public void HideTargetFlag()
+        {
+            //stageInstances.targetFlag?.Hide();
+            Debug.Log("未実装");
+        }
+
+        /// <summary>
         /// 詰み状態を発動させるか確認する。
         /// </summary>
         /// <returns>詰み状態へ変更する時 true。すでに詰み状態だったり継続可能ならfalse</returns>

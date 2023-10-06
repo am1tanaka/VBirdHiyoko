@@ -22,5 +22,15 @@ namespace AM1.VBirdHiyoko
         {
             Debug.Log("未実装");
         }
+
+        /// <summary>
+        /// 現在の歩数を一歩増やす。一時歩数も一致させる。
+        /// </summary>
+        /// <returns>更新したゲーム内歩数を返す。</returns>
+        public int IncrementAll()
+        {
+            Debug.Log("未実装");
+            return 0;
+        }
     }
 }

@@ -1,3 +1,5 @@
+#define DEBUG_LOG
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -112,6 +114,8 @@ namespace AM1.CommandSystem
         static void InvokeCommand()
         {
             if (nextCommand == null) return;
+
+            Log($"InvokeCommand {nextCommand}");
 
             // 実行
             nextCommand.Invoke();

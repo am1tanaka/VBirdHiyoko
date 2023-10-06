@@ -50,6 +50,15 @@ namespace AM1.VBirdHiyoko
         }
 
         /// <summary>
+        /// 移動開始したオブジェクトを受け取って記録しておく。
+        /// </summary>
+        /// <param name="behaviour">移動を開始したオブジェクト</param>
+        public static void StartMove(HistoryBehaviour behaviour)
+        {
+            Debug.Log("未実装");
+        }
+
+        /// <summary>
         /// 移動が完了したら呼び出す。
         /// </summary>
         public static void MoveDone()
