@@ -35,10 +35,6 @@ public class RouteTests
         Vector3 target = new(1, 0.5f, -5);
         var block = AM1TestUtil.Click(target);
 
-        yield return null;
-        yield return null;
-        yield return null;
-
         Assert.That(block, Is.Not.Null, "Block取得");
         Assert.That(block.Checked, Is.True, $"Block {block.transform.position} チェック済み");
         Assert.That(block.StepCount, Is.GreaterThan(0), $"Block {block.transform.position} 歩ける");

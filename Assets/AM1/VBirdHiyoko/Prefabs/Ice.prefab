@@ -132,6 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c0aa69748397cc4ca175e37dca7cec9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPushBlock: 1
 --- !u!114 &-645559351655703397
 MonoBehaviour:
   m_ObjectHideFlags: 0

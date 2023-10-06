@@ -80,6 +80,7 @@ GameObject:
   m_Component:
   - component: {fileID: 234790685391269650}
   - component: {fileID: 20566858205915011}
+  - component: {fileID: 1913022979890558386}
   m_Layer: 6
   m_Name: GoalFloor
   m_TagString: Goal
@@ -123,6 +124,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.98, y: 1, z: 0.98}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &1913022979890558386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3860222672240128578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c0aa69748397cc4ca175e37dca7cec9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPushBlock: 0
 --- !u!1001 &891112122540233067
 PrefabInstance:
   m_ObjectHideFlags: 0

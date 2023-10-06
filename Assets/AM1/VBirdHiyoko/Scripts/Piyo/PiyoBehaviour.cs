@@ -38,6 +38,11 @@ namespace AM1.VBirdHiyoko
         public Vector3 RigidbodyPosition => rb.position;
 
         /// <summary>
+        /// プレイヤーの当たり判定
+        /// </summary>
+        public BoxCollider BoxColliderInstance { get; private set; }
+
+        /// <summary>
         /// 登録されたシナリオイベントがある時、trueを返す。
         /// </summary>
         public bool IsAddedScenario => addedScenarioQueue.Count > 0;
@@ -70,9 +75,17 @@ namespace AM1.VBirdHiyoko
             if (SceneStateChanger.IsReady)
             {
                 Instance = this;
+                //anim = GetComponentInChildren<Animator>();
+                //SetAnimState(PiyoAnimState.Stand);
                 rb = GetComponent<Rigidbody>();
+                //AnimEventInstance = GetComponentInChildren<AnimEvent>();
                 pivotTransform = transform.Find("Pivot");
                 Mover = new PiyoMover(this, rb, pivotTransform);
+                BoxColliderInstance = pivotTransform.GetComponent<BoxCollider>();
+                //tsumiScenario = new GeneralPlayerStateScenario(tsumiScenarioText.text);
+                //stateTsumi.SetSource(tsumiScenario);
+                //IsTsumi = false;
+                //StepCounterInstance.Clear();
             }
         }
 
@@ -111,7 +124,32 @@ namespace AM1.VBirdHiyoko
         /// </summary>
         public void UpdateRoute()
         {
-            Debug.Log("未実装");
+            // ルートを削除
+            var RouteInstance = GetInstance<Route>();
+            RouteInstance.ClearRoute();
+
+            // ルートチェック
+            var footBlock = Mover.FootBlock;
+            if (footBlock != null)
+            {
+                var block = footBlock.Value.collider.GetComponent<BlockRouteData>();
+#if UNITY_EDITOR
+                if (block == null)
+                {
+                    Debug.Log($"UpdateWaitInput ルートチェック 足元ブロックにBlockRouteDataが未設定 {footBlock.Value.transform.position}");
+                }
+#endif
+                RouteInstance.Search(
+                    block,
+                    BoxColliderInstance,
+                    PiyoMover.StepHeight);
+            }
+#if UNITY_EDITOR
+            else
+            {
+                Debug.Log($"足場がnull");
+            }
+#endif        
         }
 
         /// <summary>

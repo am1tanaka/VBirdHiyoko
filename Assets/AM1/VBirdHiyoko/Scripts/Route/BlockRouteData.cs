@@ -52,19 +52,6 @@ namespace AM1.VBirdHiyoko
         public BlockRouteData[] LinkedBlock { get; private set; } = new BlockRouteData[4];
 
         /// <summary>
-        /// 指定の方向に押せるかを確認。押せるならtrue。必要に応じて調査を実行。
-        /// </summary>
-        /// <param name="dir">押せるかを確認する方向</param>
-        /// <returns>押せる時、true</returns>
-        public bool CanPush(Direction.Type dir)
-        {
-            if (!isPushBlock) return false;
-
-            CheckPushDirectionAndNextToThePlayer();
-            return canPush.HasFlag((CanPushFlag)(1 << (int)dir));
-        }
-
-        /// <summary>
         /// 歩けるとき、trueを返す
         /// </summary>
         public bool CanWalk => Checked && StepCount > 0;
@@ -138,6 +125,30 @@ namespace AM1.VBirdHiyoko
         {
             boxCollider = GetComponent<BoxCollider>();
             checkLayer = LayerMask.GetMask("Player", "Block");
+        }
+
+        /// <summary>
+        /// 指定の方向に押せるかを確認。押せるならtrue。必要に応じて調査を実行。
+        /// </summary>
+        /// <param name="dir">押せるかを確認する方向</param>
+        /// <returns>押せる時、true</returns>
+        public bool CanPush(Direction.Type dir)
+        {
+            if (!isPushBlock) return false;
+
+            CheckPushDirectionAndNextToThePlayer();
+            return canPush.HasFlag((CanPushFlag)(1 << (int)dir));
+        }
+
+        /// <summary>
+        /// 接続先のブロックを設定する。
+        /// </summary>
+        /// <param name="type">方向</param>
+        /// <param name="block">ブロックのインスタンス</param>
+        public void SetLinkedBlock(Direction.Type type, BlockRouteData block)
+        {
+            VBirdHiyokoManager.Log($"接続設定 {transform.position}から{type}方向の{block.name} pushpos={block.PushPosition} pos={block.transform.position}");
+            LinkedBlock[(int)type] = block;
         }
 
         /// <summary>
@@ -313,6 +324,46 @@ namespace AM1.VBirdHiyoko
             }
 
             return count;
+        }
+
+        /// <summary>
+        /// 探索情報を消す
+        /// </summary>
+        public void Clear()
+        {
+            Checked = false;
+            StepCount = 0;
+            for (int i = 0; i < LinkedBlock.Length; i++)
+            {
+                LinkedBlock[i] = null;
+            }
+            canPush = 0;
+            isNextToThePlayer = false;
+        }
+
+        /// <summary>
+        /// チェックしたブロックの情報をすべて削除する。
+        /// </summary>
+        public static void ClearAll()
+        {
+            while (checkedInstanceStack.TryPop(out BlockRouteData data))
+            {
+                data.Clear();
+            }
+
+            VBirdHiyokoManager.Log($"ClearAll {checkedInstanceStack.Count}");
+        }
+
+        /// <summary>
+        /// 歩数を設定して探索済みにする。
+        /// </summary>
+        /// <param name="count">設定する歩数。プレイヤーの位置なら0</param>
+        public void SetStepCountAndChecked(int count)
+        {
+            StepCount = count;
+            Checked = true;
+            checkedInstanceStack.Push(this);
+            VBirdHiyokoManager.Log($"Checked {transform.position}");
         }
 
     }
