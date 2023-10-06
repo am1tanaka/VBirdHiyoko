@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using AM1.BaseFrame;
+using AM1.CommandSystem;
 
 namespace AM1.VBirdHiyoko
 {
     public class TitleBehaviour : MonoBehaviour
     {
         public static TitleBehaviour Instance { get; private set; }
+
+        [Tooltip("タイトルのCanvasGroup"), SerializeField]
+        CanvasGroup titleCanvasGroup = default;
 
         public enum State
         {
@@ -29,12 +33,33 @@ namespace AM1.VBirdHiyoko
         public bool CanChangeState =>
             ((nextState == State.None) && (CurrentState != State.GameStart));
 
+        AutoTalker autoTalker;
+        AutoTalker AutoTalkerInstance
+        {
+            get
+            {
+                if (autoTalker == null)
+                {
+                    autoTalker = GameObject.FindObjectOfType<AutoTalker>();
+                }
+                return autoTalker;
+            }
+        }
+
         private void Awake()
         {
             if (SceneStateChanger.IsReady)
             {
                 Instance = this;
             }
+        }
+
+        private void Update()
+        {
+            if (SceneStateChanger.IsChanging) return;
+
+            CommandQueue.Update();
+            ChangeState();
         }
 
         /// <summary>
@@ -51,6 +76,40 @@ namespace AM1.VBirdHiyoko
 
             nextState = state;
             return true;
+        }
+
+        /// <summary>
+        /// 状態切り替え処理
+        /// </summary>
+        void ChangeState()
+        {
+            if (nextState == State.None) return;
+
+            CurrentState = nextState;
+            nextState = State.None;
+
+            switch (CurrentState)
+            {
+                case State.Play:
+                    titleCanvasGroup.interactable = true;
+                    AutoTalkerInstance.SetTimerActive(true);
+                    PiyoBehaviour.Instance.EnqueueState<PiyoStateWaitInput>();
+                    break;
+                case State.Credits:
+                    titleCanvasGroup.interactable = false;
+                    AutoTalkerInstance.SetTimerActive(false);
+                    CreditsBehaviour.Show(CreditsBehaviour.Mode.TitleCredits);
+                    break;
+                case State.GameStart:
+                    titleCanvasGroup.interactable = false;
+                    AutoTalkerInstance.SetTimerActive(false);
+                    GameSceneStateChanger.Instance.Request(false);
+                    break;
+                case State.Dialog:
+                    AutoTalkerInstance.SetTimerActive(false);
+                    titleCanvasGroup.interactable = false;
+                    break;
+            }
         }
 
         /// <summary>
