@@ -19,14 +19,26 @@ public class GameSceneStateChanger : SceneStateChangerBase<GameSceneStateChanger
     public string LoadedStageName { get; private set; }
 
     /// <summary>
-    /// TODO 現在のステージ番号から該当するステージ名を返す
-    /// </summary>
-    static string StageName = "Stage01";
-
-    /// <summary>
     /// タイトルからスタートの時、true
     /// </summary>
     bool isStartTitle;
+
+    static readonly string[] stageNames = {
+            "StageTitle",
+            "Stage01",
+            "Stage02",
+            "Stage03",
+            "Stage04",
+            "Stage05",
+            "Stage06",
+            "Stage07",
+            "Stage08",
+        };
+
+    /// <summary>
+    /// 現在のステージ番号から該当するステージ名を返す
+    /// </summary>
+    static string StageName => stageNames[VBirdHiyokoManager.CurrentStage.Current];
 
     /// <summary>
     /// 画面を覆う演出の開始や、この状態に必要なシーンの非同期読み込みの開始など。

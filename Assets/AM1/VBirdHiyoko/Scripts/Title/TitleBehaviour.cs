@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using AM1.BaseFrame;
 using AM1.CommandSystem;
+using UnityEngine.UI;
 
 namespace AM1.VBirdHiyoko
 {

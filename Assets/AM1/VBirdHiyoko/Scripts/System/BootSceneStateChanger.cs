@@ -33,8 +33,9 @@ namespace AM1.VBirdHiyoko
             // ボリューム初期化
             new VolumeSetting((int)VolumeType.BGM, new BGMVolumeSaverWithPlayerPrefs());
             BGMSourceAndClips.Instance.SetVolumeSetting(VolumeSetting.volumeSettings[(int)VolumeType.BGM]);
-            new VolumeSetting((int)VolumeType.SE, new SEVolumeSaverWithPlayerPrefs());
+            var seSetting = new VolumeSetting((int)VolumeType.SE, new SEVolumeSaverWithPlayerPrefs());
             SESourceAndClips.Instance.SetVolumeSetting(VolumeSetting.volumeSettings[(int)VolumeType.SE]);
+            seSetting.ChangeVolumeEvent.AddListener(() => SEPlayer.Play(SEPlayer.SE.Click));
             VolumeSlider.initEvents.Invoke();
 
             // 遅延再生初期化
