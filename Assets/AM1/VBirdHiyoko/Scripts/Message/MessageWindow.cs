@@ -214,7 +214,7 @@ namespace AM1.MessageSystem
         /// </summary>
         void ToShowMessage()
         {
-            messageText.text = messages[0].Message;
+            messageText.text = Messages.GetMessage(messages[0].Message);
             showSeconds = messages[0].Seconds;
             animator.SetBool("Show", true);
             animator.SetBool("WaitCursor", false);

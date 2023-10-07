@@ -12,7 +12,8 @@ public class AM1TestUtil
     {
         SceneManager.LoadScene("System");
         yield return new WaitUntil(
-            () => SceneStateChanger.IsStateStarted(TitleSceneStateChanger.Instance));
+            () => SceneStateChanger.IsStateStarted(TitleSceneStateChanger.Instance)
+            && TitleBehaviour.Instance.CanChangeState);
     }
 
     public static IEnumerator StartStage(int stage = 1)
