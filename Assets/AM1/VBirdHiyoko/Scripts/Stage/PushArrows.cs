@@ -59,6 +59,8 @@ namespace AM1.VBirdHiyoko
         /// </summary>
         public void Hide()
         {
+            if (!arrows[0]) { return; }
+
             for (int i = 0; i < arrows.Length; i++)
             {
                 arrows[i].SetBool("Show", false);
