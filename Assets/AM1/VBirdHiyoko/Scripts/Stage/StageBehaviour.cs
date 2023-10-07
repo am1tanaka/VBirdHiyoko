@@ -10,6 +10,9 @@ namespace AM1.VBirdHiyoko
     {
         public static StageBehaviour Instance { get; private set; }
 
+        [Tooltip("ステージ管理関連のインスタンス"), SerializeField]
+        private StageInstances stageInstances = default;
+
         private void Awake()
         {
             if (SceneStateChanger.IsReady)
@@ -23,7 +26,12 @@ namespace AM1.VBirdHiyoko
         /// </summary>
         public void Init()
         {
+            PiyoBehaviour.Instance.SetStageInstances(stageInstances);
+            stageInstances.targetCursor.Init();
+            stageInstances.targetFlag.Hide();
+            //stageInstances.pushArrows.Hide();
             Debug.Log("未実装");
+            stageInstances.worldPointer.Init();
         }
     }
 }

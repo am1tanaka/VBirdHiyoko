@@ -23,14 +23,14 @@ namespace AM1.VBirdHiyoko
             }
         }
 
-        private void Start()
+        /// <summary>
+        /// 初期化処理
+        /// </summary>
+        public void Init()
         {
-            if (SceneStateChanger.IsReady)
-            {
-                InputActionDetector.Instance.OnWorldPoint.AddListener(OnWorldPoint);
-                InputActionDetector.Instance.OnWorldPointExit.AddListener(OnWorldPointExit);
-                CommandQueue.AddChangeListener(CommandInputType.Game, OnChangeEnabled);
-            }
+            InputActionDetector.Instance.OnWorldPoint.AddListener(OnWorldPoint);
+            InputActionDetector.Instance.OnWorldPointExit.AddListener(OnWorldPointExit);
+            CommandQueue.AddChangeListener(CommandInputType.Game, OnChangeEnabled);
         }
 
         private void OnDestroy()

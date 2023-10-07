@@ -57,6 +57,11 @@ namespace AM1.VBirdHiyoko
         /// </summary>
         public Route RouteInstance { get; private set; }
 
+        /// <summary>
+        /// ステージシーンのインスタンス群
+        /// </summary>
+        StageInstances stageInstances;
+
         InstanceDictionary instanceDictionary = new InstanceDictionary();
         Transform pivotTransform;
         Rigidbody rb;
@@ -190,6 +195,15 @@ namespace AM1.VBirdHiyoko
         }
 
         /// <summary>
+        /// 目的地フラグのインスタンスを設定する。
+        /// </summary>
+        /// <param name="flag">目的地旗のインスタンス</param>
+        public void SetStageInstances(StageInstances instances)
+        {
+            stageInstances = instances;
+        }
+
+        /// <summary>
         /// 押す矢印のインスタンスを受け取る。
         /// </summary>
         /// <param name="arrows">押す矢印インスタンス</param>
@@ -212,8 +226,7 @@ namespace AM1.VBirdHiyoko
         /// <param name="pos">旗を立てる座標</param>
         public void ShowTargetFlag(Vector3 pos)
         {
-            //stageInstances.targetFlag?.Show(pos);
-            Debug.Log("未実装");
+            stageInstances.targetFlag?.Show(pos);
         }
 
         /// <summary>
@@ -221,8 +234,7 @@ namespace AM1.VBirdHiyoko
         /// </summary>
         public void HideTargetFlag()
         {
-            //stageInstances.targetFlag?.Hide();
-            Debug.Log("未実装");
+            stageInstances.targetFlag?.Hide();
         }
 
         /// <summary>

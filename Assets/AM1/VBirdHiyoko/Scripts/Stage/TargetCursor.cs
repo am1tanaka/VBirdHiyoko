@@ -23,7 +23,10 @@ namespace AM1.VBirdHiyoko
             }
         }
 
-        private void Start()
+        /// <summary>
+        /// 初期化
+        /// </summary>
+        public void Init()
         {
             if (InputActionDetector.Instance)
             {
