@@ -29,7 +29,6 @@ namespace AM1.VBirdHiyoko
             // 押し終わったあとの自律動作用の状態
             if (stateAfterPushMove == null)
             {
-                Debug.Log($"Set Instance");
                 stateFall = new BlockStateFall(this);
                 stateAfterPushMove = new BlockStateAfterPushMove(this, stateFall);
             }
