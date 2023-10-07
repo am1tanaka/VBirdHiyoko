@@ -29,8 +29,7 @@ namespace AM1.VBirdHiyoko
             PiyoBehaviour.Instance.SetStageInstances(stageInstances);
             stageInstances.targetCursor.Init();
             stageInstances.targetFlag.Hide();
-            //stageInstances.pushArrows.Hide();
-            Debug.Log("未実装");
+            stageInstances.pushArrows.Hide();
             stageInstances.worldPointer.Init();
         }
     }

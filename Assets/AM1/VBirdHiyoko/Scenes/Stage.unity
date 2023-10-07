@@ -415,6 +415,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 446342185}
+  - component: {fileID: 446342186}
   m_Layer: 0
   m_Name: PushArrows
   m_TagString: Untagged
@@ -441,6 +442,28 @@ Transform:
   - {fileID: 249445638}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &446342186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 446342184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 298a7ccb08cce3a45bfee42f6fd4efcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arrows:
+  - {fileID: 555653173}
+  - {fileID: 1577178814}
+  - {fileID: 1731949752}
+  - {fileID: 1305709260}
+--- !u!95 &555653173 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5829793254435014760, guid: b6e5faad2d88da24285ad20b1c933414, type: 3}
+  m_PrefabInstance: {fileID: 378730782}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &795376021
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,7 +513,7 @@ MonoBehaviour:
   stageInstances:
     targetCursor: {fileID: 1425462614}
     targetFlag: {fileID: 1633490786}
-    pushArrows: {fileID: 0}
+    pushArrows: {fileID: 446342186}
     worldPointer: {fileID: 1721684824}
 --- !u!114 &795376024
 MonoBehaviour:
@@ -959,6 +982,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!95 &1305709260 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5829793254435014760, guid: b6e5faad2d88da24285ad20b1c933414, type: 3}
+  m_PrefabInstance: {fileID: 249445637}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1425462614 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2503458317214553622, guid: f8a8610dd2d33c345aad0bcfe447943a, type: 3}
@@ -1031,6 +1059,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3017758079624395599, guid: b6e5faad2d88da24285ad20b1c933414, type: 3}
   m_PrefabInstance: {fileID: 1489379538}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1577178814 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5829793254435014760, guid: b6e5faad2d88da24285ad20b1c933414, type: 3}
+  m_PrefabInstance: {fileID: 207043084}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1633490785
 PrefabInstance:
@@ -1168,6 +1201,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c4184664d2c9f842bfed05e5794f085, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1731949752 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5829793254435014760, guid: b6e5faad2d88da24285ad20b1c933414, type: 3}
+  m_PrefabInstance: {fileID: 1489379538}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

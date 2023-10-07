@@ -29,6 +29,14 @@ namespace AM1.VBirdHiyoko
             PiyoBehaviour.Instance.StartCoroutine(UpdateWaitInput());
         }
 
+        public override void Terminate()
+        {
+            base.Terminate();
+
+            // 押せる矢印を消す
+            PiyoBehaviour.Instance.HidePushArrows();
+        }
+
         IEnumerator UpdateWaitInput()
         {
             // 落下
@@ -51,6 +59,7 @@ namespace AM1.VBirdHiyoko
 
             // ルートを更新
             PiyoBehaviour.Instance.UpdateRoute();
+            PiyoBehaviour.Instance.ShowPushArrows();
 
             // 詰みならここまで
             if (PiyoBehaviour.Instance.ChangeTsumi())

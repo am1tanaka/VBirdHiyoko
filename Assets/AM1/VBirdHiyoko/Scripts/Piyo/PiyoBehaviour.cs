@@ -209,7 +209,7 @@ namespace AM1.VBirdHiyoko
         /// <param name="arrows">押す矢印インスタンス</param>
         public void ShowPushArrows()
         {
-            Debug.Log("未実装");
+            stageInstances.pushArrows?.Show(BoxColliderInstance);
         }
 
         /// <summary>
@@ -217,7 +217,7 @@ namespace AM1.VBirdHiyoko
         /// </summary>
         public void HidePushArrows()
         {
-            Debug.Log("未実装");
+            stageInstances.pushArrows?.Hide();
         }
 
         /// <summary>
