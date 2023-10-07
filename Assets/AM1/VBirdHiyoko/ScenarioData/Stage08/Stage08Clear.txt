@@ -1,0 +1,10 @@
+@stop_bgm 0.1
+@se Clear
+@turn front
+@banzai
+@force_walk 1,0,0
+@stand
+LastClear,2
+@wait_click 1
+@force_walk 1,0,0
+@next_stage

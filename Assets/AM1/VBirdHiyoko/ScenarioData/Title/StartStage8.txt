@@ -1,0 +1,2 @@
+@force_walk 0,0,1
+@stage 8

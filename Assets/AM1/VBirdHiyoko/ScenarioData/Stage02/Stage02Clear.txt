@@ -1,0 +1,8 @@
+@stop_bgm 0.1
+@se Clear
+@turn front
+@banzai
+Stage02Clear,2
+@wait_click 1
+@force_walk 2,0,0
+@next_stage

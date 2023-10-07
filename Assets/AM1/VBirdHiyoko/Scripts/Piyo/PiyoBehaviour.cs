@@ -195,6 +195,21 @@ namespace AM1.VBirdHiyoko
         }
 
         /// <summary>
+        /// シナリオによる中断が終了。処理を復帰させる。
+        /// </summary>
+        public void ScenarioInterceptDone()
+        {
+            if (afterScenarioState != null)
+            {
+                Enqueue(afterScenarioState);
+            }
+            else
+            {
+                EnqueueState<PiyoStateWaitInput>();
+            }
+        }
+
+        /// <summary>
         /// 目的地フラグのインスタンスを設定する。
         /// </summary>
         /// <param name="flag">目的地旗のインスタンス</param>

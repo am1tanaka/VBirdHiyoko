@@ -1,0 +1,6 @@
+@turn frontfront
+IceLetsGo,1
+@wait 0.5
+@wait_click 0.5
+@force_walk 0,0,1
+@stage 5

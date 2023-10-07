@@ -1,0 +1,3 @@
+@turn forward
+SandInteresting,2
+@wait_click 1

@@ -4,16 +4,17 @@ using UnityEngine;
 
 namespace AM1.MessageSystem
 {
+    [System.Serializable]
     /// <summary>
     /// メッセージ１つ分のデータ
     /// </summary>
     public class MessageData
     {
-        public string Message { get; private set; }
+        public string Message = default;
         /// <summary>
         /// 自動で閉じる秒数。0の時、自動で閉じない。
         /// </summary>
-        public float Seconds { get; private set; }
+        public float Seconds = default;
         public bool AutoClose => !Mathf.Approximately(Seconds, 0f);
         public MessageData(string mes, float sec = 0)
         {

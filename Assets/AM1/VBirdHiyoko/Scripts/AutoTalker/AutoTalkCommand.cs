@@ -11,6 +11,7 @@ namespace AM1.VBirdHiyoko
     /// </summary>
     public class AutoTalkCommand : ICommandQueueData
     {
+        AutoTalker autoTalker;
         MessageData autoTalkData;
 
         /// <summary>
@@ -22,13 +23,33 @@ namespace AM1.VBirdHiyoko
             autoTalkData = messageData;
         }
 
+        /// <summary>
+        /// メッセージウィンドウ用のデータをセット
+        /// </summary>
+        /// <param name="talker">AutoTalkerのインスタンス</param>
+        /// <param name="data">表示するメッセージ</param>
+        public void SetData(AutoTalker talker, MessageData data)
+        {
+            autoTalker = talker;
+            autoTalkData = data;
+        }
+
         public void Invoke()
         {
-            Debug.Log($"未実装 {autoTalkData.Message}を設定");
-
             // メッセージ発話中の時は発話キャンセル
-
-            // メッセージに登録できたら自動発話成功
+            if (MessageWindow.Instance.IsShowing)
+            {
+                autoTalker.DeniedTalk();
+            }
+            else
+            {
+                // メッセージに登録できたら自動発話成功
+                bool result = MessageWindow.Instance.Show(autoTalkData);
+                if (result)
+                {
+                    autoTalker.TalkDone();
+                }
+            }
         }
     }
 }

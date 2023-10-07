@@ -3774,7 +3774,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startScenario: {fileID: 0}
-  defaultAutoTalkerData: {fileID: 0}
+  defaultAutoTalkerData: {fileID: 11400000, guid: ed6b253f6c132fd47a9bddb1b781d544, type: 2}
 --- !u!4 &1968078428
 Transform:
   m_ObjectHideFlags: 0
