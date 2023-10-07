@@ -33,11 +33,11 @@ namespace AM1.VBirdHiyoko
                 float.TryParse(serif[1], out sec);
             }
 
-            var talk = Messages.GetMessage(serif[0].Trim());
+            var talk = serif[0].Trim();
             for (int i = 0; i < talkDataList.Count; i++)
             {
-                VBirdHiyokoManager.Log($"talkDataList[{i}].Message={talkDataList[i].Message} talk={talk}");
-                if (talkDataList[i].Message == talk)
+                VBirdHiyokoManager.Log($"talkDataList[{i}].Message={talkDataList[i].MessageID} talk={talk}");
+                if (talkDataList[i].MessageID == talk)
                 {
                     VBirdHiyokoManager.Log($"  一致 {i}");
                     index = i;
@@ -53,7 +53,7 @@ namespace AM1.VBirdHiyoko
 
         public IEnumerator Invoke()
         {
-            VBirdHiyokoManager.Log($"talk [{index}] {talkDataList[index].Message}");
+            VBirdHiyokoManager.Log($"talk [{index}] {talkDataList[index].MessageID}");
             MessageWindow.Instance.Show(talkDataList[index]);
 
             // セリフ待ちの時はここで一旦停止

@@ -6,16 +6,22 @@ namespace AM1.VBirdHiyoko
 {
     public class PiyoScenarioWait : IScenarioTextCommand
     {
-        public IEnumerator Invoke()
-        {
-            Debug.Log($"未実装");
-            yield return null;
-        }
+        static string CommandText => "@wait";
+        static int CommandCount => 2;
+
+        float waitSeconds;
 
         public bool IsCommand(string[] words)
         {
-            Debug.Log($"未実装");
-            return false;
+            if (!ScenarioTextValidator.Validate(words, CommandText, CommandCount)) return false;
+
+            waitSeconds = float.TryParse(words[1], out float sec) ? sec : 0;
+            return true;
+        }
+
+        public IEnumerator Invoke()
+        {
+            yield return new WaitForSeconds(waitSeconds);
         }
     }
 }

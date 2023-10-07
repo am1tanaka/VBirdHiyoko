@@ -168,7 +168,7 @@ namespace AM1.VBirdHiyoko
         /// <param name="scenario">プレイヤーの状態として使えるもの</param>
         public void AddScenario(AM1StateQueueBase scenario)
         {
-            Debug.Log("未実装");
+            addedScenarioQueue.Enqueue(scenario);
         }
 
         /// <summary>

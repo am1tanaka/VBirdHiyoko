@@ -214,7 +214,7 @@ namespace AM1.MessageSystem
         /// </summary>
         void ToShowMessage()
         {
-            messageText.text = Messages.GetMessage(messages[0].Message);
+            messageText.text = Messages.GetMessage(messages[0].MessageID);
             showSeconds = messages[0].Seconds;
             animator.SetBool("Show", true);
             animator.SetBool("WaitCursor", false);
@@ -237,7 +237,7 @@ namespace AM1.MessageSystem
             // メッセージが続くのでそのまま表示へ
             if (messages.Count > 0)
             {
-                messageText.text = messages[0].Message;
+                messageText.text = Messages.GetMessage(messages[0].MessageID);
                 showSeconds = messages[0].Seconds;
                 CurrentState = State.Show;
                 SEPlayer.Play(SEPlayer.SE.Message);
@@ -270,7 +270,7 @@ namespace AM1.MessageSystem
         /// <returns>登録</returns>
         public bool Show(MessageData data)
         {
-            VBirdHiyokoManager.Log($"MessageWindow.Show({data.Message})");
+            VBirdHiyokoManager.Log($"MessageWindow.Show({data.MessageID})");
             if (messages.Contains(data))
             {
                 VBirdHiyokoManager.Log($"  含まれていたのでキャンセル");

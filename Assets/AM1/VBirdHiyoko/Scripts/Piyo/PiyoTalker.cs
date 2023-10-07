@@ -1,4 +1,5 @@
 using AM1.MessageSystem;
+using UnityEngine;
 
 namespace AM1.VBirdHiyoko
 {
@@ -16,9 +17,9 @@ namespace AM1.VBirdHiyoko
 
         static readonly MessageData[] messageData =
         {
-            new MessageData(Messages.GetMessage(Messages.Type.CantGo), 2),
-            new MessageData(Messages.GetMessage(Messages.Type.TooHeavy), 2),
-            new MessageData(Messages.GetMessage(Messages.Type.CantMove), 2),
+            new MessageData(Type.CantGo.ToString(), 2),
+            new MessageData(Type.TooHeavy.ToString(), 2),
+            new MessageData(Type.CantMove.ToString(), 2),
         };
 
         /// <summary>

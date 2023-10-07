@@ -489,7 +489,48 @@ namespace AM1.VBirdHiyoko
             yield return Fall();
 
             // 万歳
+            //SetState(State.Banzai);
+            //yield return PiyoBehaviour.Instance.AnimEventInstance.WaitEvent();
             Debug.Log("未実装");
+        }
+
+        /// <summary>
+        /// 指定の相対位置へ当たり判定なしで移動する。
+        /// </summary>
+        /// <param name="dir">歩く方向。Yも有効</param>
+        public IEnumerator ForceWalkTo(Vector3 dir)
+        {
+            yield return TurnTo(Direction.DetectType(dir));
+
+            SetState(State.Walk);
+
+            // 目的座標算出
+            Vector3 target = rb.position + dir;
+
+            // 当たり判定を切る
+            boxCollider.enabled = false;
+
+            // 目的座標まで移動
+            bool isWalking = true;
+            float step = Time.fixedDeltaTime * WalkSpeed;
+            while (isWalking)
+            {
+                Vector3 to = target - rb.position;
+                float distance = step;
+                if (to.magnitude <= distance)
+                {
+                    // 次の移動で到着
+                    isWalking = false;
+                    distance = to.magnitude;
+                }
+
+                var nextPos = rb.position + distance * to.normalized;
+                rb.MovePosition(nextPos);
+                yield return wait;
+            }
+
+            // 当たり判定復帰
+            boxCollider.enabled = true;
         }
     }
 }
