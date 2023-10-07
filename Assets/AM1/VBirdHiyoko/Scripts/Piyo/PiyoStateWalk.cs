@@ -1,7 +1,7 @@
+#define DEBUG_LOG
+
 using AM1.State;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace AM1.VBirdHiyoko
 {
@@ -43,7 +43,7 @@ namespace AM1.VBirdHiyoko
 
         public override void Init()
         {
-            VBirdHiyokoManager.Log($"State Walk Init {targetBlockData.transform.position}");
+            VBirdHiyokoManager.Log($"State Walk Init target={targetBlockData.transform.position}");
             base.Init();
             if (!isPaused)
             {

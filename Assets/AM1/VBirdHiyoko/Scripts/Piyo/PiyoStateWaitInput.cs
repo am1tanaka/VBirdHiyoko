@@ -32,6 +32,8 @@ namespace AM1.VBirdHiyoko
         public override void Terminate()
         {
             base.Terminate();
+            CommandQueue.Update();
+            InputActionDetector.Instance.OnAction.RemoveListener(OnAction);
 
             // 押せる矢印を消す
             PiyoBehaviour.Instance.HidePushArrows();
