@@ -184,6 +184,27 @@ namespace AM1.VBirdHiyoko
         }
 
         /// <summary>
+        /// 氷の上かどうかを判定する。
+        /// </summary>
+        /// <returns>氷の上の時、true</returns>
+        protected bool IsOnIce()
+        {
+            int count = OverlapSphereBlock(BoxColliderInstance.bounds.center + Vector3.down);
+            IBlockInfo blockInfo = null;
+
+            for (int i = 0; i < count; i++)
+            {
+                if ((blockInfo = Results[i].GetComponent<IBlockInfo>()) != null)
+                {
+                    // 滑るか
+                    return blockInfo.IsSlippery;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// 履歴の移動開始を通知する。
         /// </summary>
         protected void HistoryStartMove()
