@@ -13,8 +13,34 @@ namespace AM1.VBirdHiyoko
         Animator animator;
         Transform pivotTransform;
 
+        private void Awake()
+        {
+            if (SceneStateChanger.IsReady)
+            {
+                animator = GetComponent<Animator>();
+                pivotTransform = transform.Find("Pivot");
+                pivotTransform.gameObject.SetActive(false);
+            }
+        }
+
+        private void Start()
+        {
+            if (SceneStateChanger.IsReady)
+            {
+                InputActionDetector.Instance.OnWorldPoint.AddListener(OnWorldPoint);
+                InputActionDetector.Instance.OnWorldPointExit.AddListener(OnWorldPointExit);
+                CommandQueue.AddChangeListener(CommandInputType.Game, OnChangeEnabled);
+            }
+        }
+
         private void OnDestroy()
         {
+            if (InputActionDetector.Instance != null)
+            {
+                InputActionDetector.Instance.OnWorldPoint.RemoveListener(OnWorldPoint);
+                InputActionDetector.Instance.OnWorldPointExit.RemoveListener(OnWorldPointExit);
+                CommandQueue.RemoveChangeListener(CommandInputType.Game, OnChangeEnabled);
+            }
         }
 
         void OnWorldPoint(RaycastHit hit)
