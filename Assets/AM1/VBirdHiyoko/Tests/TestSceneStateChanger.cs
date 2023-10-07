@@ -85,6 +85,8 @@ namespace AM1.VBirdHiyoko
             StageBehaviour.Instance.Init();
             CommandQueue.AddChangeListener(CommandInputType.UI, OnChangeCommandUI);
             CommandQueue.AddChangeListener(CommandInputType.Game, OnChangeCommandGame);
+            StageScenarioBehaviour.Init();
+            GamePlayStateQueue.Instance.Init();
 
             HistoryRecorder.Init();
             HistoryPlayer.Init();

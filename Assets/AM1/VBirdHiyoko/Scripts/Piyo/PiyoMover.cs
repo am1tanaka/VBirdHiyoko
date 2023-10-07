@@ -1,4 +1,4 @@
-#define DEBUG_LOG
+//#define DEBUG_LOG
 
 using System.Collections;
 using System.Collections.Generic;
@@ -207,7 +207,6 @@ namespace AM1.VBirdHiyoko
                 Vector3 to = target - rb.position;
                 to.y = 0;
                 float distance = step;
-                VBirdHiyokoManager.Log($"  mag={to.magnitude} dist={distance} step={step} to={to}");
                 if (to.magnitude <= distance)
                 {
                     // 次の移動で到着

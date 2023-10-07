@@ -38,7 +38,6 @@ public class AM1TestUtil
         yield return new WaitUntil(
             () => SceneStateChanger.IsStateStarted(TestSceneStateChanger.Instance));
         yield return new WaitWhile(() => SceneStateChanger.IsChanging);
-        Debug.Log("wait can acton");
         yield return WaitCanAction();
     }
 

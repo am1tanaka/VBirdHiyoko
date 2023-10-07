@@ -1,7 +1,8 @@
-#define DEBUG_LOG
+//#define DEBUG_LOG
 
 using AM1.State;
 using System.Collections;
+using UnityEngine;
 
 namespace AM1.VBirdHiyoko
 {

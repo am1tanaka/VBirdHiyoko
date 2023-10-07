@@ -96,7 +96,7 @@ namespace AM1.VBirdHiyoko
                 //tsumiScenario = new GeneralPlayerStateScenario(tsumiScenarioText.text);
                 //stateTsumi.SetSource(tsumiScenario);
                 //IsTsumi = false;
-                //StepCounterInstance.Clear();
+                StepCounterInstance.Clear();
             }
         }
 
