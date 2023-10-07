@@ -9807,6 +9807,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7988810349049727344}
+  - component: {fileID: 4361866552908987490}
   - component: {fileID: -2404219121899068998}
   - component: {fileID: -6905662003570686159}
   - component: {fileID: 7977326800524407487}
@@ -9838,6 +9839,24 @@ Transform:
   - {fileID: 3946182023371881157}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4361866552908987490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7988810349049727351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c09bacf70df5c88429084499259163d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pushSE: {fileID: 8300000, guid: 630d9cf5e4bc82f41a423c1234537603, type: 3}
+  collisionSE: {fileID: 8300000, guid: 375c76ccd2a50e4408eb0a9dcf7995d7, type: 3}
+  breakSE: {fileID: 8300000, guid: c94c3eaa9594f114da234f59437675e3, type: 3}
+  restoreSE: {fileID: 8300000, guid: 4a1e669d81381b7448d549f0b3943d99, type: 3}
+  debrisParticle: {fileID: 188365857468888085}
+  smokeParticle: {fileID: 2223066753810728353}
 --- !u!114 &-2404219121899068998
 MonoBehaviour:
   m_ObjectHideFlags: 0
