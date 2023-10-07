@@ -52,6 +52,11 @@ namespace AM1.VBirdHiyoko
         /// </summary>
         public AM1StateQueueBase afterScenarioState;
 
+        /// <summary>
+        /// ルートを確認するインスタンス
+        /// </summary>
+        public Route RouteInstance { get; private set; }
+
         InstanceDictionary instanceDictionary = new InstanceDictionary();
         Transform pivotTransform;
         Rigidbody rb;
@@ -82,6 +87,7 @@ namespace AM1.VBirdHiyoko
                 pivotTransform = transform.Find("Pivot");
                 Mover = new PiyoMover(this, rb, pivotTransform);
                 BoxColliderInstance = pivotTransform.GetComponent<BoxCollider>();
+                RouteInstance = new();
                 //tsumiScenario = new GeneralPlayerStateScenario(tsumiScenarioText.text);
                 //stateTsumi.SetSource(tsumiScenario);
                 //IsTsumi = false;
@@ -125,7 +131,6 @@ namespace AM1.VBirdHiyoko
         public void UpdateRoute()
         {
             // ルートを削除
-            var RouteInstance = GetInstance<Route>();
             RouteInstance.ClearRoute();
 
             // ルートチェック
