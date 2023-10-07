@@ -28,6 +28,11 @@ namespace AM1.VBirdHiyoko
         public bool IsFaceTo(Direction.Type dir) => CurrentDirectionType == dir;
 
         /// <summary>
+        /// アニメから呼ばれるイベントを登録するインスタンス
+        /// </summary>
+        public AnimEvent AnimEventInstance { get; private set; }
+
+        /// <summary>
         /// 歩数を管理するインスタンス
         /// </summary>
         public StepCounter StepCounterInstance { get; private set; } = new();
@@ -63,6 +68,7 @@ namespace AM1.VBirdHiyoko
         StageInstances stageInstances;
 
         InstanceDictionary instanceDictionary = new InstanceDictionary();
+        Animator anim;
         Transform pivotTransform;
         Rigidbody rb;
 
@@ -85,10 +91,10 @@ namespace AM1.VBirdHiyoko
             if (SceneStateChanger.IsReady)
             {
                 Instance = this;
-                //anim = GetComponentInChildren<Animator>();
-                //SetAnimState(PiyoAnimState.Stand);
+                anim = GetComponentInChildren<Animator>();
+                SetAnimState(PiyoAnimState.Stand);
                 rb = GetComponent<Rigidbody>();
-                //AnimEventInstance = GetComponentInChildren<AnimEvent>();
+                AnimEventInstance = GetComponentInChildren<AnimEvent>();
                 pivotTransform = transform.Find("Pivot");
                 Mover = new PiyoMover(this, rb, pivotTransform);
                 BoxColliderInstance = pivotTransform.GetComponent<BoxCollider>();
@@ -118,6 +124,15 @@ namespace AM1.VBirdHiyoko
         public void EnqueueState<T>() where T : AM1StateQueueBase, new()
         {
             Enqueue(GetInstance<T>());
+        }
+
+        /// <summary>
+        /// アニメ状態を設定する。
+        /// </summary>
+        /// <param name="state">設定するアニメ状態</param>
+        public void SetAnimState(PiyoAnimState state)
+        {
+            anim.SetInteger("State", (int)state);
         }
 
         /// <summary>

@@ -4,18 +4,23 @@ using UnityEngine;
 
 namespace AM1.VBirdHiyoko
 {
+    /// <summary>
+    /// 静止するシナリオ
+    /// </summary>
     public class PiyoScenarioStand : IScenarioTextCommand
     {
-        public IEnumerator Invoke()
-        {
-            Debug.Log($"未実装");
-            yield return null;
-        }
+        static string CommandText => "@stand";
+        static int CommandCount => 1;
 
         public bool IsCommand(string[] words)
         {
-            Debug.Log($"未実装");
-            return false;
+            return ScenarioTextValidator.Validate(words, CommandText, CommandCount);
+        }
+
+        public IEnumerator Invoke()
+        {
+            PiyoBehaviour.Instance.SetAnimState(PiyoAnimState.Stand);
+            yield return null;
         }
     }
 }

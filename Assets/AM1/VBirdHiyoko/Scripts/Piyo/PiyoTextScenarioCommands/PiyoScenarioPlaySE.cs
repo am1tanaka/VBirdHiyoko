@@ -4,18 +4,37 @@ using UnityEngine;
 
 namespace AM1.VBirdHiyoko
 {
+    /// <summary>
+    /// 指定の効果音を鳴らす
+    /// </summary>
     public class PiyoScenarioPlaySE : IScenarioTextCommand
     {
-        public IEnumerator Invoke()
-        {
-            Debug.Log($"未実装");
-            yield return null;
-        }
+        static string CommandText => "@se";
+        static int CommandCount => 2;
+
+        string se;
 
         public bool IsCommand(string[] words)
         {
-            Debug.Log($"未実装");
-            return false;
+            if (!ScenarioTextValidator.Validate(words, CommandText, CommandCount)) return false;
+
+            se = words[1].Trim();
+
+            return true;
+        }
+
+        public IEnumerator Invoke()
+        {
+            var seNames = System.Enum.GetNames(typeof(SEPlayer.SE));
+            for (int i = 0; i < seNames.Length; i++)
+            {
+                if (seNames[i] == se)
+                {
+                    SEPlayer.Play((SEPlayer.SE)i);
+                    break;
+                }
+            }
+            yield break;
         }
     }
 }

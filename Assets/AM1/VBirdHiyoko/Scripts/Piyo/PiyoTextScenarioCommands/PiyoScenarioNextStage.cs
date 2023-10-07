@@ -4,18 +4,34 @@ using UnityEngine;
 
 namespace AM1.VBirdHiyoko
 {
+    /// <summary>
+    /// 次のステージへ移動するシナリオ
+    /// </summary>
     public class PiyoScenarioNextStage : IScenarioTextCommand
     {
-        public IEnumerator Invoke()
-        {
-            Debug.Log($"未実装");
-            yield return null;
-        }
+        static string CommandText => "@next_stage";
+        static int CommandCount => 1;
 
         public bool IsCommand(string[] words)
         {
-            Debug.Log($"未実装");
-            return false;
+            return ScenarioTextValidator.Validate(words, CommandText, CommandCount);
+        }
+
+        public IEnumerator Invoke()
+        {
+            // 次のステージへ切り替え
+            if (VBirdHiyokoManager.NextStage())
+            {
+                // 次のステージへ
+                GameSceneStateChanger.Instance.Request(true);
+            }
+            else
+            {
+                // エンディングへ
+                EndingSceneStateChanger.Instance.Request(true);
+            }
+
+            yield return null;
         }
     }
 }

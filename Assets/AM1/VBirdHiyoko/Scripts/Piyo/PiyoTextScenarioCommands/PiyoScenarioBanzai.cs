@@ -6,16 +6,30 @@ namespace AM1.VBirdHiyoko
 {
     public class PiyoScenarioBanzai : IScenarioTextCommand
     {
-        public IEnumerator Invoke()
-        {
-            Debug.Log($"未実装");
-            yield return null;
-        }
+        static string CommandText => "@banzai";
+        static int CommandCount => 1;
+
+        bool isDone;
 
         public bool IsCommand(string[] words)
         {
-            Debug.Log($"未実装");
-            return false;
+            if (!ScenarioTextValidator.Validate(words, CommandText, CommandCount)) return false;
+
+            return true;
+        }
+
+        public IEnumerator Invoke()
+        {
+            isDone = false;
+            PiyoBehaviour.Instance.AnimEventInstance.onEvent.AddListener(OnDone);
+            PiyoBehaviour.Instance.SetAnimState(PiyoAnimState.Banzai);
+            yield return new WaitUntil(() => isDone);
+            PiyoBehaviour.Instance.AnimEventInstance.onEvent.RemoveListener(OnDone);
+        }
+
+        void OnDone()
+        {
+            isDone = true;
         }
     }
 }

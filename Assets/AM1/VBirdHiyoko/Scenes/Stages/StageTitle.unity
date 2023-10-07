@@ -3866,52 +3866,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6774622370923066520, guid: 45d7c17838e00714aa87f372a710a538, type: 3}
   m_PrefabInstance: {fileID: 1945703092}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1968078426
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1968078428}
-  - component: {fileID: 1968078427}
-  m_Layer: 0
-  m_Name: StageTitleBehaviour
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1968078427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1968078426}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0145f094b92bd847860a5d9b14f7fa0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startScenario: {fileID: 0}
-  defaultAutoTalkerData: {fileID: 11400000, guid: ed6b253f6c132fd47a9bddb1b781d544, type: 2}
---- !u!4 &1968078428
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1968078426}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1981086823
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4439,6 +4393,67 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1001 &2059435646064427526
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5001542249919917051, guid: 63cde2c9a4905d84e98e3b2f59a7b9a8, type: 3}
+      propertyPath: m_Name
+      value: StageScenario
+      objectReference: {fileID: 0}
+    - target: {fileID: 7488881902137732892, guid: 63cde2c9a4905d84e98e3b2f59a7b9a8, type: 3}
+      propertyPath: defaultAutoTalkerData
+      value: 
+      objectReference: {fileID: 11400000, guid: ed6b253f6c132fd47a9bddb1b781d544, type: 2}
+    - target: {fileID: 8617485243473505133, guid: 63cde2c9a4905d84e98e3b2f59a7b9a8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617485243473505133, guid: 63cde2c9a4905d84e98e3b2f59a7b9a8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617485243473505133, guid: 63cde2c9a4905d84e98e3b2f59a7b9a8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617485243473505133, guid: 63cde2c9a4905d84e98e3b2f59a7b9a8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617485243473505133, guid: 63cde2c9a4905d84e98e3b2f59a7b9a8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617485243473505133, guid: 63cde2c9a4905d84e98e3b2f59a7b9a8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617485243473505133, guid: 63cde2c9a4905d84e98e3b2f59a7b9a8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617485243473505133, guid: 63cde2c9a4905d84e98e3b2f59a7b9a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617485243473505133, guid: 63cde2c9a4905d84e98e3b2f59a7b9a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617485243473505133, guid: 63cde2c9a4905d84e98e3b2f59a7b9a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 63cde2c9a4905d84e98e3b2f59a7b9a8, type: 3}
 --- !u!1001 &6090079581360168123
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4527,7 +4542,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1968078428}
+  - {fileID: 2059435646064427526}
   - {fileID: 827218831}
   - {fileID: 1887437058}
   - {fileID: 113324732}

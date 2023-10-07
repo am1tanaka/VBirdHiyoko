@@ -489,9 +489,8 @@ namespace AM1.VBirdHiyoko
             yield return Fall();
 
             // 万歳
-            //SetState(State.Banzai);
-            //yield return PiyoBehaviour.Instance.AnimEventInstance.WaitEvent();
-            Debug.Log("未実装");
+            SetState(State.Banzai);
+            yield return PiyoBehaviour.Instance.AnimEventInstance.WaitEvent();
         }
 
         /// <summary>

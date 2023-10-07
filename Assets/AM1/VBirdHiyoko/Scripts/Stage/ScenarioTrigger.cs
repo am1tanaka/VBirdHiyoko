@@ -56,7 +56,7 @@ namespace AM1.VBirdHiyoko
 
         public void Done()
         {
-            if (isDoneOff)
+            if (isDoneOff && gameObject)
             {
                 gameObject.SetActive(false);
             }
