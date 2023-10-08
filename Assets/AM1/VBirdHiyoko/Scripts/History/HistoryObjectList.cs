@@ -41,5 +41,20 @@ namespace AM1.VBirdHiyoko
             objectList.Add(behaviour);
             return objectList.Count - 1;
         }
+
+        /// <summary>
+        /// オブジェクトがあったら指定のデータの位置に
+        /// </summary>
+        /// <param name="data">設定する履歴データ</param>
+        public static void LatestTransform(HistoryData data)
+        {
+            for (int i = 0; i < Count; i++)
+            {
+                if (objectList[i].SetHistoryData(data))
+                {
+                    return;
+                }
+            }
+        }
     }
 }

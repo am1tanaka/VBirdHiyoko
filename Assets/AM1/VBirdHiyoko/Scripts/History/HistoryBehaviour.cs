@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace AM1.VBirdHiyoko
 {
@@ -66,6 +67,11 @@ namespace AM1.VBirdHiyoko
         /// 現在の状態
         /// </summary>
         public int State { get; set; }
+
+        /// <summary>
+        /// SetHistoryDataでデータを更新した時に実行するイベントを登録する。
+        /// </summary>
+        public UnityEvent<HistoryData> DataLoaded { get; set; } = new();
 
         /// <summary>
         /// 今回のステップで移動を登録した場合、trueにして、同じステップ中に座標を更新しないようにする。
@@ -170,6 +176,22 @@ namespace AM1.VBirdHiyoko
 
             // 変化したのでデータを設定して true
             data.Set(Id, nowpos - pos, (nowdir - dir) & 3, State - st);
+            return true;
+        }
+
+        /// <summary>
+        /// 指定の履歴データを反映させる。オブジェクトIDが異なる場合は何もしない。
+        /// </summary>
+        /// <param name="data">反映させるデータ</param>
+        /// <returns>IDが一致して、値を設定したら true</returns>
+        public bool SetHistoryData(HistoryData data)
+        {
+            if (Id != data.ObjectId) return false;
+
+            transform.position += data.RelativePosition;
+            ObserveTransform.eulerAngles = data.EulerY * 90 * Vector3.up;
+            State = data.State;
+            DataLoaded.Invoke(data);
             return true;
         }
     }

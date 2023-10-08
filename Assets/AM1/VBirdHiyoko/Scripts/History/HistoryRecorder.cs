@@ -302,9 +302,40 @@ namespace AM1.VBirdHiyoko
         /// <returns>保存データを読んだら true。ないかLoaderが未設定なら false</returns>
         public static bool Load(int stage, out ushort innerStep)
         {
-            Debug.Log("未実装");
-
+            AllListToPool();
             innerStep = 0;
+
+            if (historyLoader == null) return false;
+
+            sbyte[] history;
+            sbyte[] toLatest;
+            if (!historyLoader.Load(stage, out innerStep, out history, out toLatest))
+            {
+                return false;
+            }
+            if (history.Length == 0)
+            {
+                return false;
+            }
+
+            // 履歴へ反映
+            for (int i = 0; i < history.Length; i += HistoryData.DataSize)
+            {
+                var data = GetBlankHistoryData();
+                data.SetSByte(history, i);
+                historyDataList.AddLast(data);
+            }
+            Counter = history[history.Length - HistoryData.DataSize];
+
+            // 最新状態へ反映
+            for (int i = 0; i < toLatest.Length; i += HistoryData.DataSize)
+            {
+                var data = GetBlankHistoryData();
+                data.SetSByte(toLatest, i);
+                toLatestList.AddLast(data);
+                HistoryObjectList.LatestTransform(data);
+            }
+
             return true;
         }
 
@@ -315,8 +346,39 @@ namespace AM1.VBirdHiyoko
         /// <param name="innerStep">現在の内部ステップ数</param>
         public static void Save(int stage, ushort innerStep)
         {
-            Debug.Log("未実装");
-        }
+            VBirdHiyokoManager.Log($"Save({stage}, {innerStep}) {historySaver} / {historyDataList.Count}");
+            if (historySaver == null) return;
+            if (historyDataList.Count == 0) return;
 
+            List<sbyte> historySBytes = new List<sbyte>();
+            for (int i = 0; i < HistoryArray.Length; i++)
+            {
+                var data = HistoryArray[i].GetSBytes();
+                for (int j = 0; j < data.Length; j++)
+                {
+                    historySBytes.Add(data[j]);
+                }
+            }
+
+            var toLatestArray = UpdateToLatestArray();
+            List<sbyte> toLatestSBytes = new List<sbyte>();
+            for (int i = 0; i < toLatestArray.Length; i++)
+            {
+                var data = toLatestArray[i].GetSBytes();
+                for (int j = 0; j < data.Length; j++)
+                {
+                    toLatestSBytes.Add(data[j]);
+                }
+            }
+
+            historySaver.Save(
+                stage,
+                innerStep,
+                historySBytes.ToArray(),
+                toLatestSBytes.ToArray());
+
+            historySBytes.Clear();
+            toLatestSBytes.Clear();
+        }
     }
 }
