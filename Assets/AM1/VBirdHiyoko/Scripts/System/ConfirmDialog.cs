@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 namespace AM1.VBirdHiyoko
 {
@@ -10,6 +11,13 @@ namespace AM1.VBirdHiyoko
     public class ConfirmDialog : MonoBehaviour
     {
         public static ConfirmDialog Instance { get; private set; }
+
+        [Tooltip("メッセージ"), SerializeField]
+        TextMeshProUGUI messageText = default;
+        [Tooltip("左ボタンテキスト"), SerializeField]
+        TextMeshProUGUI leftText = default;
+        [Tooltip("右ボタンテキスト"), SerializeField]
+        TextMeshProUGUI rightText = default;
 
         public enum State
         {
@@ -29,6 +37,7 @@ namespace AM1.VBirdHiyoko
         public static bool IsCurrentState(State state) => state == CurrentState;
 
         Animator anim;
+        ConfirmDialogData confirmDialogData;
 
         private void Awake()
         {
@@ -40,12 +49,19 @@ namespace AM1.VBirdHiyoko
         /// <summary>
         /// 表示開始
         /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
+        /// <param name="data">確認ダイアログが実行する情報</param>
+        /// <returns>表示できたら、true</returns>
         public bool Show(ConfirmDialogData data)
         {
-            Debug.Log("未実装");
-            return false;
+            if (CurrentState != State.Hide) return false;
+
+            confirmDialogData = data;
+            CurrentState = State.ToShow;
+            anim.SetBool("Show", true);
+            messageText.text = data.Message;
+            leftText.text = data.LeftButtonText;
+            rightText.text = data.RightButtonText;
+            return true;
         }
 
         /// <summary>
@@ -53,8 +69,63 @@ namespace AM1.VBirdHiyoko
         /// </summary>
         public bool Hide()
         {
-            Debug.Log("未実装");
-            return false;
+            if ((CurrentState != State.Show)
+                && (CurrentState != State.ToShow)) return false;
+
+            CurrentState = State.ToHide;
+            anim.SetBool("Show", false);
+            return true;
+        }
+
+        /// <summary>
+        /// 閉じるボタン
+        /// </summary>
+        public void HideButton()
+        {
+            if (Hide())
+            {
+                SEPlayer.Play(SEPlayer.SE.Cancel);
+            }
+        }
+
+        /// <summary>
+        /// 表示が完了したらアニメから呼び出す。
+        /// </summary>
+        public void ShowDone()
+        {
+            if (CurrentState == State.ToHide)
+            {
+                anim.SetBool("Show", false);
+            }
+            CurrentState = State.Show;
+        }
+
+        /// <summary>
+        /// 非表示が完了したらアニメから呼び出す。
+        /// </summary>
+        public void HideDone()
+        {
+            CurrentState = State.Hide;
+        }
+
+        /// <summary>
+        /// 左ボタンを押した処理
+        /// </summary>
+        public void OnClickLeft()
+        {
+            if (CurrentState != State.Show) return;
+
+            confirmDialogData?.LeftAction();
+        }
+
+        /// <summary>
+        /// 右ボタンを押した処理
+        /// </summary>
+        public void OnClickRight()
+        {
+            if (CurrentState != State.Show) return;
+
+            confirmDialogData?.RightAction();
         }
     }
 }

@@ -390,6 +390,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1287fb5f52295a74aa28cd3e031094ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  messageText: {fileID: 433761238}
+  leftText: {fileID: 521094852}
+  rightText: {fileID: 1967138345}
 --- !u!1 &216339769
 GameObject:
   m_ObjectHideFlags: 0
@@ -964,7 +967,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 630961344}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 143438840}
+        m_TargetAssemblyTypeName: AM1.VBirdHiyoko.ConfirmDialog, AM1.VBirdHiyoko
+        m_MethodName: OnClickRight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &630961344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1463,7 +1478,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1275346450}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 143438840}
+        m_TargetAssemblyTypeName: AM1.VBirdHiyoko.ConfirmDialog, AM1.VBirdHiyoko
+        m_MethodName: HideButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1275346450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1633,7 +1660,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1617432660}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 143438840}
+        m_TargetAssemblyTypeName: AM1.VBirdHiyoko.ConfirmDialog, AM1.VBirdHiyoko
+        m_MethodName: OnClickLeft
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1617432660
 MonoBehaviour:
   m_ObjectHideFlags: 0
