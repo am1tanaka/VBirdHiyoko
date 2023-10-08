@@ -28,7 +28,7 @@ namespace AM1.VBirdHiyoko
         {
             // クリア済みステージの読み込みと初期設定
             VBirdHiyokoManager.GetInstance<IGameDataStorage>().InitAndLoad();
-            VBirdHiyokoManager.CurrentStage.Set(VBirdHiyokoManager.ClearedStage.Current - 1);
+            VBirdHiyokoManager.CurrentStage.Set(VBirdHiyokoManager.ClearedStage.Current);
 
             // ボリューム初期化
             new VolumeSetting((int)VolumeType.BGM, new BGMVolumeSaverWithPlayerPrefs());
