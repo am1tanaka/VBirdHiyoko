@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed01e03e614477e40b7ce4c3be4d64ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tsumiScenarioText: {fileID: 4900000, guid: 8f1b62ffaea79094dbb65d50f8bcbb38, type: 3}
 --- !u!114 &-5866865583253845227
 MonoBehaviour:
   m_ObjectHideFlags: 0

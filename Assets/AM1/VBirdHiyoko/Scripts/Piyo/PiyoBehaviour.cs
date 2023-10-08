@@ -10,6 +10,9 @@ namespace AM1.VBirdHiyoko
     {
         public static PiyoBehaviour Instance { get; private set; }
 
+        [Tooltip("詰んだ時のスクリプトテキスト"), SerializeField]
+        TextAsset tsumiScenarioText = default;
+
         /// <summary>
         /// プレイヤーの移動管理
         /// </summary>
@@ -78,6 +81,13 @@ namespace AM1.VBirdHiyoko
         Queue<AM1StateQueueBase> addedScenarioQueue = new Queue<AM1StateQueueBase>();
 
         /// <summary>
+        /// 詰み状態の時、true
+        /// </summary>
+        public bool IsTsumi { get; private set; }
+        PiyoStateScenario stateTsumi;
+        GeneralPiyoStateScenario tsumiScenario;
+
+        /// <summary>
         /// 状態の予約がないことと指定の状態かを確認する。
         /// </summary>
         /// <returns>予約がなく状態が指定のものなら、true</returns>
@@ -99,9 +109,10 @@ namespace AM1.VBirdHiyoko
                 Mover = new PiyoMover(this, rb, pivotTransform);
                 BoxColliderInstance = pivotTransform.GetComponent<BoxCollider>();
                 RouteInstance = new();
-                //tsumiScenario = new GeneralPlayerStateScenario(tsumiScenarioText.text);
-                //stateTsumi.SetSource(tsumiScenario);
-                //IsTsumi = false;
+                tsumiScenario = new(tsumiScenarioText.text);
+                stateTsumi = new();
+                stateTsumi.SetSource(tsumiScenario);
+                IsTsumi = false;
                 StepCounterInstance.Clear();
             }
         }
@@ -273,8 +284,27 @@ namespace AM1.VBirdHiyoko
         /// <returns>詰み状態へ変更する時 true。すでに詰み状態だったり継続可能ならfalse</returns>
         public bool ChangeTsumi()
         {
-            Debug.Log("未実装");
-            return false;
+            // 状態に変化がなければ何もしない
+            bool nowTsumi = !RouteInstance.CanPlay;
+
+            if (IsTsumi == nowTsumi)
+            {
+                return false;
+            }
+
+            // 前回、詰み状態でここに来たなら、今回詰みではない
+            if (IsTsumi)
+            {
+                IsTsumi = false;
+                return false;
+            }
+
+            // ここに来たら前回は詰みではなく、今回詰んだので、詰んだ処理を発動
+            IsTsumi = true;
+            afterScenarioState = GetInstance<PiyoStateWaitInput>();
+            AddScenario(stateTsumi);
+            InvokeAddedScenarioState();
+            return true;
         }
     }
 }

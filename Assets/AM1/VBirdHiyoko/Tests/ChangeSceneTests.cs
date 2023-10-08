@@ -18,8 +18,14 @@ public class ChangeSceneTests
     {
         float waitSeconds = 5;
 
+        VBirdHiyokoPlayerPrefs.prefix = "Test";
+        var storage = new VBirdHiyokoPlayerPrefs();
+        storage.DeleteAll();
+
         // シーン起動
         yield return AM1TestUtil.StartTitle();
+
+        Debug.Log($"Current={VBirdHiyokoManager.CurrentStage.Current}");
 
         // タイトルシーンの起動待ち
         float time = Time.realtimeSinceStartup;
@@ -28,6 +34,7 @@ public class ChangeSceneTests
         Assert.That(CheckSceneLoaded(titleScenes), Is.True, "Title状態のシーン確認");
 
         // ゲーム開始
+        VBirdHiyokoManager.CurrentStage.Set(1);
         GameSceneStateChanger.Instance.Request();
         time = Time.realtimeSinceStartup;
         yield return WaitSceneLoaded(waitSeconds);
