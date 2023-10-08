@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 528507065814671367}
   - component: {fileID: 2100123302865478038}
   - component: {fileID: -5866865583253845227}
+  - component: {fileID: 7143219823987488874}
   - component: {fileID: 2465761032397629978}
   m_Layer: 3
   m_Name: Piyo
@@ -57,6 +58,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4b15fa9a94743f4dbe174c5002a0427, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  observeTransform: {fileID: 528507066226340903}
+--- !u!114 &7143219823987488874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 528507065814671366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8c11e453e819384fa54385bc6dbdd4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!54 &2465761032397629978

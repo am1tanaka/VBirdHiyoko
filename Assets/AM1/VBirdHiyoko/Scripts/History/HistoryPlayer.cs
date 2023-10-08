@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using AM1.CommandSystem;
+using UnityEngine.Events;
 
 namespace AM1.VBirdHiyoko
 {
@@ -11,6 +12,11 @@ namespace AM1.VBirdHiyoko
     public static class HistoryPlayer
     {
         public static IHistoryPlayer.Mode CurrentState = IHistoryPlayer.Mode.None;
+
+        /// <summary>
+        /// UndoかRedoが押された時に実行する処理を登録する。
+        /// </summary>
+        public static UnityEvent ClickedHistoryButton { get; set; } = new UnityEvent();
 
         /// <summary>
         /// 1手の秒数
@@ -39,6 +45,7 @@ namespace AM1.VBirdHiyoko
         /// </summary>
         static int relativeTargetStep;
 
+        static IHistoryPlayer.Mode lastState = IHistoryPlayer.Mode.None;
         static IHistoryPlayer.Mode lastMove = IHistoryPlayer.Mode.None;
 
         static PiyoStateHistory stateHistory;
@@ -320,6 +327,134 @@ namespace AM1.VBirdHiyoko
             }
 
             return i - step;
+        }
+
+        /// <summary>
+        /// Undoできるか確認する。
+        /// </summary>
+        /// <returns>Undoできるなら true</returns>
+        public static bool CanUndo()
+        {
+            var history = HistoryRecorder.HistoryArray;
+
+            VBirdHiyokoManager.Log($"CanUndo() history={history} CurrentState={CurrentState} currentIndex={currentIndex} {(currentIndex > 0 ? "Can" : "Cannot")}");
+
+            if ((history == null) || (history.Length == 0)) { return false; }
+            if (CurrentState == IHistoryPlayer.Mode.None) { return true; }
+            return (currentIndex > 0);
+        }
+
+        /// <summary>
+        /// Redoできるか確認する。
+        /// </summary>
+        /// <returns>Redoできるなら true</returns>
+        public static bool CanRedo()
+        {
+            var history = HistoryRecorder.HistoryArray;
+
+            VBirdHiyokoManager.Log($"CanRedo() history={history} currentst={CurrentState} lastMove={lastMove} ");
+
+            if ((history == null) || (history.Length == 0)) { return false; }
+            if (CurrentState == IHistoryPlayer.Mode.None) { return false; }
+            if (CurrentState == IHistoryPlayer.Mode.Undo) { return true; }
+            if ((CurrentState == IHistoryPlayer.Mode.Standby) && (lastMove == IHistoryPlayer.Mode.Undo)) { return true; }
+
+            VBirdHiyokoManager.Log($"  currentIndex={currentIndex} historyLen={history.Length} {(currentIndex < history.Length - 1 ? "Can" : "Cannot")}");
+
+            return (currentIndex < history.Length - 1);
+        }
+
+        /// <summary>
+        /// UndoButtonのコマンドから呼び出す。
+        /// </summary>
+        public static void Undo()
+        {
+            if (!CanUndo()) { return; }
+
+            SEPlayer.Play(SEPlayer.SE.Click);
+
+            lastState = CurrentState;
+            CurrentState = IHistoryPlayer.Mode.Undo;
+            VBirdHiyokoManager.Log($"Undo lastMove={lastMove} lastState={lastState}");
+            CommandQueue.ChangeInputMask(CommandInputType.None);
+
+            if (lastState == IHistoryPlayer.Mode.None)
+            {
+                StartUndo();
+            }
+            else if (lastState == IHistoryPlayer.Mode.Standby)
+            {
+                // 待機中から開始
+                StandbyToUndo();
+            }
+            else
+            {
+                // 移動中。目的だけ更新
+                PlayToUndo();
+            }
+
+            ClickedHistoryButton.Invoke();
+        }
+
+        /// <summary>
+        /// 移動中にUndoを設定する。
+        /// </summary>
+        static void PlayToUndo()
+        {
+            relativeTargetStep = Mathf.Min(relativeTargetStep - 1, -1);
+
+            // 現在の移動がRedoだったら何もしない
+            if (lastMove == IHistoryPlayer.Mode.Redo)
+            {
+                return;
+            }
+
+            // Undoだったら最大回数の更新を確認
+            targetIndexMax = Mathf.Max(targetIndexMax, Mathf.Abs(relativeTargetStep));
+        }
+
+        /// <summary>
+        /// Undo開始
+        /// </summary>
+        static void StartUndo()
+        {
+            historyArray = HistoryRecorder.HistoryArray;
+            currentIndex = historyArray.Length - 1;
+
+            currentTime = 0;
+            nextTime = StepSeconds;
+            relativeTargetStep = 0;
+            targetIndexMax = 0;
+
+            // 一手戻す設定
+            currentIndex = StartPlay(currentIndex, IHistoryPlayer.Mode.Undo, nextTime);
+            PiyoBehaviour.Instance.Enqueue(stateHistory);
+        }
+
+        /// <summary>
+        /// 現在の位置からUndo。
+        /// </summary>
+        static void StandbyToUndo()
+        {
+            currentTime = 0;
+            nextTime = StepSeconds;
+            relativeTargetStep = 0;
+            targetIndexMax = 0;
+
+            if (lastMove == IHistoryPlayer.Mode.Undo)
+            {
+                // 前回から続けてUndo
+                currentIndex--;
+                if (currentIndex < 0)
+                {
+                    currentIndex = 0;
+                    return;
+                }
+            }
+
+            // 一手戻す設定
+            VBirdHiyokoManager.Log($"CurrentUndo() lastMove={lastMove} currentIndex={currentIndex}");
+            currentIndex = StartPlay(currentIndex, IHistoryPlayer.Mode.Undo, nextTime);
         }
     }
 }
