@@ -34,6 +34,11 @@ namespace AM1.VBirdHiyoko
         public bool CanChangeState =>
             ((nextState == State.None) && (CurrentState != State.GameStart));
 
+        /// <summary>
+        /// クレジット表示のコマンド
+        /// </summary>
+        ToCreditsCommand toCreditsCommand = new ToCreditsCommand();
+
         AutoTalker autoTalker;
         AutoTalker AutoTalkerInstance
         {
@@ -118,7 +123,7 @@ namespace AM1.VBirdHiyoko
         /// </summary>
         public void OnClickCredits()
         {
-            Debug.Log("未実装");
+            CommandQueue.EntryCommand(toCreditsCommand);
         }
     }
 }
