@@ -8,6 +8,13 @@ using AM1.VBirdHiyoko;
 
 public class Stage05Tests
 {
+    [SetUp]
+    public void SetUp()
+    {
+        StaticInitializer.Init();
+        Time.timeScale = 2;
+    }
+
     [UnityTest]
     public IEnumerator Stage05ClearTests()
     {

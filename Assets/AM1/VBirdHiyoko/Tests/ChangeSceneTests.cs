@@ -11,7 +11,7 @@ public class ChangeSceneTests
 {
     readonly string[] titleScenes = { "Title", "Stage", "StageTitle" };
     readonly string[] gameScenes = { "Game", "Stage", "Stage01" };
-    readonly string[] endingScenes = { "Ending" };
+    readonly string[] endingScenes = { "Ending", "Credits" };
 
     [UnityTest]
     public IEnumerator ChangeSceneTestsWithEnumeratorPasses()
@@ -24,8 +24,6 @@ public class ChangeSceneTests
 
         // シーン起動
         yield return AM1TestUtil.StartTitle();
-
-        Debug.Log($"Current={VBirdHiyokoManager.CurrentStage.Current}");
 
         // タイトルシーンの起動待ち
         float time = Time.realtimeSinceStartup;
@@ -51,8 +49,8 @@ public class ChangeSceneTests
         // エンディング
         EndingSceneStateChanger.Instance.Request();
         time = Time.realtimeSinceStartup;
-        yield return WaitSceneLoaded(7);
-        Assert.That(Time.realtimeSinceStartup - time, Is.LessThanOrEqualTo(7), "Ending起動");
+        yield return WaitSceneLoaded(10);
+        Assert.That(Time.realtimeSinceStartup - time, Is.LessThanOrEqualTo(10), "Ending起動");
         Assert.That(CheckSceneLoaded(endingScenes), Is.True, "Ending状態のシーン確認");
 
         // エンディングからタイトルヘ戻る

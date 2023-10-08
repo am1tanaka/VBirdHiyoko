@@ -11,6 +11,8 @@ public class Stage01Tests
     [UnityTest]
     public IEnumerator Stage01ClearTests()
     {
+        StaticInitializer.Init();
+
         yield return AM1TestUtil.StartStage(1);
 
         Time.timeScale = 4;

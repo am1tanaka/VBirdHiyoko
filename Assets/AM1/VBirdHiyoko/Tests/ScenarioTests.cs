@@ -47,8 +47,10 @@ public class ScenarioTests
     public IEnumerator AutoTalkTests()
     {
         SceneStateChanger.ResetStatics();
-        yield return AM1TestUtil.StartStage();
+        yield return AM1TestUtil.StartStage("TestStage01");
         yield return null;
+
+        Time.timeScale = 4;
 
         // 準備
         var autoTalker = GameObject.FindObjectOfType<AutoTalker>();
@@ -57,7 +59,7 @@ public class ScenarioTests
 
         // データ未設定なので何も起きない
         yield return new WaitForSeconds(2f);
-        Assert.That(MessageWindow.Instance.IsShowing, Is.False);
+        Assert.That(MessageWindow.Instance.IsShowing, Is.False, "データ未設定のため何も起きない");
 
         //　データ作成
         var tutorialTalkData = ScriptableObject.CreateInstance<AutoTalkerData>();

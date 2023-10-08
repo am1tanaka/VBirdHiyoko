@@ -129,7 +129,7 @@ namespace AM1.VBirdHiyoko
                 return messages[(int)detectedType];
             }
 
-            return "";
+            return type;
         }
     }
 }

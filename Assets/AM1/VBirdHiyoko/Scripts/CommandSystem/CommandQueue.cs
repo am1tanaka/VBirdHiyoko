@@ -79,6 +79,7 @@ namespace AM1.CommandSystem
         public static void Init()
         {
             CurrentInputMask = CommandInputType.None;
+            nextCommand = null;
             RemoveAllChangeListener();
         }
 

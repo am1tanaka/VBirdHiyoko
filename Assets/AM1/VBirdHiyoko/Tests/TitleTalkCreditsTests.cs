@@ -10,6 +10,13 @@ using AM1.MessageSystem;
 
 public class TitleTalkCreditsTests
 {
+    [SetUp]
+    public void SetUp()
+    {
+        StaticInitializer.Init();
+        Time.timeScale = 2;
+    }
+
     [UnityTest]
     public IEnumerator TitleTalkAfterCreditsTest()
     {

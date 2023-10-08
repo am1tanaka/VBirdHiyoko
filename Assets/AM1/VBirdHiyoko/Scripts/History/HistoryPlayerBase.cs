@@ -93,6 +93,11 @@ namespace AM1.VBirdHiyoko
             if (!isPlaying) return;
 
             transform.position = targetPosition;
+            var rb = GetComponent<Rigidbody>();
+            if (rb)
+            {
+                rb.position = targetPosition;
+            }
             HistoryBehaviourInstance.ObserveTransform.forward = targetForward;
             isPlaying = false;
             SetCollider(true);

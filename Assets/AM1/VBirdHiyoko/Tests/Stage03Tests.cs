@@ -13,6 +13,8 @@ public class Stage03Tests
     public IEnumerator Stage03testsWithEnumeratorPasses()
     {
         StaticInitializer.Init();
+        Time.timeScale = 2;
+
         yield return AM1TestUtil.StartStage(3);
 
         // 最初のメッセージ
