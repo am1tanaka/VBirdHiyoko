@@ -16,9 +16,9 @@ MonoBehaviour:
   firstTalkSeconds: 2
   waitTalkSeconds: 4
   messageData:
-  - Message: TutorialClick
+  - MessageID: TutorialClick
     Seconds: 2
-  - Message: TutorialWind
+  - MessageID: TutorialWind
     Seconds: 2
-  - Message: TutorialWhere
+  - MessageID: TutorialWhere
     Seconds: 2
