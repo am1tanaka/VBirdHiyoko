@@ -10,7 +10,7 @@ namespace AM1.VBirdHiyoko
     /// </summary>
     public static class HistoryObjectRegistrant
     {
-        public static Bounds MapBounds { get; private set; } = new ();
+        public static Bounds MapBounds { get; private set; }
 
         class OrderClass
         {
@@ -80,8 +80,7 @@ namespace AM1.VBirdHiyoko
                 max = Vector3.Max(max, objects[i].transform.position);
             }
 
-
-            MapBounds.SetMinMax(min, max);
+            MapBounds = new Bounds(0.5f * (min + max), max - min);
         }
     }
 }
