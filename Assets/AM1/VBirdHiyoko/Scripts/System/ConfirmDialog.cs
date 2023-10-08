@@ -106,7 +106,7 @@ namespace AM1.VBirdHiyoko
         public void HideDone()
         {
             CurrentState = State.Hide;
-            confirmDialogData?.HidedAction();
+            confirmDialogData?.HidedAction?.Invoke();
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace AM1.VBirdHiyoko
         {
             if (CurrentState != State.Show) return;
 
-            confirmDialogData?.LeftAction();
+            confirmDialogData?.LeftAction?.Invoke();
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace AM1.VBirdHiyoko
         {
             if (CurrentState != State.Show) return;
 
-            confirmDialogData?.RightAction();
+            confirmDialogData?.RightAction?.Invoke();
         }
     }
 }

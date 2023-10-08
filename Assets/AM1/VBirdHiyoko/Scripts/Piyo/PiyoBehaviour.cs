@@ -247,7 +247,7 @@ namespace AM1.VBirdHiyoko
         /// </summary>
         public void HidePushArrows()
         {
-            stageInstances.pushArrows?.Hide();
+            stageInstances?.pushArrows?.Hide();
         }
 
         /// <summary>

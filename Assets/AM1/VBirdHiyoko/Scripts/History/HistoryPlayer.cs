@@ -25,5 +25,10 @@ namespace AM1.VBirdHiyoko
         {
             Debug.Log("未実装");
         }
+
+        public static void Accept()
+        {
+            Debug.Log("未実装");
+        }
     }
 }
