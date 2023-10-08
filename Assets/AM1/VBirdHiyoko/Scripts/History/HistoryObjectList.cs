@@ -22,7 +22,24 @@ namespace AM1.VBirdHiyoko
 
         public static void Init()
         {
-            Debug.Log("未実装");
+            objectList.Clear();
+        }
+
+        /// <summary>
+        /// 指定の履歴オブジェクトを登録する。
+        /// </summary>
+        /// <param name="behaviour">登録したいインスタンス</param>
+        /// <returns>登録した時のId。登録済みの時は -1</returns>
+        public static int Register(HistoryBehaviour behaviour)
+        {
+            // 登録ずみ
+            if (objectList.Contains(behaviour))
+            {
+                return -1;
+            }
+
+            objectList.Add(behaviour);
+            return objectList.Count - 1;
         }
     }
 }

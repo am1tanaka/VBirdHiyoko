@@ -32,21 +32,64 @@ namespace AM1.VBirdHiyoko
         public static int Counter { get; private set; }
 
         /// <summary>
+        /// 最新状態へのデータの配列
+        /// </summary>
+        public static HistoryData[] ToLatestArray => toLatestList.ToArray<HistoryData>();
+
+        /// <summary>
+        /// 移動中のオブジェクトのリスト
+        /// </summary>
+        static readonly List<HistoryBehaviour> movingObjects = new List<HistoryBehaviour>(HistoryObjectList.RegisterMax);
+
+        /// <summary>
         /// 最新状態へのリスト
         /// </summary>
         static readonly LinkedList<HistoryData> toLatestList = new LinkedList<HistoryData>();
 
         /// <summary>
-        /// 最新状態へのデータの配列
+        /// 履歴データを使い回す時に貯めておくためのプール。
         /// </summary>
-        public static HistoryData[] ToLatestArray => toLatestList.ToArray<HistoryData>();
+        static readonly LinkedList<HistoryData> historyDataPool = new LinkedList<HistoryData>();
+
+        /// <summary>
+        /// 履歴データを記録していくリスト。
+        /// </summary>
+        static readonly LinkedList<HistoryData> historyDataList = new LinkedList<HistoryData>();
 
         /// <summary>
         /// 環境を初期化する。
         /// </summary>
         public static void Init()
         {
-            Debug.Log("未実装");
+            HistoryObjectList.Init();
+            movingObjects.Clear();
+            Counter = 0;
+            AllListToPool();
+        }
+
+        /// <summary>
+        /// 記録と最新データのリストをプールに戻す。
+        /// </summary>
+        static void AllListToPool()
+        {
+            while (historyDataList.Count > 0)
+            {
+                historyDataPool.AddLast(historyDataList.First.Value);
+                historyDataList.RemoveFirst();
+            }
+            ReleaseToLatestListToPool();
+        }
+
+        /// <summary>
+        /// 最新状態へのリストを全てプールに戻す。
+        /// </summary>
+        static void ReleaseToLatestListToPool()
+        {
+            while (toLatestList.Count > 0)
+            {
+                historyDataPool.AddLast(toLatestList.First.Value);
+                toLatestList.RemoveFirst();
+            }
         }
 
         /// <summary>
@@ -85,6 +128,38 @@ namespace AM1.VBirdHiyoko
         {
             Debug.Log("未実装");
             return -1;
+        }
+
+        /// <summary>
+        /// Undoを確定した時に呼び出す。
+        /// 引数のインデックス以降の履歴を削除する。
+        /// </summary>
+        /// <param name="index">このインデックスから後ろの履歴を削除する</param>
+        public static void UndoAccept(int index)
+        {
+            if (index < 0 || index >= HistoryArray.Length) return;
+
+            // プールに戻す
+            while (historyDataList.Count > index)
+            {
+                historyDataPool.AddLast(historyDataList.Last.Value);
+                historyDataList.RemoveLast();
+            }
+
+            // 配列化
+            HistoryArray = null;
+            HistoryArray = historyDataList.ToArray<HistoryData>();
+            if (HistoryArray.Length > 0)
+            {
+                Counter = HistoryArray[HistoryArray.Length - 1].step;
+            }
+            else
+            {
+                Counter = 0;
+            }
+
+            // 最新情報を更新
+            UpdateToLatestArray();
         }
 
         /// <summary>

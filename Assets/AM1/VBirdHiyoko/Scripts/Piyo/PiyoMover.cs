@@ -531,5 +531,44 @@ namespace AM1.VBirdHiyoko
             // 当たり判定復帰
             boxCollider.enabled = true;
         }
+
+        /// <summary>
+        /// 現在の座標からプレイヤーを着地させて、下のブロックをFootBlockに設定する。
+        /// resultsが更新される。
+        /// </summary>
+        public void UpdateFootBlockAndLand()
+        {
+            int count = Physics.RaycastNonAlloc(
+                boxCollider.bounds.center, Vector3.down, results, 1, blockLayer);
+
+            // 接触していなければなし
+            if (count == 0)
+            {
+                FootBlock = null;
+                return;
+            }
+
+            // 一番上のものを探す
+            int index = 0;
+            float top = results[0].point.y;
+            for (int i = 1; i < count; i++)
+            {
+                if (results[i].point.y > top)
+                {
+                    index = i;
+                    top = results[i].point.y;
+                }
+            }
+
+            FootBlock = results[index];
+
+            // めり込んでいたら修正
+            if (boxCollider.bounds.min.y < FootBlock.Value.point.y)
+            {
+                var pos = rb.position;
+                pos.y = FootBlock.Value.point.y + boxCollider.bounds.extents.y - boxCollider.bounds.center.y;
+                rb.position = pos;
+            }
+        }
     }
 }
