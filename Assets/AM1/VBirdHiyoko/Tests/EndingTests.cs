@@ -20,6 +20,10 @@ public class EndingTests
         EndingSceneStateChanger.Instance.Request();
         yield return new WaitUntil(() => SceneStateChanger.IsStateStarted(EndingSceneStateChanger.Instance));
         var ending = EndingBehaviour.Instance;
+        yield return new WaitUntil(() => CreditsBehaviour.CurrentState == CreditsBehaviour.State.EndRoll);
+        Time.timeScale = 4;
         yield return new WaitUntil(() => CreditsBehaviour.CurrentState == CreditsBehaviour.State.WaitToTitle);
+
+
     }
 }

@@ -28,14 +28,13 @@ namespace AM1.VBirdHiyoko
             yield return ScreenTransitionRegistry.WaitAll();
 
             // 少し待つ
-            yield return new WaitForSeconds(4);
+            yield return new WaitForSeconds(3);
 
             // エンドクレジット
-            Time.timeScale = 0.5f;
+            Time.timeScale = 0.2f;
             CreditsBehaviour.Show(CreditsBehaviour.Mode.EndCredits);
-            // TODO CreditsBehaviourを実装したら戻す
-            //yield return new WaitUntil(() => CreditsBehaviour.CurrentState == CreditsBehaviour.State.ToShow);
-            //yield return new WaitWhile(() => CreditsBehaviour.CurrentState == CreditsBehaviour.State.ToShow);
+            yield return new WaitUntil(() => CreditsBehaviour.CurrentState == CreditsBehaviour.State.ToShow);
+            yield return new WaitWhile(() => CreditsBehaviour.CurrentState == CreditsBehaviour.State.ToShow);
 
             Time.timeScale = 1;
         }
