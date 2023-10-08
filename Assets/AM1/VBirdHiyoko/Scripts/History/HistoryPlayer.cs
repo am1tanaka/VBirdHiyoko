@@ -259,6 +259,77 @@ namespace AM1.VBirdHiyoko
         }
 
         /// <summary>
+        /// Redoボタンが押された時に呼び出す。
+        /// </summary>
+        public static void Redo()
+        {
+            if (!CanRedo()) { return; }
+
+            SEPlayer.Play(SEPlayer.SE.Click);
+
+            lastState = CurrentState;
+            CurrentState = IHistoryPlayer.Mode.Redo;
+            VBirdHiyokoManager.Log($"Redo {CurrentState} lastState={lastState}");
+            CommandQueue.ChangeInputMask(CommandInputType.None);
+
+            if (lastState == IHistoryPlayer.Mode.Standby)
+            {
+                // 待機中から開始
+                StandbyToRedo();
+            }
+            else
+            {
+                // 移動中。目的だけ更新
+                PlayToRedo();
+            }
+
+            ClickedHistoryButton.Invoke();
+        }
+
+        /// <summary>
+        /// 移動中にRedoを設定する。
+        /// </summary>
+        static void PlayToRedo()
+        {
+            relativeTargetStep = Mathf.Max(relativeTargetStep + 1, 1);
+
+            // 現在の移動がUndoだったら何もしない
+            if (lastMove == IHistoryPlayer.Mode.Undo)
+            {
+                return;
+            }
+
+            // Redoだったら最大回数の更新を確認
+            targetIndexMax = Mathf.Max(targetIndexMax, relativeTargetStep);
+        }
+
+        /// <summary>
+        /// 現在の位置からRedo。
+        /// </summary>
+        static void StandbyToRedo()
+        {
+            currentTime = 0;
+            nextTime = StepSeconds;
+            relativeTargetStep = 0;
+            targetIndexMax = 0;
+
+            if (lastMove == IHistoryPlayer.Mode.Redo)
+            {
+                // 前回から続けてRedo
+                currentIndex++;
+                if (currentIndex >= historyArray.Length)
+                {
+                    currentIndex = historyArray.Length - 1;
+                    return;
+                }
+            }
+
+            // 一手進める設定
+            VBirdHiyokoManager.Log($"StandbyToRedo() lastMove={lastMove} currentIndex={currentIndex}");
+            currentIndex = StartPlay(currentIndex, IHistoryPlayer.Mode.Redo, nextTime);
+        }
+
+        /// <summary>
         /// この状態で履歴を確定する。
         /// </summary>
         public static void Accept()
