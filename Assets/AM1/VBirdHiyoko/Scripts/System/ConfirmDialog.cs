@@ -106,6 +106,7 @@ namespace AM1.VBirdHiyoko
         public void HideDone()
         {
             CurrentState = State.Hide;
+            confirmDialogData?.HidedAction();
         }
 
         /// <summary>

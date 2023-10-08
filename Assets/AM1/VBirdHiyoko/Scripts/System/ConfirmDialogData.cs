@@ -27,14 +27,19 @@ namespace AM1.VBirdHiyoko
         /// 右ボタン押下時の処理
         /// </summary>
         public UnityAction RightAction { get; private set; }
+        /// <summary>
+        /// ダイアログが閉じた時に実行したい処理があれば登録
+        /// </summary>
+        public UnityAction HidedAction { get; private set; }
 
-        public ConfirmDialogData(string message, string leftButtonText, string rightButtonText, UnityAction leftAction, UnityAction rightAction)
+        public ConfirmDialogData(string message, string leftButtonText, string rightButtonText, UnityAction leftAction, UnityAction rightAction, UnityAction hidedAction = null)
         {
             Message = message;
             LeftButtonText = leftButtonText;
             RightButtonText = rightButtonText;
             LeftAction = leftAction;
             RightAction = rightAction;
+            HidedAction = hidedAction;
         }
     }
 }
