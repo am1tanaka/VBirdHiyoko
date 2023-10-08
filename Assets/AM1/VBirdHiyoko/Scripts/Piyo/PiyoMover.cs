@@ -566,7 +566,7 @@ namespace AM1.VBirdHiyoko
             if (boxCollider.bounds.min.y < FootBlock.Value.point.y)
             {
                 var pos = rb.position;
-                pos.y = FootBlock.Value.point.y + boxCollider.bounds.extents.y - boxCollider.bounds.center.y;
+                pos.y = FootBlock.Value.point.y + 0.5f * boxCollider.size.y - boxCollider.center.y;
                 rb.position = pos;
             }
         }

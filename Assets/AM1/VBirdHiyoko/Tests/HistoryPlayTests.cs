@@ -9,6 +9,13 @@ using UnityEditor;
 
 public class HistoryPlayTests
 {
+    [SetUp]
+    public void SetUp()
+    {
+        StaticInitializer.Init();
+        Time.timeScale = 2;
+    }
+
     /// <summary>
     /// 基本動作の確認
     /// </summary>

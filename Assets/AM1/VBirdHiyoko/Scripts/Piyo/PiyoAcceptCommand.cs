@@ -13,6 +13,8 @@ namespace AM1.VBirdHiyoko
         public CommandInputType Type => CommandInputType.Game;
         public int Priority => 10;
 
+        WaitForFixedUpdate waitForFixedUpdate = new ();
+
         public void Invoke()
         {
             PiyoBehaviour.Instance.StartCoroutine(AcceptWork());
@@ -22,6 +24,9 @@ namespace AM1.VBirdHiyoko
         {
             // 履歴を確定
             HistoryPlayer.Accept();
+
+            // 当たり判定を確定させるために1物理時間待つ
+            yield return waitForFixedUpdate;
 
             // 落下して足場を確保
             yield return PiyoBehaviour.Instance.Mover.Fall();
