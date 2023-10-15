@@ -98,7 +98,7 @@ namespace AM1.VBirdHiyoko
 
         public override bool StartPush(Vector3 direction)
         {
-            if (!CanPush(direction))
+            if (!TryPush(direction))
             {
                 return false;
             }

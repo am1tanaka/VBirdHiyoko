@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 114180947374143736}
   - component: {fileID: 6841559507613446570}
-  - component: {fileID: 5589067672818915797}
   - component: {fileID: 3322650191665190558}
+  - component: {fileID: 5589067672818915797}
   - component: {fileID: -6908939709218334627}
   - component: {fileID: 1417069022240694155}
   - component: {fileID: 6882942062208798890}
@@ -53,19 +53,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pushSE: {fileID: 0}
   collisionSE: {fileID: 0}
---- !u!114 &5589067672818915797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 114180947374143739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4b15fa9a94743f4dbe174c5002a0427, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  observeTransform: {fileID: 0}
 --- !u!114 &3322650191665190558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,6 +66,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPushBlock: 1
+--- !u!114 &5589067672818915797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114180947374143739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4b15fa9a94743f4dbe174c5002a0427, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  observeTransform: {fileID: 0}
 --- !u!114 &-6908939709218334627
 MonoBehaviour:
   m_ObjectHideFlags: 0
