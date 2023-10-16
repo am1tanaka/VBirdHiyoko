@@ -83,3 +83,6 @@ crashlytics-build.properties
 !/Assets/AM1BaseFrame/Samples~*
 !/Assets/AM1BaseFrame/Package Resources/*.unitypackage
 /Assets/AM1/BaseFrame/LocalSettings*
+
+/Assets/InitTestScene*
+

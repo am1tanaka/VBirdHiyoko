@@ -29,6 +29,7 @@ namespace AM1.VBirdHiyoko
         public string ScenarioText => scenarioText.text;
 
         PiyoStateScenario piyoStateScenario;
+        bool isOn;
 
         private void Awake()
         {
@@ -43,7 +44,13 @@ namespace AM1.VBirdHiyoko
             {
                 piyoStateScenario = new ();
                 piyoStateScenario.SetSource(this);
+                isOn = true;
             }
+        }
+
+        void OnDestroy()
+        {
+            Done();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -56,9 +63,10 @@ namespace AM1.VBirdHiyoko
 
         public void Done()
         {
-            if (isDoneOff && gameObject)
+            if (isOn && isDoneOff)
             {
-                gameObject.SetActive(false);
+                isOn = false;
+                gameObject?.SetActive(false);
             }
         }
     }

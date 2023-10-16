@@ -35,22 +35,13 @@ namespace AM1.VBirdHiyoko
 
         public override bool StartPush(Vector3 direction)
         {
-            if (!TryPush(direction))
+            bool result = base.StartPush(direction);
+            if (result)
             {
-                return false;
+                // 履歴状態を通常に設定してから履歴記録
+                HistoryBehaviourInstance.State = 0;
             }
-
-            // 押し終わったあとの自律動作用の状態
-            if (stateAfterPushMove == null)
-            {
-                stateFall = new BlockStateFall(this);
-                stateAfterPushMove = new BlockStateAfterPushMove(this, stateFall);
-            }
-
-            // 履歴状態を通常に設定してから履歴記録
-            HistoryBehaviourInstance.State = 0;
-            HistoryStartMove();
-            return true;
+            return result;
         }
 
         /// <summary>

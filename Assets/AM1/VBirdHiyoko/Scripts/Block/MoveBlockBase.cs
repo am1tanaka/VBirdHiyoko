@@ -64,8 +64,6 @@ namespace AM1.VBirdHiyoko
         protected BlockStateAfterPushMove stateAfterPushMove;
         protected BlockStateFall stateFall;
 
-        public abstract bool StartPush(Vector3 direction);
-
         /// <summary>
         /// 履歴クラスのインスタンス
         /// </summary>
@@ -106,6 +104,24 @@ namespace AM1.VBirdHiyoko
             pushedVector = Vector3.zero;
             pushedSeconds = 0;
             PlayPushSE();
+            return true;
+        }
+
+        public virtual bool StartPush(Vector3 direction)
+        {
+            if (!TryPush(direction))
+            {
+                return false;
+            }
+
+            // 押し終わったあとの自律動作用の状態
+            if (stateAfterPushMove == null)
+            {
+                stateFall = new BlockStateFall(this);
+                stateAfterPushMove = new BlockStateAfterPushMove(this, stateFall);
+            }
+
+            HistoryStartMove();
             return true;
         }
 
