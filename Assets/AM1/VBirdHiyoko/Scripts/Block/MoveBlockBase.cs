@@ -61,10 +61,10 @@ namespace AM1.VBirdHiyoko
         /// </summary>
         protected float pushedSeconds;
 
-        public abstract bool StartPush(Vector3 direction);
+        protected BlockStateAfterPushMove stateAfterPushMove;
+        protected BlockStateFall stateFall;
 
-        public abstract void Push(Vector3 move);
-        public abstract void PushDone();
+        public abstract bool StartPush(Vector3 direction);
 
         /// <summary>
         /// 履歴クラスのインスタンス
@@ -113,7 +113,7 @@ namespace AM1.VBirdHiyoko
         /// プレイヤーから押される処理
         /// </summary>
         /// <param name="move">移動させるベクトル。Yは無視</param>
-        protected void PushMove(Vector3 move)
+        public virtual void Push(Vector3 move)
         {
             move.y = 0;
 
@@ -134,6 +134,16 @@ namespace AM1.VBirdHiyoko
             pushedSeconds += Time.fixedDeltaTime;
 
             rb.position += move + upY * Vector3.up;
+        }
+
+        /// <summary>
+        /// 押し終えたらプレイヤーから呼び出す。
+        /// ここからきりがよいところまで移動して落下まで自律して実行。
+        /// </summary>
+        public void PushDone()
+        {
+            AdjustXZ();
+            Enqueue(stateAfterPushMove);
         }
 
         /// <summary>

@@ -16,9 +16,6 @@ namespace AM1.VBirdHiyoko
 
         public bool IsSlippery => true;
 
-        BlockStateAfterPushMove stateAfterPushMove;
-        BlockStateFall stateFall;
-
         public override bool StartPush(Vector3 direction)
         {
             if (!TryPush(direction))
@@ -35,25 +32,6 @@ namespace AM1.VBirdHiyoko
 
             HistoryStartMove();
             return true;
-        }
-
-        /// <summary>
-        /// プレイヤーから受け取ったベクトルを移動に反映する
-        /// </summary>
-        /// <param name="move">移動距離</param>
-        public override void Push(Vector3 move)
-        {
-            PushMove(move);
-        }
-
-        /// <summary>
-        /// 押し終えたらプレイヤーから呼び出す。
-        /// ここからきりがよいところまで移動して落下まで自律して実行。
-        /// </summary>
-        public override void PushDone()
-        {
-            AdjustXZ();
-            Enqueue(stateAfterPushMove);
         }
     }
 }

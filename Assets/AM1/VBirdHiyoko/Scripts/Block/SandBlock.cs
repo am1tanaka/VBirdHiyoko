@@ -23,12 +23,35 @@ namespace AM1.VBirdHiyoko
         /// </summary>
         static float HistoryAnimationSpeed => 3;
 
-        BlockStateAfterPushMove stateAfterPushMove;
-        BlockStateFall stateFall;
         HistoryBehaviour HistoryBehaviourInstance => historyBehaviour ? historyBehaviour : historyBehaviour = GetComponent<HistoryBehaviour>();
 
         Animator animator;
         Animator AnimatorInstance => animator ? animator : animator = GetComponent<Animator>();
+
+        /// <summary>
+        /// 足元が氷かを確認する。
+        /// </summary>
+        public override bool CanContinue => IsOnIce();
+
+        public override bool StartPush(Vector3 direction)
+        {
+            if (!TryPush(direction))
+            {
+                return false;
+            }
+
+            // 押し終わったあとの自律動作用の状態
+            if (stateAfterPushMove == null)
+            {
+                stateFall = new BlockStateFall(this);
+                stateAfterPushMove = new BlockStateAfterPushMove(this, stateFall);
+            }
+
+            // 履歴状態を通常に設定してから履歴記録
+            HistoryBehaviourInstance.State = 0;
+            HistoryStartMove();
+            return true;
+        }
 
         /// <summary>
         /// プレイヤーがどいたら呼び出す
@@ -95,48 +118,5 @@ namespace AM1.VBirdHiyoko
             HistoryBehaviourInstance.State = 0;
             smokeParticle.Play();
         }
-
-        public override bool StartPush(Vector3 direction)
-        {
-            if (!TryPush(direction))
-            {
-                return false;
-            }
-
-            // 押し終わったあとの自律動作用の状態
-            if (stateAfterPushMove == null)
-            {
-                stateFall = new BlockStateFall(this);
-                stateAfterPushMove = new BlockStateAfterPushMove(this, stateFall);
-            }
-
-            // 履歴状態を通常に設定してから履歴記録
-            HistoryBehaviourInstance.State = 0;
-            HistoryStartMove();
-            return true;
-        }
-
-        /// <summary>
-        /// プレイヤーから受け取ったベクトルを移動に反映する
-        /// </summary>
-        /// <param name="move">移動距離</param>
-        public override void Push(Vector3 move)
-        {
-            PushMove(move);
-        }
-
-        /// <summary>
-        /// 押し終えたらプレイヤーから呼び出す。
-        /// ここからきりがよいところまで移動して落下まで自律して実行。
-        /// </summary>
-        public override void PushDone()
-        {
-            Enqueue(stateAfterPushMove);
-        }
-
-        /// <summary>
-        /// 足元が氷かを確認する。
-        /// </summary>
-        public override bool CanContinue => IsOnIce();
     }
 }
