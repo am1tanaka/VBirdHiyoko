@@ -7,7 +7,7 @@ namespace AM1.VBirdHiyoko
     /// <summary>
     /// 砂ブロックの制御スクリプト
     /// </summary>
-    public class SandBlock : MoveBlockBase, IPlayerExit
+    public class SandBlock : MoveBlockBase, IPlayerExit, IBlockInfo
     {
         [Tooltip("崩れ効果音"), SerializeField]
         AudioClip breakSE = default;

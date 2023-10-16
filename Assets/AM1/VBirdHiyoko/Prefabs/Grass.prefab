@@ -51,8 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc46ac7bc4786149a5ab07ee5bd6228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushSE: {fileID: 0}
-  collisionSE: {fileID: 0}
+  pushSE: {fileID: 8300000, guid: efe8608b1b60d54469af69394ffb695f, type: 3}
+  collisionSE: {fileID: 8300000, guid: 633d00bd22ec86149a97ea0a31d05963, type: 3}
 --- !u!114 &3322650191665190558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,7 +113,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
