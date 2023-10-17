@@ -162,6 +162,23 @@ namespace AM1.VBirdHiyoko
             Enqueue(stateAfterPushMove);
         }
 
+        public void PlayPushSE()
+        {
+            if (pushSE != null)
+            {
+                audioSource.PlayOneShot(pushSE);
+            }
+        }
+
+        public void PlayCollisionSE()
+        {
+            if (collisionSE != null)
+            {
+                audioSource.Stop();
+                audioSource.PlayOneShot(collisionSE);
+            }
+        }
+
         /// <summary>
         /// 指定の座標を中心にした球体の衝突判定を取得する。
         /// 結果はMoveBlockBase.Resultsに格納される。
@@ -190,23 +207,6 @@ namespace AM1.VBirdHiyoko
                 Results,
                 BlockLayer);
             return count;
-        }
-
-        public void PlayCollisionSE()
-        {
-            if (collisionSE != null)
-            {
-                audioSource.Stop();
-                audioSource.PlayOneShot(collisionSE);
-            }
-        }
-
-        public void PlayPushSE()
-        {
-            if (pushSE != null)
-            {
-                audioSource.PlayOneShot(pushSE);
-            }
         }
 
         /// <summary>
