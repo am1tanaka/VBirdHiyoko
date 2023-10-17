@@ -9,7 +9,7 @@ namespace AM1.VBirdHiyoko
     /// <summary>
     /// 移動ブロックの基底クラス
     /// </summary>
-    public abstract class MoveBlockBase : AM1StateQueue, IMovableBlock, IBlockInfo
+    public abstract class MoveBlockBase : AM1StateQueue, IMovableBlock
     {
         /// <summary>
         /// 接触判定の半径
@@ -45,7 +45,7 @@ namespace AM1.VBirdHiyoko
         /// <summary>
         /// 押された時の速度
         /// </summary>
-        public Vector3 PushVelocity => pushedVector / Mathf.Max(pushSeconds, 0.01f);
+        public Vector3 PushVelocity => pushedVector / Mathf.Max(pushedSeconds, 0.01f);
 
         /// <summary>
         /// 再生に使うAudioSource
@@ -59,12 +59,10 @@ namespace AM1.VBirdHiyoko
         /// <summary>
         /// 押された秒数
         /// </summary>
-        protected float pushSeconds;
+        protected float pushedSeconds;
 
-        public abstract bool StartPush(Vector3 direction);
-
-        public abstract void Push(Vector3 move);
-        public abstract void PushDone();
+        protected BlockStateAfterPushMove stateAfterPushMove;
+        protected BlockStateFall stateFall;
 
         /// <summary>
         /// 履歴クラスのインスタンス
@@ -89,7 +87,7 @@ namespace AM1.VBirdHiyoko
         /// </summary>
         /// <param name="direction">押す方向</param>
         /// <returns>押せる時 true</returns>
-        protected bool CanPush(Vector3 direction)
+        protected bool TryPush(Vector3 direction)
         {
             // 押せないなら何もしない
             if (!routeData.CanPush(Direction.DetectType(direction)))
@@ -104,8 +102,26 @@ namespace AM1.VBirdHiyoko
             MoveDirection = Direction.DetectType(direction);
             BlockMoveObserver.Add(this);
             pushedVector = Vector3.zero;
-            pushSeconds = 0;
+            pushedSeconds = 0;
             PlayPushSE();
+            return true;
+        }
+
+        public virtual bool StartPush(Vector3 direction)
+        {
+            if (!TryPush(direction))
+            {
+                return false;
+            }
+
+            // 押し終わったあとの自律動作用の状態
+            if (stateAfterPushMove == null)
+            {
+                stateFall = new BlockStateFall(this);
+                stateAfterPushMove = new BlockStateAfterPushMove(this, stateFall);
+            }
+
+            HistoryStartMove();
             return true;
         }
 
@@ -113,7 +129,7 @@ namespace AM1.VBirdHiyoko
         /// プレイヤーから押される処理
         /// </summary>
         /// <param name="move">移動させるベクトル。Yは無視</param>
-        public void PushMove(Vector3 move)
+        public virtual void Push(Vector3 move)
         {
             move.y = 0;
 
@@ -131,9 +147,19 @@ namespace AM1.VBirdHiyoko
             }
 
             pushedVector += move;
-            pushSeconds += Time.fixedDeltaTime;
+            pushedSeconds += Time.fixedDeltaTime;
 
             rb.position += move + upY * Vector3.up;
+        }
+
+        /// <summary>
+        /// 押し終えたらプレイヤーから呼び出す。
+        /// ここからきりがよいところまで移動して落下まで自律して実行。
+        /// </summary>
+        public void PushDone()
+        {
+            AdjustXZ();
+            Enqueue(stateAfterPushMove);
         }
 
         /// <summary>

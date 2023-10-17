@@ -90,7 +90,7 @@ namespace AM1.VBirdHiyoko
         public override void Terminate()
         {
             base.Terminate();
-            scenarioTextData.Done();
+            scenarioTextData?.Done();
         }
     }
 }

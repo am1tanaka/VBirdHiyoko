@@ -9811,8 +9811,8 @@ GameObject:
   - component: {fileID: -2404219121899068998}
   - component: {fileID: -6905662003570686159}
   - component: {fileID: 8877177374754504885}
-  - component: {fileID: 7977326800524407487}
   - component: {fileID: 8755962352465020360}
+  - component: {fileID: 7977326800524407487}
   - component: {fileID: 5162531180046453073}
   - component: {fileID: 3998383035844034801}
   m_Layer: 6
@@ -9896,27 +9896,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee22ed0f745cbcc42bf96c641855bfb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &7977326800524407487
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7988810349049727351}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.98, y: 1, z: 0.98}
-  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!54 &8755962352465020360
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9939,11 +9918,32 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!65 &7977326800524407487
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7988810349049727351}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.98, y: 1, z: 0.98}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!82 &5162531180046453073
 AudioSource:
   m_ObjectHideFlags: 0

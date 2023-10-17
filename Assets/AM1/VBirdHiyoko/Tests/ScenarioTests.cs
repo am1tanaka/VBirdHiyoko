@@ -14,6 +14,8 @@ public class ScenarioTests
     [UnityTest]
     public IEnumerator StartScenarioTests()
     {
+        StaticInitializer.Init();
+
         AM1TestUtil.SetGameDataTestAndClear();
         yield return AM1TestUtil.StartTitle();
         yield return new WaitUntil(() => CommandQueue.CurrentInputMask.HasFlag(CommandInputType.Game));
@@ -46,7 +48,7 @@ public class ScenarioTests
     [UnityTest]
     public IEnumerator AutoTalkTests()
     {
-        SceneStateChanger.ResetStatics();
+        StaticInitializer.Init();
         yield return AM1TestUtil.StartStage("TestStage01");
         yield return null;
 
