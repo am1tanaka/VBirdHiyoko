@@ -10,7 +10,7 @@ namespace AM1.VBirdHiyoko
     public class BlockRouteData : MonoBehaviour
     {
         [Tooltip("押せるブロックの時、チェック"), SerializeField]
-        bool isPushBlock = false;
+        bool isPushable = false;
 
         /// <summary>
         /// 押す方向フラグ
@@ -134,7 +134,7 @@ namespace AM1.VBirdHiyoko
         /// <returns>押せる時、true</returns>
         public bool CanPush(Direction.Type dir)
         {
-            if (!isPushBlock) return false;
+            if (!isPushable) return false;
 
             CheckPushDirectionAndNextToThePlayer();
             return canPush.HasFlag((CanPushFlag)(1 << (int)dir));
@@ -158,7 +158,7 @@ namespace AM1.VBirdHiyoko
         /// <returns>押せる時、true</returns>
         public bool CanPushFrom(Vector3 fromPos)
         {
-            if (!isPushBlock) return false;
+            if (!isPushable) return false;
 
             Vector3 to = boxCollider.bounds.center - fromPos;
             to.y = 0;
@@ -176,7 +176,7 @@ namespace AM1.VBirdHiyoko
         public BlockRouteData GetNearWalkFloorBlock()
         {
             VBirdHiyokoManager.Log($"GetNearWalkFloorBlock");
-            if (!isPushBlock) { return null; }
+            if (!isPushable) { return null; }
 
             CheckPushDirectionAndNextToThePlayer();
             BlockRouteData floor = null;
@@ -234,10 +234,10 @@ namespace AM1.VBirdHiyoko
         {
             Vector3 pushPos = PushPosition + Direction.Vector[(int)dir];
 
-            VBirdHiyokoManager.Log($"CheckNextTo({dir}) pushPos={pushPos} isPushBlock={isPushBlock}");
+            VBirdHiyokoManager.Log($"CheckNextTo({dir}) pushPos={pushPos} isPushBlock={isPushable}");
 
             // 押せるブロックで、接触チェック
-            if (isPushBlock)
+            if (isPushable)
             {
                 if (CheckNextCollision(pushPos, dir) > 0)
                 {

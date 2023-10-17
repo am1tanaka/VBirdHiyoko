@@ -19,6 +19,21 @@ namespace AM1.VBirdHiyoko
         ParticleSystem smokeParticle = default;
 
         /// <summary>
+        /// ブロックの状態
+        /// </summary>
+        enum State
+        {
+            /// <summary>
+            /// 崩れる前
+            /// </summary>
+            Default,
+            /// <summary>
+            /// 崩れたあと
+            /// </summary>
+            Broken
+        }
+
+        /// <summary>
         /// 履歴再生時のアニメ倍速
         /// </summary>
         static float HistoryAnimationSpeed => 3;
@@ -39,7 +54,7 @@ namespace AM1.VBirdHiyoko
             if (result)
             {
                 // 履歴状態を通常に設定してから履歴記録
-                HistoryBehaviourInstance.State = 0;
+                HistoryBehaviourInstance.State = (int)State.Default;
             }
             return result;
         }
@@ -67,7 +82,7 @@ namespace AM1.VBirdHiyoko
         public void BreakDone()
         {
             // 崩れ状態設定
-            HistoryBehaviourInstance.State = 1;
+            HistoryBehaviourInstance.State = (int)State.Broken;
 
             // 動作を解除
             BlockMoveObserver.Remove(this);
@@ -92,7 +107,7 @@ namespace AM1.VBirdHiyoko
         {
             AnimatorInstance.SetFloat("Speed", HistoryAnimationSpeed);
             AnimatorInstance.SetBool("Break", true);
-            HistoryBehaviourInstance.State = 1;
+            HistoryBehaviourInstance.State = (int)State.Broken;
         }
 
         /// <summary>
@@ -106,7 +121,7 @@ namespace AM1.VBirdHiyoko
             }
             AnimatorInstance.SetFloat("Speed", HistoryAnimationSpeed);
             AnimatorInstance.SetBool("Break", false);
-            HistoryBehaviourInstance.State = 0;
+            HistoryBehaviourInstance.State = (int)State.Default;
             smokeParticle.Play();
         }
     }
