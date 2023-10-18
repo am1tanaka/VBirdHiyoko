@@ -93,9 +93,9 @@ namespace AM1.VBirdHiyoko
             Vector3 moveDir = Direction.Vector[(int)moveBlock.MoveDirection];
             count = MoveBlockBase.OverlapSphereBlockAndWall(targetPosition + moveDir);
             VBirdHiyokoManager.Log($"  滑った先 {targetPosition}+{moveDir} count={count} moveDir={moveDir}");
-            if (count > 0)
+            for (int i = 0; i < count; i++)
             {
-                float dy = MoveBlockBase.Results[0].bounds.max.y - moveBlock.BoxColliderInstance.bounds.min.y;
+                float dy = MoveBlockBase.Results[i].bounds.max.y - moveBlock.BoxColliderInstance.bounds.min.y;
                 VBirdHiyokoManager.Log($"  dy={dy} StepHeight={MoveBlockBase.StepHeight}");
                 if (dy > MoveBlockBase.StepHeight)
                 {
