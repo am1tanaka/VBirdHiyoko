@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c0aa69748397cc4ca175e37dca7cec9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPushBlock: 1
+  isPushable: 1
 --- !u!114 &5589067672818915797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,7 +115,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!65 &6882942062208798890
