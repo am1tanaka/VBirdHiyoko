@@ -68,7 +68,7 @@ namespace AM1.VBirdHiyoko
             }
 
             // 落下
-            moveBlock.rb.position += Vector3.down * fallDistance;
+            moveBlock.rb.MovePosition(moveBlock.rb.position + fallDistance * Vector3.down);
             fallHeight += fallDistance;
 
             if (isGrounded)
