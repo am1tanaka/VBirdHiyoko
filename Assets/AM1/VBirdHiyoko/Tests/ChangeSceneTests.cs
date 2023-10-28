@@ -90,9 +90,9 @@ public class ChangeSceneTests
     bool CheckSceneLoaded(string[] sceneList)
     {
         // リストの数にSystem1つを加えた数と一致しているか確認
-        if (SceneManager.loadedSceneCount != sceneList.Length + 1)
+        if (loadedSceneCount() != sceneList.Length + 1)
         {
-            Debug.Log($"シーン数不一致 {SceneManager.loadedSceneCount} / {sceneList.Length+1}");
+            Debug.Log($"シーン数不一致 {loadedSceneCount()} / {sceneList.Length+1}");
             return false;
         }
 
@@ -107,4 +107,14 @@ public class ChangeSceneTests
         }
         return true;        
     }
+
+    int loadedSceneCount()
+    {
+#if UNITY_2022_2_OR_NEWER
+        return SceneManager.loadedSceneCount;
+#else
+        return SceneManager.sceneCount;
+#endif
+    }
+
 }
