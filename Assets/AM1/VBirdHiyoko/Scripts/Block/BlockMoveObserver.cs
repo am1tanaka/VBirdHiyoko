@@ -33,7 +33,7 @@ namespace AM1.VBirdHiyoko
         public static bool Remove(IMovableBlock block)
         {
             moveBlocks.Remove(block);
-            return moveBlocks.Count == 0;
+            return IsAllBlocksMoveDone;
         }
     }
 }
