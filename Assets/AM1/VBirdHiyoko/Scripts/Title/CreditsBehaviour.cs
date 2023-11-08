@@ -73,7 +73,7 @@ namespace AM1.VBirdHiyoko
         float[] contentHeights =
         {
             1200,
-            2880
+            2860
         };
 
         ScrollRect.MovementType[] movementType =

@@ -24,6 +24,8 @@ public class EndingTests
         Time.timeScale = 4;
         yield return new WaitUntil(() => CreditsBehaviour.CurrentState == CreditsBehaviour.State.WaitToTitle);
 
-
+        // 少し待つ
+        Time.timeScale = 1;
+        yield return new WaitForSeconds(3);
     }
 }
