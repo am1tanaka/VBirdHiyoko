@@ -59,4 +59,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/AM1/VBirdHiyoko/Tests/TestStageNormalBlock.unity
     guid: c96e7bbd4f731544bb56b81d1d1fadf2
+  - enabled: 1
+    path: Assets/AM1/VBirdHiyoko/Tests/TestStageRigidbodyBlock.unity
+    guid: 5c2ecef8a31b38248a40abb4c5ddb83b
   m_configObjects: {}
