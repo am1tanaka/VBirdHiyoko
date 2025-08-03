@@ -28,17 +28,29 @@ Gitのコマンドツールが必要です。なければ https://git-scm.com/ �
 
 1. 本リポジトリーをクローンかダウンロードする
 1. 展開してUnity2022LTS以降で開く
-1. 最初に開いたときはTextMesh Proのアセットが必要なので、Import TMP EssentialsとImport TMP Examples & Extrasの両方をインポート
+1. 最初に開いたときはTextMesh Proのアセットが必要なので、WindowメニューからTextMeshPro > Import TMP Essentialsを選んで、インポートする。インポートできたら、続けてImport TMP Examples & Extrasもインポートする
 1. Projectウィンドウで、AM1 > VBirdHiyoko > Scenesの順にフォルダーを開いて、Systemシーンをダブルクリックして起動
 
 以上でPlayできます。
 
+## エラーが出たら
+
+### Unityのバージョンをアップするとエラーが出る
+
+古いUnityで開いたプロジェクトを、新しいUnityで開こうとすると、エラーが出る場合があります。Safe Modeでは開かず、Ignoreを選んで、普通にプロジェクトを開きます。プロジェクトが開いたら、WindowメニューのTextMesh Proから、Import TMP EssentialsとImport TMP Examples & Extrasを改めて読み込んでください。
+
+### Unity6.1.xにバージョンアップすると警告が出る
+
+Unity6.1から、Object.FindObjectOfType<T>()やObject.FindObjectsOfType<T>()が非推奨になりました。代わりに、効率を向上させたObject.FindObjectsByType<T>()に変更します。
+
+警告が表示されるだけなので、そのまま使っていても大丈夫です。近々、更新する予定です。
+
 
 # 解説本
 
-本プロジェクトを題材にした技術書を出版します。草ブロック、砂ブロック、氷ブロック、地面ブロック、岩ブロック、氷床ブロックの6種類のブロックを企画段階から実装するまで解説しています。初心者向けから一歩発展させて、企画を具体化させるときに実際に書いている資料を交えながら考え方を書きました。チュートリアルや手を動かすための内容ではなく、イメージトレーニングのための本という位置づけです。
+本プロジェクトを題材にした技術書を出版しました。草ブロック、砂ブロック、氷ブロック、地面ブロック、岩ブロック、氷床ブロックの6種類のブロックを企画段階から実装するまで解説しています。初心者向けから一歩発展させて、企画を具体化させるときに実際に書いている資料を交えながら考え方を書きました。チュートリアルや手を動かすための内容ではなく、イメージトレーニングのための本という位置づけです。
 
-2023/11/11(土)からオンラインで販売を開始します。また翌日12日(日)の技術書典15にオフライン出展します。よろしければご購入のほど、よろしくお願いいたします！
+[技術書典のサイト](https://techbookfest.org/product/nQdhDsspFhjK7zfWzmZMwK)で、電子書を販売しています。よろしければご購入のほど、よろしくお願いいたします！
 
 <a href="https://techbookfest.org/product/nQdhDsspFhjK7zfWzmZMwK"><img src="./Docs/images/book-hyoshi-320.png" alt="ブロック6種類解説本">
 <br>
