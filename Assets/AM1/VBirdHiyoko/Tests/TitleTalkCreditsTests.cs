@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using AM1.VBirdHiyoko;
-using NUnit.Framework;
-using UnityEngine;
-using UnityEngine.TestTools;
-using AM1.BaseFrame;
 using AM1.CommandSystem;
 using AM1.MessageSystem;
+using AM1.VBirdHiyoko;
+using NUnit.Framework;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.TestTools;
 
 public class TitleTalkCreditsTests
 {
@@ -30,7 +28,7 @@ public class TitleTalkCreditsTests
         yield return new WaitForSeconds(0.5f);
         yield return new WaitUntil(() => CommandQueue.CurrentInputMask.HasFlag(CommandInputType.UI));
 
-        var autoTalker = GameObject.FindObjectOfType<AutoTalker>();
+        var autoTalker = GameObject.FindFirstObjectByType<AutoTalker>();
         Assert.That(autoTalker.CurrentState, Is.EqualTo(AutoTalker.State.Stop), "メッセージ停止");
         yield return new WaitForSeconds(1);
     }
@@ -49,7 +47,7 @@ public class TitleTalkCreditsTests
 
         yield return new WaitForSeconds(2f);
 
-        var autoTalker = GameObject.FindObjectOfType<AutoTalker>();
+        var autoTalker = GameObject.FindFirstObjectByType<AutoTalker>();
         Assert.That(MessageWindow.Instance.IsShowing, Is.False, "メッセージが表示されない");
         yield return new WaitForSeconds(1);
 

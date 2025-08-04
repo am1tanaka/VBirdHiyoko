@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using NUnit.Framework;
-using UnityEngine;
-using UnityEngine.TestTools;
 using AM1.VBirdHiyoko;
+using NUnit.Framework;
 using System.Linq;
+using UnityEngine;
 
 public class HistoryTests
 {
@@ -12,7 +9,7 @@ public class HistoryTests
     public void SetUp()
     {
         StaticInitializer.Init();
-        var objs = GameObject.FindObjectsOfType<GameObject>();
+        var objs = GameObject.FindObjectsByType<GameObject>(FindObjectsSortMode.None);
         foreach (var obj in objs)
         {
             GameObject.DestroyImmediate(obj);

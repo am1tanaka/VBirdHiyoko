@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+using AM1.VBirdHiyoko;
 using NUnit.Framework;
+using System.Collections;
+using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
-using AM1.VBirdHiyoko;
-using UnityEngine;
-using TMPro;
 
 public class ConfirmDialogTests
 {
@@ -39,7 +38,7 @@ public class ConfirmDialogTests
         yield return new WaitUntil(() => ConfirmDialog.CurrentState == ConfirmDialog.State.Show);
 
         // 表示内容を確認
-        var dialog = GameObject.FindObjectOfType<ConfirmDialog>();
+        var dialog = GameObject.FindFirstObjectByType<ConfirmDialog>();
         Assert.That(dialog, Is.Not.Null);
         var message = dialog.transform.Find("Obi").transform.Find("Message");
         Assert.That(message, Is.Not.Null);

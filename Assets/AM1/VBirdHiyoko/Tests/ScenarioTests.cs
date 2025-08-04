@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+using AM1.CommandSystem;
+using AM1.MessageSystem;
+using AM1.VBirdHiyoko;
 using NUnit.Framework;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.TestTools;
-using AM1.BaseFrame;
-using UnityEngine.SceneManagement;
-using AM1.VBirdHiyoko;
-using AM1.MessageSystem;
-using AM1.CommandSystem;
 
 public class ScenarioTests
 {
@@ -55,7 +52,7 @@ public class ScenarioTests
         Time.timeScale = 4;
 
         // 準備
-        var autoTalker = GameObject.FindObjectOfType<AutoTalker>();
+        var autoTalker = GameObject.FindFirstObjectByType<AutoTalker>();
         Assert.That(autoTalker, Is.Not.Null);
         autoTalker.SetTimerActive(true);
 

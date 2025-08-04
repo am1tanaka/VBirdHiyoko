@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+using AM1.CommandSystem;
+using AM1.VBirdHiyoko;
 using NUnit.Framework;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.TestTools;
-using AM1.VBirdHiyoko;
-using AM1.CommandSystem;
-using UnityEditor;
 
 public class HistoryPlayTests
 {
@@ -19,7 +17,6 @@ public class HistoryPlayTests
     /// <summary>
     /// 基本動作の確認
     /// </summary>
-    /// <returns></returns>
     [UnityTest]
     public IEnumerator HistoryPlayFundamental()
     {
@@ -81,7 +78,7 @@ public class HistoryPlayTests
         // Undo
         yield return AM1TestUtil.WaitCanAction();
         Time.timeScale = 1;
-        var undo = GameObject.FindObjectOfType<UndoButton>();
+        var undo = GameObject.FindFirstObjectByType<UndoButton>();
         Assert.That(undo, Is.Not.Null);
         undo.OnClick();
 
@@ -112,7 +109,7 @@ public class HistoryPlayTests
         AM1TestUtil.AssertPosition(stands[index], "1フレームごとに2手戻し");
 
         // Redo
-        var redo = GameObject.FindObjectOfType<RedoButton>();
+        var redo = GameObject.FindFirstObjectByType<RedoButton>();
         redo.OnClick();
         yield return WaitRedoStartAndDone("Redo");
         index++;
@@ -264,7 +261,7 @@ public class HistoryPlayTests
         // Undo
         Time.timeScale = 1;
         yield return AM1TestUtil.WaitCanAction();
-        var undo = GameObject.FindObjectOfType<UndoButton>();
+        var undo = GameObject.FindFirstObjectByType<UndoButton>();
         Assert.That(undo, Is.Not.Null);
         undo.OnClick();
         yield return null;
@@ -286,7 +283,7 @@ public class HistoryPlayTests
     int GetArrowFlag()
     {
         int flag = 0;
-        var arrows = GameObject.FindObjectOfType<PushArrows>();
+        var arrows = GameObject.FindFirstObjectByType<PushArrows>();
         for (int i = 0; i < 4; i++)
         {
             var child = arrows.transform.GetChild(i);
@@ -346,7 +343,7 @@ public class HistoryPlayTests
         // Undo
         Time.timeScale = 1;
         yield return AM1TestUtil.WaitCanAction();
-        var undo = GameObject.FindObjectOfType<UndoButton>();
+        var undo = GameObject.FindFirstObjectByType<UndoButton>();
         Assert.That(undo, Is.Not.Null);
         undo.OnClick();
         yield return null;
@@ -354,7 +351,7 @@ public class HistoryPlayTests
         yield return WaitUndoStartAndDone("2手戻し");
 
         // 2手進め
-        var redo = GameObject.FindObjectOfType<RedoButton>();
+        var redo = GameObject.FindFirstObjectByType<RedoButton>();
         redo.OnClick();
         yield return null;
         redo.OnClick();

@@ -56,16 +56,16 @@ namespace AM1.BaseFrame.Assets.Editor
             bool res = false;
             existsSystemObjects.Clear();
 
-            var stateChanger = FindObjectsOfType<SceneStateChanger>();
+            var stateChanger = FindObjectsByType<SceneStateChanger>(FindObjectsSortMode.None);
             res |= ExistsActiveScene(stateChanger, "状態切り替え管理スクリプト StateChanger");
 
-            var bgm = FindObjectsOfType<BGMSourceAndClips>();
+            var bgm = FindObjectsByType<BGMSourceAndClips>(FindObjectsSortMode.None);
             res |= ExistsActiveScene(bgm, "BGM再生スクリプト BGMSourceAndClips");
 
-            var se = FindObjectsOfType<SESourceAndClips>();
+            var se = FindObjectsByType<SESourceAndClips>(FindObjectsSortMode.None);
             res |= ExistsActiveScene(se, "効果音再生スクリプト SESourceAndClips");
 
-            var transitions = FindObjectsOfType<StandardTransition>();
+            var transitions = FindObjectsByType<StandardTransition>(FindObjectsSortMode.None);
             res |= ExistsActiveScene(transitions, "画面切り替え StandardScreenTransition");
 
             return res;
