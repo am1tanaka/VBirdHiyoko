@@ -35,8 +35,8 @@ namespace AM1.VBirdHiyoko
         /// </summary>
         public static void Init()
         {
-            var instance = FindObjectOfType<StageScenarioBehaviour>();
-            if (instance)
+            var instances = FindObjectsByType<StageScenarioBehaviour>(FindObjectsSortMode.None);
+            foreach (var instance in instances)
             {
                 instance.SetStartScenario();
             }
@@ -57,7 +57,10 @@ namespace AM1.VBirdHiyoko
             if (defaultAutoTalkerData == null) { return; }
             if (autoTalker == null)
             {
-                autoTalker = GameObject.FindObjectOfType<AutoTalker>();
+                var talkers = FindObjectsByType<AutoTalker>(FindObjectsSortMode.None);
+                if (talkers.Length > 0) {
+                    autoTalker = talkers[0];
+                }
             }
             if (autoTalker != null)
             {
