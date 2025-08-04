@@ -46,7 +46,11 @@ namespace AM1.VBirdHiyoko
             {
                 if (autoTalker == null)
                 {
-                    autoTalker = GameObject.FindObjectOfType<AutoTalker>();
+                    var talkers = FindObjectsByType<AutoTalker>(FindObjectsSortMode.None);
+                    if (talkers.Length > 0)
+                    {
+                        autoTalker = talkers[0];
+                    }
                 }
                 return autoTalker;
             }

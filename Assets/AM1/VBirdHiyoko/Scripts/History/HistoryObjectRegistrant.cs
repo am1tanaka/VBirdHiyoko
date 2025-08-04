@@ -38,7 +38,7 @@ namespace AM1.VBirdHiyoko
         /// </summary>
         public static void RegisterObjects()
         {
-            var objects = GameObject.FindObjectsOfType<HistoryBehaviour>();
+            var objects = GameObject.FindObjectsByType<HistoryBehaviour>(FindObjectsSortMode.None);
 
             CalcMapBounds(objects);
 
