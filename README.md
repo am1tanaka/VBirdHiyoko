@@ -12,6 +12,11 @@ Voxelorer Birdはボクセルの世界を冒険するトリのゲームです。
 悪例として挙げて改善するための土台として利用できるかも知れません。
 良かれ悪しかれ利用方法はあるのではないかと考えています。
 
+# 対応バージョン
+
+- Unity6000.0.44f1
+  - 書籍のUnity2022LTS向けは、[2022.3.10f1ブランチ](https://github.com/am1tanaka/VBirdHiyoko/tree/2022.3.10f1)を利用してください
+
 # WebGL版
 
 [WebGL版を遊ぶ](https://am1tanaka.github.io/VBirdHiyoko/Demo/)
@@ -27,7 +32,8 @@ Voxelorer Birdはボクセルの世界を冒険するトリのゲームです。
 Gitのコマンドツールが必要です。なければ https://git-scm.com/ などからインストールしてください。
 
 1. 本リポジトリーをクローンかダウンロードする
-1. 展開してUnity2022LTS以降で開く
+1. 展開してUnity6.0以降で開く
+   - 2022LTSで利用したい場合は、[2022.3.10f1ブランチ](https://github.com/am1tanaka/VBirdHiyoko/tree/2022.3.10f1)を利用してください
 1. 最初に開いたときはTextMesh Proのアセットが必要なので、WindowメニューからTextMeshPro > Import TMP Essentialsを選んで、インポートする。インポートできたら、続けてImport TMP Examples & Extrasもインポートする
 1. Projectウィンドウで、AM1 > VBirdHiyoko > Scenesの順にフォルダーを開いて、Systemシーンをダブルクリックして起動
 
@@ -38,12 +44,6 @@ Gitのコマンドツールが必要です。なければ https://git-scm.com/ �
 ### Unityのバージョンをアップするとエラーが出る
 
 古いUnityで開いたプロジェクトを、新しいUnityで開こうとすると、エラーが出る場合があります。Safe Modeでは開かず、Ignoreを選んで、普通にプロジェクトを開きます。プロジェクトが開いたら、WindowメニューのTextMesh Proから、Import TMP EssentialsとImport TMP Examples & Extrasを改めて読み込んでください。
-
-### Unity6.1.xにバージョンアップすると警告が出る
-
-Unity6.1から、Object.FindObjectOfType<T>()やObject.FindObjectsOfType<T>()が非推奨になりました。代わりに、効率を向上させたObject.FindObjectsByType<T>()に変更します。
-
-警告が表示されるだけなので、そのまま使っていても大丈夫です。近々、更新する予定です。
 
 
 # 解説本
