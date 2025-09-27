@@ -28,6 +28,7 @@ namespace AM1
         Image image;
         Vector4 viewRect;
         RectTransform canvasRectTransform;
+        Material runtimeMaterial;
 
         /// <summary>
         /// 画面サイズに対してゲーム画面の範囲を左下と右上の
@@ -39,6 +40,8 @@ namespace AM1
             if (image == null)
             {
                 image = GetComponent<Image>();
+                runtimeMaterial = Instantiate(image.material);
+                image.material = runtimeMaterial;
             }
             if (canvasRectTransform == null)
             {
@@ -64,6 +67,7 @@ namespace AM1
                 viewRect.z = (halfW + scale * uiRectTransform.rect.xMax);
                 viewRect.w = (halfH + scale * uiRectTransform.rect.yMax);
             }
+
             image.material.SetVector("_ViewRect", viewRect);
         }
     }
