@@ -14,8 +14,8 @@ Voxelorer Birdはボクセルの世界を冒険するトリのゲームです。
 
 # 対応バージョン
 
-- Unity6000.0.44f1
-  - 書籍のUnity2022LTS向けは、[2022.3.10f1ブランチ](https://github.com/am1tanaka/VBirdHiyoko/tree/2022.3.10f1)を利用してください
+- Unity6000.0.58f2
+  - 書籍のUnity2022LTSは、サポート外になっています。どうしても必要な場合は、[2022.3.10f1ブランチ](https://github.com/am1tanaka/VBirdHiyoko/tree/2022.3.10f1)を利用してください
 
 # WebGL版
 
