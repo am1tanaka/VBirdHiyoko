@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace AM1.VBirdHiyoko
@@ -53,7 +51,7 @@ namespace AM1.VBirdHiyoko
             Done();
         }
 
-        private void OnTriggerEnter(Collider other)
+        public void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag(targetTag.ToString()))
             {
