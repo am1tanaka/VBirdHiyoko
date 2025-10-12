@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2584827215010157403}
   - component: {fileID: 2584827215010157402}
+  - component: {fileID: 7120465712851575801}
   m_Layer: 8
   m_Name: Trigger
   m_TagString: Untagged
@@ -53,6 +54,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5, y: 0.5, z: 0.5}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &7120465712851575801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2584827215010157396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d71921e27cf006443a6580ba3d023b25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2584827216128729459
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,7 +76,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2584827216128729458}
   - component: {fileID: 705917750390144282}
-  - component: {fileID: 2584827216128729456}
   m_Layer: 8
   m_Name: ScenarioTrigger
   m_TagString: Untagged
@@ -99,30 +111,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57cbe978440ab6c4bbbb43b5b07cc757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &2584827216128729456
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2584827216128729459}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
+  targetTag: 0
+  isDoneOff: 1
+  scenarioText: {fileID: 0}
