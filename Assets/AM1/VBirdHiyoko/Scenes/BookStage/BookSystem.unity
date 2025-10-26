@@ -1055,7 +1055,7 @@ RectTransform:
   m_AnchoredPosition: {x: -20, y: -26}
   m_SizeDelta: {x: 16, y: 16}
   m_Pivot: {x: 1, y: 0.5}
---- !u!21 &801572349
+--- !u!21 &811071411
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 0
