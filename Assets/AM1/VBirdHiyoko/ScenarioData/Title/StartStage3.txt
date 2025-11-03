@@ -1,4 +1,4 @@
-@turn frontfront
+@turn camera
 SandLetsGo,1
 @wait 0.5
 @wait_click 0.5

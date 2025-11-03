@@ -1,3 +1,2 @@
-# @bgm Tsumi
 Tsumi,2
 @wait_click 1

@@ -1394,9 +1394,13 @@ PrefabInstance:
       propertyPath: scenarioText
       value: 
       objectReference: {fileID: 4900000, guid: c3bf3c54022c52c4989149418a2adbb1, type: 3}
+    - target: {fileID: 2584827215010157402, guid: 08f50ab5eeaed2a4dbf53e671b9d7745, type: 3}
+      propertyPath: m_Size.x
+      value: 4.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2584827216128729458, guid: 08f50ab5eeaed2a4dbf53e671b9d7745, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2584827216128729458, guid: 08f50ab5eeaed2a4dbf53e671b9d7745, type: 3}
       propertyPath: m_LocalPosition.y
