@@ -1,0 +1,45 @@
+id,ja
+RetryConfirm,リトライしますか？
+RetryButton,リトライ
+NoButton,いいえ
+ToTitleConfirm,タイトルヘ戻ります？
+ToTitleButton,タイトルヘ
+QuitConfirm,ゲームを終了しますか？
+QuitButton,終了する
+# 操作への反応
+CantGo,そこへは行けないな。
+CanPush,押して動かせるかも？
+TooHeavy,重い。押せなかった。
+CantMove,動かない。
+Tsumi,あれ？詰んだ？？\nUndoしてみよう。
+GoNext,次行ってみよう！
+# チュートリアル
+TutorialClick,クリックした場所へ歩くよ。
+TutorialWind,強風で飛ばされちゃった。
+TutorialWhere,みんなどこ～...
+TutorialLetsGo,ここに入ってみよう！
+# Stage01
+Stage01Start,あっちに穴があるね。\nあそこを目指そう。
+Stage01Clear,着いた！みんな向こうにいるかな？
+# Stage02
+Stage02Start,誰もいないね。\nあっちに行ってみよう。
+Stage02Clear,次行ってみよう！
+# Stage03
+SandLetsGo,乾いた風だ。
+Stage03Start,足場が頼りない感じ。
+Sand01,崩れた！
+Sand02,一度しか通れないな。
+# Stage04
+SandInteresting,これは面白い！
+# Stage05
+IceLetsGo,ひんやりしてるね。
+Stage05Start,寒いところだ。
+Ice01,冷たくてツルツルしてる。
+Ice02,すべるね。
+IceMiss,何かにぶつけて止めよう。
+# Stage06
+IceGround,地面が凍ってる！
+# Stage07
+LastLetsGo,"この先にこそ..."
+# Stage08
+LastClear,"ああっ！！"

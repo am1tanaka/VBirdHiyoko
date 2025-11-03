@@ -1,3 +1,4 @@
-@turn forward
+@turn left
 Sand01,2
+Sand02,2
 @wait_click 1
