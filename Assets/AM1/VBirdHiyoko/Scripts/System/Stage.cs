@@ -15,7 +15,7 @@ namespace AM1.VBirdHiyoko
         /// <summary>
         /// 最大ステージ
         /// </summary>
-        public static int MaxStage => 8;
+        public static int MaxStage => 4;
 
         /// <summary>
         /// ステージ数を設定する
