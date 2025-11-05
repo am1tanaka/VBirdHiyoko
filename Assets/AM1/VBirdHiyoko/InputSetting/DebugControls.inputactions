@@ -1,0 +1,47 @@
+{
+    "version": 1,
+    "name": "DebugControls",
+    "maps": [
+        {
+            "name": "GamePad",
+            "id": "b94ed1ea-0d22-4cb4-bcd0-8161012f1ceb",
+            "actions": [
+                {
+                    "name": "ClearData",
+                    "type": "Button",
+                    "id": "3728c4ad-9692-4a30-8da3-75e2a0680324",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "600ff966-09ec-497e-81fe-ca5c6870efa9",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "Hold(duration=2)",
+                    "processors": "",
+                    "groups": ";GamePad",
+                    "action": "ClearData",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "GamePad",
+            "bindingGroup": "GamePad",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}
