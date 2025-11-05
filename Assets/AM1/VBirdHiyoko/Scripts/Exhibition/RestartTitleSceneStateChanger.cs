@@ -25,10 +25,13 @@ public class RestartTitleSceneStateChanger : SceneStateChangerBase<RestartTitleS
     /// </summary>
     public override void OnHideScreen()
     {
+        VBirdHiyokoManager.ClearedStage.Set(0);
+        VBirdHiyokoManager.CurrentStage.Set(0);
+
         // シーンの非同期読み込み開始
-        SceneStateChanger.LoadSceneAsync("Title", true);
-        SceneStateChanger.LoadSceneAsync("StageTitle", true);
-        SceneStateChanger.LoadSceneAsync("Stage", true);
+        SceneStateChanger.LoadSceneAsync("Title", false);
+        SceneStateChanger.LoadSceneAsync("StageTitle", false);
+        SceneStateChanger.LoadSceneAsync("Stage", false);
     }
 
     /// <summary>
