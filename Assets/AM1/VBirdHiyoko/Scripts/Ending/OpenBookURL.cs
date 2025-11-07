@@ -6,8 +6,10 @@ namespace AM1.VBirdHiyoko
     {
         public void OpenURL()
         {
+            /*
             SEPlayer.Play(SEPlayer.SE.Click);
             Application.OpenURL("https://github.com/am1tanaka/VBirdHiyoko");
+            */
         }
     }
 }
