@@ -193,6 +193,7 @@ namespace AM1.VBirdHiyoko
         /// <param name="context"></param>
         void OnClickPerformed(InputAction.CallbackContext context)
         {
+            clickMessage = $"{context.ReadValueAsButton()}, {currentPoint}";
             if (context.ReadValueAsButton())
             {
                 // クリック
@@ -206,7 +207,20 @@ namespace AM1.VBirdHiyoko
         /// <param name="context"></param>
         void OnTapPerformed(InputAction.CallbackContext context)
         {
+            tapMessage = $"{context.ReadValue<Vector2>()}";
             Action(context.ReadValue<Vector2>());
+        }
+
+        string tapMessage = "";
+        string clickMessage = "";
+        GUIStyle style = new GUIStyle();
+        GUIStyleState styleState = new GUIStyleState();
+        private void OnGUI()
+        {
+            style.fontSize = 48;
+            styleState.textColor = Color.red;
+            style.normal = styleState;
+            GUI.Label(new Rect(30,30,800,30), $"tap:{tapMessage} click:{clickMessage}", style);
         }
 
         /// <summary>

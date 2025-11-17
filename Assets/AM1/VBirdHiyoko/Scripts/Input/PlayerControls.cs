@@ -98,7 +98,7 @@ namespace AM1.VBirdHiyoko
                     ""name"": ""Click"",
                     ""type"": ""PassThrough"",
                     ""id"": ""277008d8-ac49-419a-9f05-6ef1ffe7366c"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -148,7 +148,7 @@ namespace AM1.VBirdHiyoko
                 {
                     ""name"": """",
                     ""id"": ""a5f1fa12-d471-431c-a0e5-00337aba76d2"",
-                    ""path"": ""<Touchscreen>/touch0"",
+                    ""path"": ""<Touchscreen>/primaryTouch"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

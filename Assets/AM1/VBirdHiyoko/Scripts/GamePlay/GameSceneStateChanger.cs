@@ -6,6 +6,7 @@ using AM1.BaseFrame.Assets;
 using AM1.CommandSystem;
 using AM1.VBirdHiyoko;
 using AM1.MessageSystem;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// Game状態への切り替え
@@ -47,6 +48,11 @@ public class GameSceneStateChanger : SceneStateChangerBase<GameSceneStateChanger
     {
         // 操作を無効にする
         CommandQueue.ChangeInputMask(CommandInputType.None);
+
+        foreach (var pi in PlayerInput.all)
+        {
+            pi.enabled = false;
+        }
 
         // プレイヤーを待機状態へ
         PiyoBehaviour.Instance.EnqueueState<PiyoStateStandby>();
