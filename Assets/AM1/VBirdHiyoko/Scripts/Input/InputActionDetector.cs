@@ -168,6 +168,7 @@ namespace AM1.VBirdHiyoko
         {
             currentPoint = context.ReadValue<Vector2>();
             isCurrentPoint = true;
+            IsPointer = false;
             UpdatePointer();
 
 #if TAP_DEV
