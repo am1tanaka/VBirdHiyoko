@@ -55,7 +55,7 @@ namespace AM1.VBirdHiyoko
 
         /// <summary>
         /// ポインターの時、trueを返す
-        public bool IsPointer {get; private set;} = false;
+        public bool IsPointer {get; private set;} = true;
         /// </summary>
 
         /// <summary>

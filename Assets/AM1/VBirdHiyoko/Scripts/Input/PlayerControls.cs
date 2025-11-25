@@ -158,17 +158,6 @@ namespace AM1.VBirdHiyoko
                 },
                 {
                     ""name"": """",
-                    ""id"": ""2b8ac7e8-fc75-4093-8598-14849d515755"",
-                    ""path"": ""<Pointer>/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Point"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""a5f1fa12-d471-431c-a0e5-00337aba76d2"",
                     ""path"": ""<Touchscreen>/primaryTouch"",
                     ""interactions"": """",

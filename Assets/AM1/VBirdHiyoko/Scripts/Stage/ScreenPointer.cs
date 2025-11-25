@@ -23,8 +23,10 @@ namespace AM1.VBirdHiyoko
                 canvasRectTransform = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
                 InputActionDetector.Instance.OnMovePoint.AddListener(OnMovePoint);
                 CommandQueue.AddChangeListener(CommandInputType.Game, OnChangeActive);
+
                 animator = GetComponentInChildren<Animator>();
                 image = GetComponent<Image>();
+                image.enabled = false;
                 OnChangeActive(false);
             }
         }
@@ -33,7 +35,7 @@ namespace AM1.VBirdHiyoko
         {
             if (InputActionDetector.Instance != null)
             {
-                InputActionDetector.Instance.OnMovePoint.AddListener(OnMovePoint);
+                InputActionDetector.Instance.OnMovePoint.RemoveListener(OnMovePoint);
                 CommandQueue.RemoveChangeListener(CommandInputType.Game, OnChangeActive);
             }
         }
@@ -43,7 +45,8 @@ namespace AM1.VBirdHiyoko
             if (InputActionDetector.Instance.IsPointer) {
                 image.enabled = false;
             }
-            else{
+            else
+            {
                 image.enabled = true;
                 rectTransform.anchoredPosition = pos / canvasRectTransform.localScale.x;
             }
@@ -55,7 +58,10 @@ namespace AM1.VBirdHiyoko
         /// <param name="flag">操作の有効無効</param>
         void OnChangeActive(bool flag)
         {
-            animator.SetBool("Enabled", flag);
+            if (!InputActionDetector.Instance.IsPointer)
+            {
+                animator.SetBool("Enabled", flag);
+            }
         }
     }
 }
