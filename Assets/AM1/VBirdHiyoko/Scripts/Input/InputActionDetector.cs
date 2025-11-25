@@ -1,3 +1,5 @@
+#define TAP_DEV
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -162,7 +164,23 @@ namespace AM1.VBirdHiyoko
             currentPoint = context.ReadValue<Vector2>();
             isCurrentPoint = true;
             UpdatePointer();
+
+#if TAP_DEV
+            if (isTapped)
+            {
+                isTapped = false;
+                tappedPoint = $"{currentPoint}";
+            }
+
+            lastPointUpdate = Time.frameCount;
+#endif
         }
+
+#if TAP_DEV
+        int lastPointUpdate;
+        bool isTapped = false;
+        string tappedPoint = "";
+#endif
 
         /// <summary>
         /// 指定の座標がUIに被っているかを返す
@@ -193,13 +211,31 @@ namespace AM1.VBirdHiyoko
         /// <param name="context"></param>
         void OnClickPerformed(InputAction.CallbackContext context)
         {
-            clickMessage = $"{context.ReadValueAsButton()}, {currentPoint}";
             if (context.ReadValueAsButton())
             {
+#if TAP_DEV
+                isTapped = true;
+                tappedPointTrue = currentPoint;
+#endif
+                if (context.control.device is Pointer)
+                {
+                    currentPoint = Pointer.current.position.ReadValue();
+                }
                 // クリック
                 Action(currentPoint);
             }
+#if TAP_DEV
+            clickMessage = $"{context.ReadValueAsButton()}, {tappedPointTrue} {Time.frameCount}:{lastPointUpdate}\ncontext:{context.valueType} {context.control.ToString()}";
+            if (context.control.device is Mouse)
+            {
+                clickMessage += $"\nMouse";
+            }
+#endif
         }
+
+#if TAP_DEV
+        Vector2 tappedPointTrue = Vector2.zero;
+#endif
 
         /// <summary>
         /// タップした時
@@ -207,10 +243,13 @@ namespace AM1.VBirdHiyoko
         /// <param name="context"></param>
         void OnTapPerformed(InputAction.CallbackContext context)
         {
+#if TAP_DEV
             tapMessage = $"{context.ReadValue<Vector2>()}";
+#endif
             Action(context.ReadValue<Vector2>());
         }
 
+#if TAP_DEV
         string tapMessage = "";
         string clickMessage = "";
         GUIStyle style = new GUIStyle();
@@ -220,8 +259,9 @@ namespace AM1.VBirdHiyoko
             style.fontSize = 48;
             styleState.textColor = Color.red;
             style.normal = styleState;
-            GUI.Label(new Rect(30,30,800,30), $"tap:{tapMessage} click:{clickMessage}", style);
+            GUI.Label(new Rect(30,30,800,30), $"tap:{tapMessage} click:{clickMessage} / tapped={tappedPoint}", style);
         }
+#endif
 
         /// <summary>
         /// クリックやタップした座標を受け取って、処理を呼び出す。
