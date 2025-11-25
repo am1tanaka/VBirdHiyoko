@@ -54,6 +54,11 @@ namespace AM1.VBirdHiyoko
         public UnityEvent OnWorldPointExit { get; private set; } = new UnityEvent();
 
         /// <summary>
+        /// ポインターの時、trueを返す
+        public bool IsPointer {get; private set;} = false;
+        /// </summary>
+
+        /// <summary>
         /// RaycastHitの受け取り
         /// </summary>
         RaycastHit[] raycastHits = new RaycastHit[8];
@@ -217,10 +222,9 @@ namespace AM1.VBirdHiyoko
                 isTapped = true;
                 tappedPointTrue = currentPoint;
 #endif
-                if (context.control.device is Pointer)
-                {
-                    currentPoint = Pointer.current.position.ReadValue();
-                }
+                currentPoint = Pointer.current.position.ReadValue();
+                IsPointer = !(context.control.device is Mouse);
+
                 // クリック
                 Action(currentPoint);
             }

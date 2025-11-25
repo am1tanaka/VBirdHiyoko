@@ -45,8 +45,13 @@ namespace AM1.VBirdHiyoko
 
         void OnWorldPoint(RaycastHit hit)
         {
-            transform.position = hit.point;
-            pivotTransform.gameObject.SetActive(true);
+            if (InputActionDetector.Instance.IsPointer) {
+                pivotTransform.gameObject.SetActive(false);
+            }
+            else {
+                transform.position = hit.point;
+                pivotTransform.gameObject.SetActive(true);
+            }
         }
 
         void OnWorldPointExit()

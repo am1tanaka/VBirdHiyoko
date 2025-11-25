@@ -1,6 +1,7 @@
 using AM1.BaseFrame;
 using AM1.CommandSystem;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace AM1.VBirdHiyoko
 {
@@ -12,6 +13,7 @@ namespace AM1.VBirdHiyoko
         RectTransform rectTransform;
         Animator animator;
         RectTransform canvasRectTransform;
+        Image image;
 
         private void Awake()
         {
@@ -22,6 +24,7 @@ namespace AM1.VBirdHiyoko
                 InputActionDetector.Instance.OnMovePoint.AddListener(OnMovePoint);
                 CommandQueue.AddChangeListener(CommandInputType.Game, OnChangeActive);
                 animator = GetComponentInChildren<Animator>();
+                image = GetComponent<Image>();
                 OnChangeActive(false);
             }
         }
@@ -37,7 +40,13 @@ namespace AM1.VBirdHiyoko
 
         void OnMovePoint(Vector2 pos)
         {
-            rectTransform.anchoredPosition = pos / canvasRectTransform.localScale.x;
+            if (InputActionDetector.Instance.IsPointer) {
+                image.enabled = false;
+            }
+            else{
+                image.enabled = true;
+                rectTransform.anchoredPosition = pos / canvasRectTransform.localScale.x;
+            }
         }
 
         /// <summary>
