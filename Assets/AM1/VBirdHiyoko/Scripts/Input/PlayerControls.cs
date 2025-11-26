@@ -96,7 +96,7 @@ namespace AM1.VBirdHiyoko
             ""actions"": [
                 {
                     ""name"": ""Click"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""277008d8-ac49-419a-9f05-6ef1ffe7366c"",
                     ""expectedControlType"": """",
                     ""processors"": """",
@@ -105,7 +105,7 @@ namespace AM1.VBirdHiyoko
                 },
                 {
                     ""name"": ""Point"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""75a34ad4-0954-4eed-8e64-9ffa5bbd51e6"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
@@ -114,7 +114,7 @@ namespace AM1.VBirdHiyoko
                 },
                 {
                     ""name"": ""Tap"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""55b83ee2-d4e4-49e5-b56d-4bb1cfdd6bf0"",
                     ""expectedControlType"": """",
                     ""processors"": """",

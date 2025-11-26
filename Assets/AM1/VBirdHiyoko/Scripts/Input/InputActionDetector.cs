@@ -1,4 +1,4 @@
-//#define TAP_DEV
+#define TAP_DEV
 
 using System.Collections;
 using System.Collections.Generic;
@@ -83,8 +83,24 @@ namespace AM1.VBirdHiyoko
                 playerControls.Player.Tap.performed += OnTapPerformed;
                 blockLayer = LayerMask.GetMask("Block");
                 uiLayer = LayerMask.NameToLayer("UI");
+
+                #if TAP_DEV
+                playerControls.Player.Click.started += OnPointStarted;
+                playerControls.Player.Click.canceled += OnPointCanceled;
+                #endif
             }
         }
+
+#if TAP_DEV
+        void OnPointStarted(InputAction.CallbackContext context) 
+        {
+            Debug.Log($"started {Time.frameCount}");
+        }
+        void OnPointCanceled(InputAction.CallbackContext context) 
+        {
+            Debug.Log($"canceled {Time.frameCount}");
+        }
+#endif
 
         private void OnEnable()
         {
@@ -222,6 +238,7 @@ namespace AM1.VBirdHiyoko
 #if TAP_DEV
                 isTapped = true;
                 tappedPointTrue = currentPoint;
+                Debug.Log($"performed  {Time.frameCount}");
 #endif
                 currentPoint = Pointer.current.position.ReadValue();
                 IsPointer = !(context.control.device is Mouse);
