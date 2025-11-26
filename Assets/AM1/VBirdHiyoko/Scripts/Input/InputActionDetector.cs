@@ -1,4 +1,5 @@
 //#define TAP_DEV
+#define TAP_CHECK
 
 using System.Collections;
 using System.Collections.Generic;
@@ -81,6 +82,10 @@ namespace AM1.VBirdHiyoko
                 playerControls.Player.Point.performed += OnPointPerformed;
                 playerControls.Player.Click.performed += OnClickPerformed;
                 playerControls.Player.Tap.performed += OnTapPerformed;
+#if TAP_CHECK
+                playerControls.Player.Tap.started += OnTapStarted;
+                playerControls.Player.Tap.canceled += OnTapCanceled;
+#endif
                 blockLayer = LayerMask.GetMask("Block");
                 uiLayer = LayerMask.NameToLayer("UI");
             }
@@ -248,11 +253,25 @@ namespace AM1.VBirdHiyoko
         /// <param name="context"></param>
         void OnTapPerformed(InputAction.CallbackContext context)
         {
-#if TAP_DEV
-            tapMessage = $"{context.ReadValue<Vector2>()}";
+#if TAP_DEV || TAP_CHECK
+            tapMessage = $"{context.ReadValue<Vector2>()} phase={context.phase}";
 #endif
             Action(context.ReadValue<Vector2>());
         }
+
+#if TAP_CHECK
+    string tapStarted = "";
+    void OnTapStarted(InputAction.CallbackContext context){
+        tapStarted = $"started={Time.frameCount} {context.ReadValue<Vector2>()}";
+    }
+
+    string tapCanceled = "";
+    void OnTapCanceled(InputAction.CallbackContext context){
+        tapCanceled = $"canceled={Time.frameCount} {context.ReadValue<Vector2>()}";
+    }
+
+
+#endif
 
 #if TAP_DEV
         string tapMessage = "";
@@ -265,6 +284,19 @@ namespace AM1.VBirdHiyoko
             styleState.textColor = Color.red;
             style.normal = styleState;
             GUI.Label(new Rect(30,30,800,30), $"tap:{tapMessage} click:{clickMessage} / tapped={tappedPoint}", style);
+        }
+#endif
+
+#if TAP_CHECK
+        string tapMessage = "";
+        GUIStyle style = new GUIStyle();
+        GUIStyleState styleState = new GUIStyleState();
+        private void OnGUI()
+        {
+            style.fontSize = 48;
+            styleState.textColor = Color.red;
+            style.normal = styleState;
+            GUI.Label(new Rect(30,30,800,48*3), $"tap:{tapMessage}\n{tapStarted}\n{tapCanceled}", style);
         }
 #endif
 

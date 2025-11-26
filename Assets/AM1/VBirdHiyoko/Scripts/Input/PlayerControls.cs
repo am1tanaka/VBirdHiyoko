@@ -114,9 +114,9 @@ namespace AM1.VBirdHiyoko
                 },
                 {
                     ""name"": ""Tap"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Button"",
                     ""id"": ""55b83ee2-d4e4-49e5-b56d-4bb1cfdd6bf0"",
-                    ""expectedControlType"": ""Touch"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
